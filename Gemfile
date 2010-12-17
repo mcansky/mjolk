@@ -11,8 +11,14 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'unicorn'
 gem "thin"
 
+# initial basic styling
+gem "flutie"
+
 # Deploy with Capistrano
 # gem 'capistrano'
+
+# auth stuff
+gem "devise"
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
@@ -35,3 +41,10 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+# test stuff
+group :test do
+  gem "shoulda"
+  gem 'factory_girl_rails', "1.1.beta1"
+  gem "rspec-rails", "2.0.0.beta.12"
+end

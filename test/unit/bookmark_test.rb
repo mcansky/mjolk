@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class BookmarkTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  should belong_to(:link)
+  should belong_to(:user)
 end
