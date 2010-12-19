@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :bookmarks
   has_many :links, :through => :bookmarks
   
+  validates_presence_of :name, :email
+  validates_uniqueness_of :name, :case_sensitive => true
   validates_uniqueness_of :email, :case_sensitive => true
   validates_length_of :password, :in => 8..20
+  validates_exclusion_of :name, :in => ['admin', 'login', 'logout'], :message => "name %{value} is reserved."
 end

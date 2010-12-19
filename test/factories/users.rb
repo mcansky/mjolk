@@ -1,20 +1,14 @@
 FactoryGirl.define do
   factory :user do
-    first_name 'John'
-    last_name  'Doe'
     email 'riboulet@gmail.com'
-    password 'acefz'
-    password_confirm 'acefz'
-    admin false
+    password 'acedfdfz'
+    name "thom"
   end
 
   # This will use the User class (Admin would have been guessed)
-  factory :admin, :class => User do
-    first_name 'Admin'
-    last_name  'User'
+  factory :bob, :class => User do
     email 'thomas@arbousier.info'
     password 'acefz'
-    password_confirm 'acefz'
-    admin true
+    name "bob"
   end
 end
