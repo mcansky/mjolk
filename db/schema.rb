@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20101219170203) do
     t.datetime "updated_at"
     t.datetime "bookmarked_at"
     t.string   "meta"
+    t.boolean  "private",       :default => false
   end
 
   create_table "histories", :force => true do |t|
