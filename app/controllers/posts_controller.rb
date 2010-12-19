@@ -30,9 +30,9 @@ class PostsController < ApplicationController
       conditions << DateTime.parse(params[:todt])
     end
     if params[:tag]
-      @posts = current_user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "created_at DESC")
+      @posts = current_user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
     else  
-      @posts = current_user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "created_at DESC")
+      @posts = current_user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
     end
     respond_to do |format|
       format.html
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
           post.tags.each { |t| tags << t.name }
           xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
         end
-        posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
+        posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :hash => post.meta, :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
         xml_output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XmlSimple.xml_out(posts).gsub("opt","posts")
         render :xml => xml_output
       end

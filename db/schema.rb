@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20101219170203) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "bookmarked_at"
+    t.string   "meta"
   end
 
   create_table "histories", :force => true do |t|
