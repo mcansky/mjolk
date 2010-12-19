@@ -29,8 +29,11 @@ class PostsController < ApplicationController
       conditions[0] += "bookmarked_at <= ?"
       conditions << DateTime.parse(params[:todt])
     end
-    @posts = current_user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions)
-    
+    if params[:tag]
+      @posts = current_user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "created_at DESC")
+    else  
+      @posts = current_user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "created_at DESC")
+    end
     respond_to do |format|
       format.html
       format.xml do
