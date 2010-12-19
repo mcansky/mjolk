@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  validates_uniqueness_of :email
-  validates_length_of :password, :in => 8..20
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
@@ -10,4 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :bookmarks
   has_many :links, :through => :bookmarks
+  
+  validates_uniqueness_of :email, :case_sensitive => true
+  validates_length_of :password, :in => 8..20
 end
