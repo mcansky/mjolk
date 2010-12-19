@@ -69,10 +69,12 @@ class PostsController < ApplicationController
     end
     respond_to do |format|
       format.html do
-        if incomplete
+        if incomplete || error
           flash[:error] = "incomplet"
+          render :file => File.join(Rails.root, 'public', '400.html'), :status => 400
+        else
+          redirect_to :action => "index"
         end
-        redirect_to :action => "index"
       end
       format.xml do
         if incomplete || error
