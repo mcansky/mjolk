@@ -1,0 +1,7 @@
+%h1 Bookmarks
+
+- @posts.each do |post|
+  %h2
+    = post.link.url
+    %p
+    = post.title
