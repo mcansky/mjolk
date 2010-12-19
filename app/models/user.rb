@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
   has_many :bookmarks
   has_many :links, :through => :bookmarks
   
-  validates_presence_of :name, :email
+  validates_presence_of :name, :email, :password
   validates_uniqueness_of :name, :case_sensitive => true
   validates_uniqueness_of :email, :case_sensitive => true
   validates_length_of :password, :in => 8..20
+  # check strength of password : again 8 chars min, at least one capitaled letter, at least one normal letter, at least one non alpha characters
+  validates_format_of :password, :with => /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
   validates_exclusion_of :name, :in => ['admin', 'login', 'logout'], :message => "name %{value} is reserved."
 end
