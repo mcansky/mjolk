@@ -2,6 +2,6 @@
 
 - @posts.each do |post|
   %h2
-    = post.link.url
     %p
-    = post.title
+      = link_to post.link.url, post.link.url
+    %p= post.title
