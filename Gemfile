@@ -13,6 +13,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # Use unicorn as the web server
 # gem 'unicorn'
 gem "thin"
+gem "xml-simple"
 
 # initial basic styling
 gem "flutie"

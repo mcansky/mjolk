@@ -111,6 +111,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    xml-simple (1.0.12)
 
 PLATFORMS
   ruby
@@ -129,3 +130,4 @@ DEPENDENCIES
   shoulda
   sqlite3-ruby
   thin
+  xml-simple

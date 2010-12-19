@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
     self.name = self.email
   end
 
+  # import from delicious user username and password pair
+  # this pair is not stored locally
   def import_from_delicious(username, password)
     if ((username != nil) && (password != nil))
       # delicious api expected
@@ -45,6 +47,8 @@ class User < ActiveRecord::Base
   end
 
   private
+  # where the work happens
+  # use a xml file and extract content
   def import_from_delicious_xml(xml_file)
     # work this out
     xml_stuff = nil

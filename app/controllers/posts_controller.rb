@@ -1,9 +1,26 @@
+require 'xmlsimple'
+
 class PostsController < ApplicationController
   # auth needed !
   before_filter :authenticate_user!
 
   def index
     @posts = current_user.bookmarks
+    xml_posts = Array.new
+    @posts.each do |post|
+      tags = Array.new
+      post.tags.each { |t| tags << t.name }
+      xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
+    end
+    posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
+    
+    respond_to do |format|
+      format.html
+      format.xml do
+        xml_output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XmlSimple.xml_out(posts).gsub("opt","posts")
+        render :xml => xml_output
+      end
+    end
   end
 
   def import
