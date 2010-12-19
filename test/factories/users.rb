@@ -13,6 +13,8 @@ FactoryGirl.define do
     first_name 'Admin'
     last_name  'User'
     email 'thomas@arbousier.info'
+    password 'acefz'
+    password_confirm 'acefz'
     admin true
   end
 end
