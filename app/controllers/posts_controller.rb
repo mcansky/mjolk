@@ -153,4 +153,12 @@ class PostsController < ApplicationController
       redirect_to login_path
     end
   end
+
+  private
+  def check_api
+    if current_user && current_user.api_key == params[:api_key]
+      return true
+    end
+    return false
+  end
 end
