@@ -42,6 +42,7 @@ class PostsController < ApplicationController
   # not implemented : replace, extended
   def create
     incomplete = true
+    error = false
     if ((params[:url] != nil) && (params[:description] != nil ))
       incomplete = false
       url = params[:url]
@@ -61,6 +62,7 @@ class PostsController < ApplicationController
         if new_bookmark.save
           logger.info("bookmark for #{url} added")
         else
+          error = true
           logger.warn("Error : could not save the new bookmark")
         end
       end
@@ -73,10 +75,10 @@ class PostsController < ApplicationController
         redirect_to :action => "index"
       end
       format.xml do
-        if incomplete
+        if incomplete || error
           render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
         else
-          
+          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"done\" />"
         end
       end
     end
