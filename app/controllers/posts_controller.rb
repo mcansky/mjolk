@@ -4,8 +4,32 @@ class PostsController < ApplicationController
   # auth needed !
   before_filter :authenticate_user!
 
+  # params :
+  # &tag={TAG}
+  # (optional) Filter by this tag.
+  # &start={#}
+  # (optional) Start returning posts this many results into the set.
+  # &results={#}
+  # (optional) Return this many results.
+  # &fromdt={CCYY-MM-DDThh:mm:ssZ}
+  # (optional) Filter for posts on this date or later
+  # &todt={CCYY-MM-DDThh:mm:ssZ}
+  # (optional) Filter for posts on this date or earlier
+  # &meta=yes
+  # (optional) Include change detection signatures on each item in a 'meta' attribute. Clients wishing to maintain a synchronized local store of bookmarks should retain the value of this attribute - its value will change when any significant field of the bookmark changes.
   def index
-    @posts = current_user.bookmarks
+    # building conditions
+    conditions = Array.new
+    if params[:fromdt]
+      conditions[0] = "bookmarked_at >= ?"
+      conditions << DateTime.parse(params[:fromdt])
+    end
+    if params[:todt]
+      conditions[0] += " AND " if params[:fromdt]
+      conditions[0] += "bookmarked_at <= ?"
+      conditions << DateTime.parse(params[:todt])
+    end
+    @posts = current_user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions)
     
     respond_to do |format|
       format.html

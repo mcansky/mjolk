@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
+  #private
   # where the work happens
   # use a xml file and extract content
   def import_from_delicious_xml(xml_file)
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
           if link.users.include?(self)
             # already in
           else
-            new_bookmark = Bookmark.new(:title => post['description'], :link_id => link.id, :user_id => self.id)
+            new_bookmark = Bookmark.new(:title => post['description'], :link_id => link.id, :user_id => self.id, :bookmarked_at => DateTime.parse(post['time']))
             new_bookmark.tag_list = post['tag'].gsub(" ",", ")
             if new_bookmark.save
               logger.info("bookmark for #{url} added")
