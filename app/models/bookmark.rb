@@ -6,4 +6,6 @@ class Bookmark < ActiveRecord::Base
   validates_presence_of :title
   validates_associated :user
   validates_presence_of :user
+  # tags
+  acts_as_taggable
 end
