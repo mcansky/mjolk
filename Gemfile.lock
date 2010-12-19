@@ -36,6 +36,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    acts-as-taggable-on (2.0.6)
     arel (2.0.6)
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
@@ -115,6 +116,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   devise
   factory_girl_rails (= 1.1.beta1)
   flutie
