@@ -30,6 +30,7 @@ gem "devise"
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 gem 'haml'
+gem 'hpricot'
 
 group :production do
 	gem "pg"
@@ -48,3 +49,5 @@ group :test do
   gem 'factory_girl_rails', "1.1.beta1"
   gem "rspec-rails", "2.0.0.beta.12"
 end
+
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
