@@ -8,7 +8,8 @@ Poulpzor::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
   match 'posts/all' => 'posts#index'
-  match 'posts/add' => 'posts#create'
+  match 'posts/add' => 'posts#create', :via => :post
+  match 'posts/delete' => 'posts#destroy', :via => :post
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

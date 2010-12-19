@@ -86,6 +86,28 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    error = false
+    if params[:url]
+      link = Link.find_by_url(params[:url]) || nil
+      if link.users.include(current_user)
+        bookmark = current_user.bookmarks.find(:all, :conditions => ["link_id = ?", link.id])
+        bookmark.destroy
+        link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => "index" }
+      format.xml do
+        if error
+          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
+        else
+          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"done\" />"
+        end
+      end
+    end
+  end
+
   # to fix
   def import
     if params[:file]
