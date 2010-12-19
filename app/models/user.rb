@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   validates_format_of :password, :with => /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
   validates_exclusion_of :name, :in => ['admin', 'login', 'logout'], :message => "name %{value} is reserved."
 
+  # setting some initial name as devise seems to misunderstand if we put that in the registration form TODO
   def set_initial_name
     self.name = self.email
   end
