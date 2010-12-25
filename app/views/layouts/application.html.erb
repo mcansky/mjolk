@@ -8,6 +8,8 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  
+<%= link_to 'Twitter Authentication', :controller => 'devise/sessions', :action => 'new', :warden_oauth_provider => 'twitter' %>
 
 <%= yield %>
 
