@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101227173317) do
+ActiveRecord::Schema.define(:version => 20101227225027) do
 
   create_table "bookmarks", :force => true do |t|
     t.string   "title"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20101227173317) do
     t.datetime "updated_at"
     t.datetime "bookmarked_at"
     t.string   "meta"
-    t.boolean  "private",       :default => false
+    t.integer  "private",       :default => 0
   end
 
   create_table "histories", :force => true do |t|

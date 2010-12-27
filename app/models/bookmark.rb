@@ -20,6 +20,7 @@ class Bookmark < ActiveRecord::Base
   end
 
   def private?
-    return private
+    return true if private == 1
+    return false
   end
 end

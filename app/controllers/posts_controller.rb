@@ -91,13 +91,15 @@ class PostsController < ApplicationController
       link = Link.find_by_url(url) || Link.new(:url => url)
       link.save
       if link.users.include?(current_user)
-        # already in
+        flash[:message] = "Already in"
       else
         datetime = nil
         datetime = params[:dt] if params[:dt]
         description = params['description'] || params[:bookmark]['title']
+
         new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
-        new_bookmark.private = true if ((params[:shared] && (params[:shared] == "no")) || (params[:bookmark]["private"]))
+        new_bookmark.private = 1 if ((params[:shared] && (params[:shared] == "no")))
+        new_bookmark.private = params[:bookmark]["private"] if params[:bookmark]["private"]
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         if new_bookmark.save
           logger.info("bookmark for #{url} added")
@@ -220,30 +222,35 @@ class PostsController < ApplicationController
 
   def update
     bookmark = Bookmark.find(params[:bookmark][:id])
-    new_url = params[:url]["url"]
-    if not ((new_url =~ /^http:\/\//) || (new_url =~ /^https:\/\//))
-      new_url = "http://" + new_url
-    end
-    if new_url != bookmark.url
-      if bookmark.link.bookmarks.size == 1
-        # only one entry, meaning it's gonna be empty
-        bookmark.link.destroy
+    if bookmark.user == current_user
+      new_url = params[:url]["url"]
+      if not ((new_url =~ /^http:\/\//) || (new_url =~ /^https:\/\//))
+        new_url = "http://" + new_url
       end
-      new_link = Link.find_by_url(new_url)
-      if new_link
-        bookmark.link = new_link
+      if new_url != bookmark.url
+        if bookmark.link.bookmarks.size == 1
+          # only one entry, meaning it's gonna be empty
+          bookmark.link.destroy
+        end
+        new_link = Link.find_by_url(new_url)
+        if new_link
+          bookmark.link = new_link
+        else
+          bookmark.link = Link.new(:url => new_url)
+        end
+      end
+      bookmark.title = params[:bookmark][:title]
+      bookmark.tag_list = params[:bookmark][:tags]
+      bookmark.private = params[:bookmark][:private]
+      if bookmark.save
+        flash[:message] = "Updated"
       else
-        bookmark.link = Link.new(:url => new_url)
       end
-    end
-    bookmark.title = params[:bookmark][:title]
-    bookmark.tag_list = params[:bookmark][:tags]
-    bookmark.private = params[:bookmark][:private]
-    if bookmark.save
-      flash[:message] = "Updated"
+      redirect_to :action => "index"
     else
+      flash[:message] = "You have no rights here."
+      redirect_to :action => "index"
     end
-    redirect_to :action => "index"
   end
 
   private
