@@ -1,0 +1,24 @@
+== Welcome to Altelicious
+
+Altelicious is a online bookmarking engine written to be an equivalent to Delicious.
+
+As many of us are again aware of the problem to have a third party company running such a service and the risk to loose our bookmarks we decided to write an alternative.
+
+The main goal is to provide a maximum compatibility on the api side.
+
+You can find more info and code at : http://github.com/mcansky/altelicious.
+
+== Getting things running
+
+First you need to get a proper web server, one that can handle ruby on rails app (thin, nginx+passenger, apache+passenger,unicorn, ...), then get ruby 1.9.2, and bundler.
+
+Do the classic bundler install thing.
+
+You might need to check config/database.yml, and you'll have to edit config/settings/production.yml (or development depending if you just running the app or not) and put something like that :
+
+  oauth:
+    twitter:
+        consumer_secret: something
+        consumer_key: somethingelse
+
+This will allow OAuth login through twitter. Check http://dev.twitter.com/pages/auth for details about how you will get those two things.
