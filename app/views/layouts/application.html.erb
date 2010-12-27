@@ -19,11 +19,15 @@
 </head>
 <body>
   <div class="container_16">
+    <div class="grid_2 prefix_1">
+      <h1><%= link_to "Altelicious", root_path %></h1>
+    </div>
+    <div class="clear"></div>
     <div class="grid_3 prefix_13" id="user_info">
       <p>
         <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) if !current_user %>
         <% if current_user %>
-          Hello <%= current_user.name %> !
+          Hello <%= link_to current_user.name, "/users/edit" %> !
           <% end %>
         </p>
     </div>

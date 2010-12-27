@@ -14,3 +14,8 @@ body {
 #content {
 	background: #FFF;
 }
+
+#footer {
+	text-align: center;
+	color: #AAA;
+}
