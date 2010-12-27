@@ -1,5 +1,9 @@
 - if current_user && current_user != post.user
-  %span.author= link_to post.user.name, :controller => "posts", :action => "index", :username => post.user.name
+  %span.author= link_to "@" + post.user.name, :controller => "posts", :action => "index", :username => post.user.name
+- elsif current_user && current_user == post.user
+  %span.author= link_to "you", :controller => "posts", :action => "index", :username => post.user.name
+- elsif !current_user
+  %span.author= link_to "@" + post.user.name, :controller => "posts", :action => "index", :username => post.user.name
 = link_to post.link.url, post.link.url
 %span.description= post.title
 - if post.bookmarked_at

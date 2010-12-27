@@ -50,3 +50,12 @@ span.tags a {
 span.tags a:hover {
 	text-decoration: underline;
 }
+
+span.author a {
+	font-size: 12px;
+	color: #ED4811;
+	text-decoration: none;
+}
+span.author a:hover {
+	text-decoration: underline;
+}
