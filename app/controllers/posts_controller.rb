@@ -97,7 +97,7 @@ class PostsController < ApplicationController
         datetime = params[:dt] if params[:dt]
         description = params['description'] || params[:bookmark]['title']
         new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
-        new_bookmark.private = true if ((params[:shared] && (params[:shared] == "no")) || (params[:private]))
+        new_bookmark.private = true if ((params[:shared] && (params[:shared] == "no")) || (params[:bookmark]["private"]))
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         if new_bookmark.save
           logger.info("bookmark for #{url} added")
