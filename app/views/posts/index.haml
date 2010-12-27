@@ -1,14 +1,21 @@
 .grid_14.prefix_1
   %h1
-    - if current_user && (current_user.name == @posts.first.user.name)
-      Your Bookmarks
-    - elsif @posts.size > 0
-      = @posts.first.user.name + "'s Bookmarks "
+    - if current_user
+      - if params[:username]
+        - if (current_user.name == params[:username])
+          Your Bookmarks
+        - else
+          = params[:username] + "'s Bookmarks "
+      - else
+        Your Bookmarks
     - else
       = params[:username] + "'s Bookmarks "
     = '(' + @posts.count.to_s + ')'
-    - if current_user && (current_user.name == @posts.first.user.name)
+    - if current_user && (!params[:username])
       = link_to( '+', :action => 'new')
+    - elsif (current_user && params[:username])
+      - if( current_user.name == params[:username])
+        = link_to( '+', :action => 'new')
 
   %ul
   - @posts.each do |post|

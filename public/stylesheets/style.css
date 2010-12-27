@@ -34,3 +34,8 @@ span.private {
 	color: orange;
 	font-weight: bold;
 }
+
+span.tags {
+	font-size: 10px;
+	color: #888;
+}
