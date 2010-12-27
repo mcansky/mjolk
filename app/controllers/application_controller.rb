@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     # filter private ones
     conditions[0] += " AND " if (params[:fromdt] || params[:todt])
     conditions[0] += "private = ?"
-    conditions << false
+    conditions << 0
     size = Bookmark.all.count
     if params[:tag]
       @posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")

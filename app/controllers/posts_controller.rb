@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   def index
     # building conditions
     conditions = Array.new
+    conditions[0] = ""
     user = nil
     if params[:username]
       user = User.find_by_name(params[:username])
@@ -36,14 +37,20 @@ class PostsController < ApplicationController
       if user
         posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
       else
+        # filter private ones
+        conditions[0] += " AND " if (params[:fromdt] || params[:todt])
+        conditions[0] += "private = ?"
+        conditions << 0
         posts = Bookmark.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
       end
     end
     # filter private ones
     the_posts = Array.new
     posts.each do |post|
-      if post.private? && current_user
-        the_posts << post if (post.user == current_user)
+      if post.private?
+        if current_user
+          the_posts << post if (post.user == current_user)
+        end
       else
         the_posts << post
       end
