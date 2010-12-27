@@ -70,8 +70,9 @@ class User < ActiveRecord::Base
   end
 
   def role_symbols
-    roles = Array.new
-    roles.split.each { |r| roles << r.to_sym }
+    e_roles = Array.new
+    roles.split.each { |r| e_roles << r.to_sym } unless not roles
+    return e_roles
   end
 
   #private
