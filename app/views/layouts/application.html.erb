@@ -27,7 +27,7 @@
       <p>
         <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) if !current_user %>
         <% if current_user %>
-          Hello <%= link_to current_user.name, "/users/edit" %> !
+          Hello <%= link_to current_user.name, "/users/edit" %> ! <%= link_to "Logout", "/users/sign_out" %>
           <% end %>
         </p>
     </div>
