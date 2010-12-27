@@ -69,6 +69,11 @@ class User < ActiveRecord::Base
     self.api_key = Digest::SHA1.hexdigest(Time.now.to_s + self.email + self.name)
   end
 
+  def role_symbols
+    roles = Array.new
+    roles.split.each { |r| roles << r.to_sym }
+  end
+
   #private
   # where the work happens
   # use a xml file and extract content
