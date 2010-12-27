@@ -1,0 +1,16 @@
+.clear {
+	clear: both;
+}
+
+#user_info {
+	background: #CCDACA;
+	border: #000000;
+}
+
+body {
+	background: #EBEEE2;
+}
+
+#content {
+	background: #FFF;
+}
