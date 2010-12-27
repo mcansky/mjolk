@@ -148,7 +148,7 @@ class PostsController < ApplicationController
       elsif params[:id]
         bookmark = Bookmark.find(params[:id]) || nil
         link = bookmark.link
-        bookmark.destroy
+        bookmark.destroy if bookmark.user == current_user
         link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
       end
       
