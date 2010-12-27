@@ -20,6 +20,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def create
     user = User.new(:name => params[:name], :email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation])
     user.save
-    redirect_to :controller => "users/posts"
+    redirect_to :controller => "posts"
   end
 end
