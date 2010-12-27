@@ -28,16 +28,19 @@ class PostsController < ApplicationController
       posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
     end
     # filter private ones
-    @posts = Array.new
+    the_posts = Array.new
     posts.each do |post|
       if post.private?
-        @posts << post if (post.user == current_user)
+        the_posts << post if (post.user == current_user)
       else
-        @posts << post
+        the_posts << post
       end
     end
+    @posts_count = the_posts.size
     respond_to do |format|
-      format.html
+      format.html do
+        @posts = the_posts.paginate(:page => params[:page])
+      end
       format.xml do
         xml_posts = Array.new
         @posts.each do |post|

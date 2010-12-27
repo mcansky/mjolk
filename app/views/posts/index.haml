@@ -10,7 +10,7 @@
         Your Bookmarks
     - else
       = params[:username] + "'s Bookmarks "
-    = '(' + @posts.count.to_s + ')'
+    = '(' + @posts_count.to_s + ')'
     - if current_user && (!params[:username])
       = link_to( '+', :action => 'new')
     - elsif (current_user && params[:username])
@@ -21,3 +21,6 @@
   - @posts.each do |post|
     %li.bookmark
       = render "short_post", :post => post
+
+  .pagination
+    = will_paginate(@posts)
