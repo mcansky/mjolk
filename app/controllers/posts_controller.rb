@@ -73,7 +73,7 @@ class PostsController < ApplicationController
       else
         url = params[:url]
       end
-      if not (url =~ /^http:\/\//)
+      if not ((url =~ /^http:\/\//) || (url =~ /^https:\/\//))
         url = "http://" + url
       end
       link = Link.find_by_url(url) || Link.new(:url => url)
@@ -161,7 +161,7 @@ class PostsController < ApplicationController
             # let's check if the url is already in the db
             # but first we need to check if there is http:// in there
             url = post["href"]
-            if post["href"] =~ /^http:\/\//
+            if ((post["href"] =~ /^http:\/\//) || (post["href"] =~ /^https:\/\//))
             else
               url = "http://" + post["href"]
             end
@@ -209,7 +209,7 @@ class PostsController < ApplicationController
   def update
     bookmark = Bookmark.find(params[:bookmark][:id])
     new_url = params[:url]["url"]
-    if not (new_url =~ /^http:\/\//)
+    if not ((new_url =~ /^http:\/\//) || (new_url =~ /^https:\/\//))
       new_url = "http://" + new_url
     end
     if new_url != bookmark.url

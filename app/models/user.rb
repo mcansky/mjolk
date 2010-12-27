@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
           # let's check if the url is already in the db
           # but first we need to check if there is http:// in there
           url = post["href"]
-          if post["href"] =~ /^http:\/\//
+          if ((post["href"] =~ /^http:\/\//) || (post["href"] =~ /^https:\/\//))
           else
             url = "http://" + post["href"]
           end
