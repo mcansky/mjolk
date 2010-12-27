@@ -6,8 +6,7 @@
     = link_to '+', :action => 'new'
     )
 
+  %ul
   - @posts.each do |post|
-    %h2
-      %p
-        = link_to post.link.url, post.link.url
-      %p= post.title
+    %li
+      = render "short_post", :post => post

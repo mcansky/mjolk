@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   def create
     incomplete = true
     error = false
-    if ((params[:url] != nil) && (params[:description] != nil ))
+    if ((params[:url] != nil) &&( (params[:description] != nil ) || (params[:bookmark]["title"] != nil )))
       incomplete = false
       url = nil
       if params[:url][:url]
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
       else
         url = params[:url]
       end
-      if url =~ /^http:\/\//
+      if not (url =~ /^http:\/\//)
         url = "http://" + url
       end
       link = Link.find_by_url(url) || Link.new(:url => url)
@@ -65,10 +65,10 @@ class PostsController < ApplicationController
       else
         datetime = nil
         datetime = params[:dt] if params[:dt]
-        description = params['description'] || params['title']
+        description = params['description'] || params[:bookmark]['title']
         new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
         new_bookmark.private = true if (params[:shared] && (params[:shared] == "no"))
-        new_bookmark.tag_list = params['tags']
+        new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         if new_bookmark.save
           logger.info("bookmark for #{url} added")
         else

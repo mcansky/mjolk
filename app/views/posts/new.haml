@@ -1,7 +1,7 @@
 .grid_13.prefix_1
   %h2 New Bookmark
 
-  = form_for(:bookmark) do |f|
+  = form_for(:bookmark, :url => { :action => "create" }) do |f|
     %p
       = fields_for("url") do |fl|
         = fl.label :url
