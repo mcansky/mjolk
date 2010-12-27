@@ -127,7 +127,7 @@ class PostsController < ApplicationController
   end
 
   # to fix
-  def import
+  def import_file
     if params[:file]
       # using hpricot to read
       xml_stuff = nil
@@ -174,6 +174,18 @@ class PostsController < ApplicationController
 
   def edit
     @bookmark = Bookmark.find(params[:id])
+  end
+
+  def import
+    
+  end
+
+  def import_url
+    if (params[:password] && params[:username])
+      current_user.import_from_delicious(params[:username], params[:password])
+    end
+    flash[:message] = "Importing ..."
+    redirect_to :action => "index"
   end
 
   def update

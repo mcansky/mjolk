@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
       resp = nil
       http.start do |http|
         req = Net::HTTP::Get.new("/v1/posts/all", {"User-Agent" =>
-            "poulpzor v0.1"})
+            "altelicious #{Settings.version}"})
         req.basic_auth(username, password)
         response = http.request(req)
         resp = response.body

@@ -1,0 +1,13 @@
+.grid_13.prefix_1
+  %h2 Import from delicious
+  
+  %p We need you delicious credentials, we will not store those.
+  
+  - form_tag("/posts/import_url") do
+    = label_tag :username
+    = text_field_tag :username
+    
+    = label_tag :password
+    = password_field_tag :password
+    
+    = submit_tag("Import")

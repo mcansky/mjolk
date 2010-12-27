@@ -35,6 +35,7 @@
     <% if current_user %>
       <div class="grid_6 prefix_1" id="menu">
         <%= link_to "Bookmarks", posts_path %>
+        <%= link_to "Import from delicious", :controller => "posts", :action => "import" %>
       </div>
     <% end %>
     <div class="clear"></div>
