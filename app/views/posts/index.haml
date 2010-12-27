@@ -8,8 +8,12 @@
           = params[:username] + "'s Bookmarks "
       - else
         Your Bookmarks
-    - else
+    - elsif params[:username]
       = params[:username] + "'s Bookmarks "
+    - elsif params[:tag]
+      = "Bookmarks in " + params[:tag]
+    - else
+      Some bookmarks
     = '(' + @posts_count.to_s + ')'
     - if current_user && (!params[:username])
       = link_to( '+', :action => 'new')
