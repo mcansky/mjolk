@@ -11,6 +11,7 @@ Poulpzor::Application.routes.draw do
   match 'posts/add' => 'posts#create', :via => :post
   match 'posts/delete' => 'posts#destroy', :via => :post
   match 'posts/edit' => 'posts#edit'
+  match 'posts/update' => 'posts#update'
   resources :bookmarks, :controller => "posts"
 
   # Sample of named route:

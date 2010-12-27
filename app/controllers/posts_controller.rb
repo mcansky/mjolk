@@ -176,6 +176,33 @@ class PostsController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
   end
 
+  def update
+    bookmark = Bookmark.find(params[:bookmark][:id])
+    new_url = params[:url]["url"]
+    if not (new_url =~ /^http:\/\//)
+      new_url = "http://" + new_url
+    end
+    if new_url != bookmark.url
+      if bookmark.link.bookmarks.size == 1
+        # only one entry, meaning it's gonna be empty
+        bookmark.link.destroy
+      end
+      new_link = Link.find_by_url(new_url)
+      if new_link
+        bookmark.link = new_link
+      else
+        bookmark.link = Link.new(:url => new_url)
+      end
+    end
+    bookmark.title = params[:bookmark][:title]
+    bookmark.tag_list = params[:bookmark][:tags]
+    if bookmark.save
+      flash[:message] = "Updated"
+    else
+    end
+    redirect_to :action => "index"
+  end
+
   private
   def check_api
     if current_user && current_user.api_key == params[:api_key]

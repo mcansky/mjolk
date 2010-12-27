@@ -1,0 +1,20 @@
+.grid_13.prefix_1
+  %h2 Edit Bookmark
+
+  = form_for(:bookmark, :url => "update") do |f|
+    %p
+      = fields_for("url") do |fl|
+        = fl.label :url
+        = fl.text_field :url, :value => @bookmark.url
+
+    %p
+      = f.label :description
+      = f.text_field :title
+      = f.hidden_field :id, :value => @bookmark.id
+
+    %p
+      = f.label "Tags (comma separated)"
+      = f.text_field :tags
+  
+    %p
+      = f.submit("Update")
