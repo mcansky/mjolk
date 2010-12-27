@@ -20,10 +20,11 @@ class ApplicationController < ActionController::Base
     conditions << false
     size = Bookmark.all.count
     if params[:tag]
-      @posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at DESC")
+      @posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
     else  
-      @posts = Bookmark.find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at DESC")
+      @posts = Bookmark.find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
     end
+    @posts.reverse!
     respond_to do |format|
       format.html
       format.xml do
