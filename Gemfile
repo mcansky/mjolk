@@ -22,7 +22,8 @@ gem "flutie"
 # gem 'capistrano'
 
 # auth stuff
-gem "devise"
+gem "devise", :git => "git://github.com/plataformatec/devise.git", :tag => "v1.2.rc"
+gem "oa-oauth", :require => "omniauth/oauth"
 
 # config stuff
 gem "rails_config"

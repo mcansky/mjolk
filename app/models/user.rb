@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   # tag ownership
   acts_as_tagger
 
@@ -22,6 +22,23 @@ class User < ActiveRecord::Base
   # check strength of password : again 8 chars min, at least one capitaled letter, at least one normal letter, at least one non alpha characters
   #validates_format_of :password, :with => /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
   #validates_exclusion_of :name, :in => ['admin', 'login', 'logout'], :message => "name %{value} is reserved."
+
+
+  def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
+    data = access_token['extra']['user_hash']
+    if user = User.find_by_email(data["email"])
+      user
+    else # Create an user with a stub password. 
+      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20]) 
+    end
+  end
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.twitter_data"] && session["devise.twitter_data"]["extra"]["user_hash"]
+        user.email = data["email"]
+      end
+    end
+  end
 
   # setting some initial name as devise seems to misunderstand if we put that in the registration form TODO
   def set_initial_name

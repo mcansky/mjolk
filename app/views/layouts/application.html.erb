@@ -8,8 +8,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  
-<%= link_to 'Twitter Authentication', :controller => 'devise/sessions', :action => 'new', :warden_oauth_provider => 'twitter' %>
+<%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) if !current_user %>
 
 <%= yield %>
 

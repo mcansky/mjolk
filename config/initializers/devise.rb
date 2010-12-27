@@ -139,4 +139,8 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+
+  # oauth
+  config.omniauth :twitter, Settings.oauth.twitter.consumer_key, Settings.oauth.twitter.consumer_secret
+  
 end
