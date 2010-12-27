@@ -31,6 +31,10 @@ li.bookmark {
 	border-bottom: 1px solid #CCC;
 }
 
+a {
+	color: #204D84;
+}
+
 p.beware {
 	color: red;
 	font-weight: bold;
