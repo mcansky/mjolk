@@ -10,8 +10,8 @@ class PostsController < ApplicationController
     user = nil
     if params[:username]
       user = User.find_by_name(params[:username])
-    else
-      user = current_user if current_user
+    elsif current_user
+      user = current_user
     end
     if params[:fromdt]
       conditions[0] = "bookmarked_at >= ?"
@@ -27,9 +27,17 @@ class PostsController < ApplicationController
       if ActiveRecord::Base.connection.class.to_s.split('::')[-1].gsub("Adapter",'') == "SQLite3"
         limit = -1
       end
-      posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
-    else  
-      posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+      if user
+        posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+      else
+        posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+      end
+    else
+      if user
+        posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+      else
+        posts = Bookmark.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+      end
     end
     # filter private ones
     the_posts = Array.new
