@@ -17,4 +17,4 @@
 - if post.tags.size > 0
   %span.tags
     - post.tags.each do |tag|
-      = link_to tag, :action => "index", :tag => tag.name
+      = link_to tag, :controller => "posts", :action => "index", :tag => tag.name
