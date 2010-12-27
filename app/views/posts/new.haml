@@ -1,0 +1,19 @@
+.grid_13.prefix_1
+  %h2 New Bookmark
+
+  = form_for(:bookmark) do |f|
+    %p
+      = fields_for("url") do |fl|
+        = fl.label :url
+        = fl.text_field :url
+
+    %p
+      = f.label :description
+      = f.text_field :title
+
+    %p
+      = f.label "Tags (comma separated)"
+      = f.text_field :tags
+  
+    %p
+      = f.submit("Post")

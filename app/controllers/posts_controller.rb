@@ -37,6 +37,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def new
+    @bookmark = Bookmark.new
+  end
+
   # also respond to posts/add
   # implemented : url (req), description (req), tags, dt, shared
   # not implemented : replace, extended
@@ -45,9 +49,14 @@ class PostsController < ApplicationController
     error = false
     if ((params[:url] != nil) && (params[:description] != nil ))
       incomplete = false
-      url = params[:url]
-      if params[:url] =~ /^http:\/\//
-        url = "http://" + params[:url]
+      url = nil
+      if params[:url][:url]
+        url = params[:url][:url]
+      else
+        url = params[:url]
+      end
+      if url =~ /^http:\/\//
+        url = "http://" + url
       end
       link = Link.find_by_url(url) || Link.new(:url => url)
       link.save
@@ -56,7 +65,8 @@ class PostsController < ApplicationController
       else
         datetime = nil
         datetime = params[:dt] if params[:dt]
-        new_bookmark = Bookmark.new(:title => params['description'], :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
+        description = params['description'] || params['title']
+        new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
         new_bookmark.private = true if (params[:shared] && (params[:shared] == "no"))
         new_bookmark.tag_list = params['tags']
         if new_bookmark.save

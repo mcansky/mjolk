@@ -19,3 +19,7 @@ body {
 	text-align: center;
 	color: #AAA;
 }
+
+#main {
+	margin-top: 5px;
+}

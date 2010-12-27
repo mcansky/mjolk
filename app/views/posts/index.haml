@@ -1,10 +1,13 @@
-%h1
-  Bookmarks (
-  = @posts.count
-  )
+.grid_14.prefix_1
+  %h1
+    Bookmarks (
+    = @posts.count
+    ) (
+    = link_to '+', :action => 'new'
+    )
 
-- @posts.each do |post|
-  %h2
-    %p
-      = link_to post.link.url, post.link.url
-    %p= post.title
+  - @posts.each do |post|
+    %h2
+      %p
+        = link_to post.link.url, post.link.url
+      %p= post.title
