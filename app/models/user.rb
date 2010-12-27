@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :api_key, :name
+  attr_accessible :email, :password, :password_confirmation, :api_key, :name
   has_many :bookmarks
   has_many :links, :through => :bookmarks
   before_validation :set_initial_name
