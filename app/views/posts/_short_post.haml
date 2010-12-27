@@ -1,6 +1,9 @@
+- if current_user && current_user != post.user
+  %span.author= link_to post.user.name, :controller => "posts", :action => "index", :username => post.user.name
 = link_to post.link.url, post.link.url
 %span.description= post.title
-%span.added_on= post.bookmarked_at.strftime("%d/%m/%Y @ %H:%M")
+- if post.bookmarked_at
+  %span.added_on= post.bookmarked_at.strftime("%d/%m/%Y @ %H:%M")
 %span.manage
   = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
   = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
