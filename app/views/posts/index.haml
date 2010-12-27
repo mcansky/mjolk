@@ -1,10 +1,14 @@
 .grid_14.prefix_1
   %h1
-    Bookmarks (
-    = @posts.count
-    ) (
-    = link_to '+', :action => 'new'
-    )
+    - if current_user && (current_user.name == @posts.first.user.name)
+      Your Bookmarks
+    - elsif @posts.size > 0
+      = @posts.first.user.name + "'s Bookmarks "
+    - else
+      = params[:username] + "'s Bookmarks "
+    = '(' + @posts.count.to_s + ')'
+    - if current_user && (current_user.name == @posts.first.user.name)
+      = link_to( '+', :action => 'new')
 
   %ul
   - @posts.each do |post|

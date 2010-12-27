@@ -18,4 +18,8 @@ class Bookmark < ActiveRecord::Base
   def url
     return link.url
   end
+
+  def private?
+    return private
+  end
 end

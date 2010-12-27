@@ -15,6 +15,9 @@
     %p
       = f.label "Tags (comma separated)"
       = f.text_field :tags
+    %p
+      = f.label "Private ?"
+      = f.check_box :private
   
     %p
       = f.submit("Update")

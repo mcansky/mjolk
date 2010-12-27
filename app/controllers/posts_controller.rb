@@ -2,11 +2,17 @@ require 'xmlsimple'
 
 class PostsController < ApplicationController
   # auth needed !
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => "index"
 
   def index
     # building conditions
     conditions = Array.new
+    user = nil
+    if params[:username]
+      user = User.find_by_name(params[:username])
+    else
+      user = current_user if current_user
+    end
     if params[:fromdt]
       conditions[0] = "bookmarked_at >= ?"
       conditions << DateTime.parse(params[:fromdt])
@@ -17,9 +23,18 @@ class PostsController < ApplicationController
       conditions << DateTime.parse(params[:todt])
     end
     if params[:tag]
-      @posts = current_user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
+      posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
     else  
-      @posts = current_user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
+      posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || -1), :conditions => conditions, :order => "bookmarked_at DESC")
+    end
+    # filter private ones
+    @posts = Array.new
+    posts.each do |post|
+      if post.private?
+        @posts << post if (post.user == current_user)
+      else
+        @posts << post
+      end
     end
     respond_to do |format|
       format.html
@@ -67,7 +82,7 @@ class PostsController < ApplicationController
         datetime = params[:dt] if params[:dt]
         description = params['description'] || params[:bookmark]['title']
         new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
-        new_bookmark.private = true if (params[:shared] && (params[:shared] == "no"))
+        new_bookmark.private = true if ((params[:shared] && (params[:shared] == "no")) || (params[:private]))
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         if new_bookmark.save
           logger.info("bookmark for #{url} added")
@@ -208,6 +223,7 @@ class PostsController < ApplicationController
     end
     bookmark.title = params[:bookmark][:title]
     bookmark.tag_list = params[:bookmark][:tags]
+    bookmark.private = params[:bookmark][:private]
     if bookmark.save
       flash[:message] = "Updated"
     else
