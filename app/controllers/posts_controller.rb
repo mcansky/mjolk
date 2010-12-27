@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     # filter private ones
     the_posts = Array.new
     posts.each do |post|
-      if post.private?
+      if post.private? && current_user
         the_posts << post if (post.user == current_user)
       else
         the_posts << post
