@@ -98,13 +98,21 @@ class PostsController < ApplicationController
 
   def destroy
     error = false
-    if params[:url]
-      link = Link.find_by_url(params[:url]) || nil
-      if link.users.include(current_user)
-        bookmark = current_user.bookmarks.find(:all, :conditions => ["link_id = ?", link.id])
+    if params[:url] || params[:id]
+      if params[:url]
+        link = Bookmark.find_by_url(url) || nil
+        if (link && link.users.include(current_user))
+          bookmark = current_user.bookmarks.find(:all, :conditions => ["link_id = ?", link.id])
+          bookmark.destroy
+          link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
+        end
+      elsif params[:id]
+        bookmark = Bookmark.find(params[:id]) || nil
+        link = bookmark.link
         bookmark.destroy
         link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
       end
+      
     end
     respond_to do |format|
       format.html { redirect_to :action => "index" }
@@ -162,6 +170,10 @@ class PostsController < ApplicationController
     else
       redirect_to login_path
     end
+  end
+
+  def edit
+    @bookmark = Bookmark.find(params[:id])
   end
 
   private

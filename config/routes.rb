@@ -10,6 +10,8 @@ Poulpzor::Application.routes.draw do
   match 'posts/all' => 'posts#index'
   match 'posts/add' => 'posts#create', :via => :post
   match 'posts/delete' => 'posts#destroy', :via => :post
+  match 'posts/edit' => 'posts#edit'
+  resources :bookmarks, :controller => "posts"
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

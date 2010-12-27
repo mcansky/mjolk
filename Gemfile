@@ -10,6 +10,9 @@ gem 'acts-as-taggable-on'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+# some good jquery
+gem "jquery-rails"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 gem "thin"

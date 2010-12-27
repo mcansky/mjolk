@@ -14,4 +14,8 @@ class Bookmark < ActiveRecord::Base
   def update_meta
     self.meta = Digest::MD5.hexdigest(title + link.url + tags.join(' '))
   end
+
+  def url
+    return link.url
+  end
 end
