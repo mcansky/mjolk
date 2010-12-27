@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
     else # not found nil (will redirect to sign up form)
       user = nil
     end
+    return user
   end
   def self.new_with_session(params, session)
     super.tap do |user|
