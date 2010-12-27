@@ -8,4 +8,5 @@
   %span.private P
 - if post.tags.size > 0
   %span.tags
-    = post.tags.join(' ')
+    - post.tags.each do |tag|
+      = link_to tag, :action => "index", :tag => tag.name
