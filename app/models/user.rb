@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   # Setup accessible (or protected) attributes for your model
-  #attr_accessible :email, :password, :password_confirmation, :api_key, :name
+  attr_accessible :email, :password, :password_confirmation, :api_key, :name
   has_many :bookmarks
   has_many :links, :through => :bookmarks
   before_validation :set_initial_name
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 
   # setting some initial name as devise seems to misunderstand if we put that in the registration form TODO
   def set_initial_name
-    self.name = self.email
+    self.name = self.email if !self.name
   end
 
   # import from delicious user username and password pair
