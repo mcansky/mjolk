@@ -9,8 +9,9 @@
 - if post.bookmarked_at
   %span.added_on= post.bookmarked_at.strftime("%d/%m/%Y @ %H:%M")
 %span.manage
-  = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
-  = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
+  - if (current_user && (post.user == current_user))
+    = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
+    = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
 - if post.private?
   %span.private P
 - if post.tags.size > 0
