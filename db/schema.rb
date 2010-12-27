@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20101227173317) do
     t.datetime "bookmarks_update_at"
     t.string   "api_key"
     t.string   "roles"
+    t.string   "import_xml"
+    t.string   "export_xml"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

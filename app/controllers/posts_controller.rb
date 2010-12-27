@@ -168,7 +168,7 @@ class PostsController < ApplicationController
       end
       redirect_to :action => 'index'
     else
-      redirect_to login_path
+      redirect_to :action => 'import'
     end
   end
 

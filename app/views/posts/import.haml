@@ -11,3 +11,9 @@
     = password_field_tag :password
     
     = submit_tag("Import")
+
+  %p Or you can just send us an xml export of your delicious store.
+  - form_tag("/posts/import_file") do
+    = label_tag :file
+    = file_field_tag :file
+    = submit_tag("Import")
