@@ -108,7 +108,9 @@ class PostsController < ApplicationController
         new_bookmark.private = 1 if ((params[:shared] && (params[:shared] == "no")))
         new_bookmark.private = params[:bookmark]["private"] if params[:bookmark]["private"]
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
+        current_user.bookmarks_update_at = Time.now
         if new_bookmark.save
+          current_user.save
           logger.info("bookmark for #{url} added")
         else
           error = true
