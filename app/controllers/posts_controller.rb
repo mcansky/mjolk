@@ -3,6 +3,7 @@ require 'xmlsimple'
 class PostsController < ApplicationController
   # auth needed !
   before_filter :authenticate_user!, :except => "index"
+  caches_page :index
 
   def index
     # building conditions
