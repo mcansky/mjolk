@@ -111,6 +111,8 @@ class PostsController < ApplicationController
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         current_user.bookmarks_update_at = Time.now
         if new_bookmark.save
+          expire_page :action => :index
+          expire_page(:controller => 'application', :action => 'index')
           current_user.save
           logger.info("bookmark for #{url} added")
         else
