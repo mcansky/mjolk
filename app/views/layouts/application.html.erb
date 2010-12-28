@@ -24,7 +24,10 @@
     <div class="clear"></div>
     <div class="grid_3 prefix_13" id="user_info">
       <p>
-        <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) if !current_user %>
+        <% if !current_user %>
+          <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %><br />
+          <%= link_to "Sign up", new_user_registration_path %> / <%= link_to('Sign in', new_user_session_path) %>  
+        <% end %>
         <% if current_user %>
           Hello <%= link_to current_user.name, "/users/edit" %> ! <%= link_to "Logout", "/users/sign_out" %>
           <% end %>
