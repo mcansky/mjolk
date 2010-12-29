@@ -10,7 +10,7 @@
 
   <p><%= f.label :name %><br />
   <% if session["devise.twitter_data"]['extra']['user_hash']['name'] != nil %>
-  <%= f.text_field :name, :value => session["devise.twitter_data"]['extra']['user_hash']['name'], {:readonly => true} %>
+  <%= f.text_field :name, :value => session["devise.twitter_data"]['extra']['user_hash']['name'], :readonly => true %>
   <% else %>
   <%= f.text_field :name %>
   <% end %>
