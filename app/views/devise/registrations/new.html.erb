@@ -9,6 +9,7 @@
   <%= f.text_field :email %></p>
 
   <p><%= f.label :name %><br />
+  <%= session["devise.twitter_data"].inspect %>
   <% if session["devise.twitter_data"]['extra']['user_hash']['name'] != nil %>
   <%= f.text_field :name, :value => session["devise.twitter_data"]['extra']['user_hash']['name'], :readonly => true %>
   <% else %>
