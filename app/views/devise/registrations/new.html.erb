@@ -10,9 +10,9 @@
 
   <p><%= f.label :name %><br />
     <% if session["username"] != nil %>
-      <%= f.text_field :name, :value => session["username"], :readonly => true %>
+      <%= f.text_field :name, :value => session["username"], :readonly => true %> (read only)
     <% else %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name %> (beware you won't be able to change this later for authentication reasons)
     <% end %>
   </p>
   
