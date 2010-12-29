@@ -9,8 +9,11 @@
   <%= f.text_field :email %></p>
 
   <p><%= f.label :name %><br />
-  <%= session["username"].inspect %>
-
+    <% if session["username"] != nil %>
+      <%= f.text_field :name, :value => session["username"], :readonly => true %>
+    <% else %>
+      <%= f.text_field :name %>
+    <% end %>
   </p>
   
   <p>We also need you to fill this local password to allow you access even if Twitter is offline, or to secure some local process sometimes.</p>
