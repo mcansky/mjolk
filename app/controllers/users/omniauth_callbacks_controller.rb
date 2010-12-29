@@ -4,6 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     logger.info(env["omniauth.auth"].inspect)
     @user = User.find_for_twitter_oauth(env["omniauth.auth"], current_user)
     if !@user
+      session["devise.twitter_data"] = env["omniauth.auth"]
       redirect_to new_user_registration_url
     elsif @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Twitter"
