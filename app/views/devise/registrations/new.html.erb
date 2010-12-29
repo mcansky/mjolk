@@ -10,11 +10,7 @@
 
   <p><%= f.label :name %><br />
   <%= session["devise.twitter_data"].inspect %>
-  <% #if session["devise.twitter_data"]['extra']['user_hash']['name'] != nil %>
-  <%= #f.text_field :name, :value => session["devise.twitter_data"]['extra']['user_hash']['name'], :readonly => true %>
-  <% #else %>
-  <%= #f.text_field :name %>
-  <% #end %>
+
   </p>
   
   <p>We also need you to fill this local password to allow you access even if Twitter is offline, or to secure some local process sometimes.</p>
@@ -28,4 +24,4 @@
   <p><%= f.submit "Sign up" %></p>
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<%= render :partial => "/devise/shared/links" %>
