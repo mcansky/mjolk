@@ -61,16 +61,20 @@ class PostsController < ApplicationController
         @posts = the_posts.paginate(:page => params[:page])
       end
       format.xml do
-        xml_posts = Array.new
-        the_posts.each do |post|
-          tags = Array.new
-          post.tags.each { |t| tags << t.name } if post.tags.count > 0
-          xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
+        if current_user
+          xml_posts = Array.new
+          the_posts.each do |post|
+            tags = Array.new
+            post.tags.each { |t| tags << t.name } if post.tags.count > 0
+            xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
+          end
+          meta = Digest::MD5.hexdigest(current_user.name + current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"))
+          posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :hash => meta, :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
+          xml_output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XmlSimple.xml_out(posts).gsub("opt","posts")
+          render :xml => xml_output
+        else
+          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
         end
-        meta = Digest::MD5.hexdigest(current_user.name + current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"))
-        posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :hash => meta, :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
-        xml_output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XmlSimple.xml_out(posts).gsub("opt","posts")
-        render :xml => xml_output
       end
     end
   end
