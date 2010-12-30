@@ -62,7 +62,7 @@ class PostsController < ApplicationController
       end
       format.xml do
         xml_posts = Array.new
-        @posts.each do |post|
+        the_posts.each do |post|
           tags = Array.new
           post.tags.each { |t| tags << t.name }
           xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
