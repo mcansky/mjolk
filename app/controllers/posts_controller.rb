@@ -64,7 +64,7 @@ class PostsController < ApplicationController
         xml_posts = Array.new
         the_posts.each do |post|
           tags = Array.new
-          post.tags.each { |t| tags << t.name } if post.tags > 0
+          post.tags.each { |t| tags << t.name } if post.tags.count > 0
           xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
         end
         posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :hash => post.meta, :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
