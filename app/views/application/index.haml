@@ -3,7 +3,7 @@
 
   %h1 Last 20 bookmarks
 
-  - cache(:action => 'recent', :action_suffix => 'last_20_posts') do
+  - cache(:action => 'index', :action_suffix => 'last_20_posts') do
     %ul
     - @posts.each do |post|
       %li.bookmark
