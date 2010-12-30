@@ -3,7 +3,8 @@
 
   %h1 Last 20 bookmarks
 
-  %ul
-  - @posts.each do |post|
-    %li.bookmark
-      = render "/posts/short_post", :post => post
+  - cache(:action => 'recent', :action_suffix => 'last_20_posts') do
+    %ul
+    - @posts.each do |post|
+      %li.bookmark
+        = render "/posts/short_post", :post => post

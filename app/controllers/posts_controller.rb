@@ -3,7 +3,6 @@ require 'xmlsimple'
 class PostsController < ApplicationController
   # auth needed !
   before_filter :authenticate_user!, :except => "index"
-  caches_page :index
 
   def index
     # building conditions
@@ -111,8 +110,8 @@ class PostsController < ApplicationController
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         current_user.bookmarks_update_at = Time.now
         if new_bookmark.save
-          expire_page :action => :index
-          expire_page(:controller => 'application', :action => 'index')
+          expire_fragment(:controller => 'posts', :action => 'recent', :action_suffix => 'all_user_posts')
+          expire_fragment(:controller => 'application', :action => 'recent', :action_suffix => 'last_20_posts')
           current_user.save
           logger.info("bookmark for #{url} added")
         else
