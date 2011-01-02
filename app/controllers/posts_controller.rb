@@ -9,11 +9,6 @@ class PostsController < ApplicationController
     conditions = Array.new
     conditions[0] = ""
     user = nil
-    if params[:username]
-      user = User.find_by_name(params[:username])
-    elsif current_user
-      user = current_user
-    end
     if params[:fromdt]
       conditions[0] = "bookmarked_at >= ?"
       conditions << DateTime.parse(params[:fromdt])
@@ -22,6 +17,17 @@ class PostsController < ApplicationController
       conditions[0] += " AND " if params[:fromdt]
       conditions[0] += "bookmarked_at <= ?"
       conditions << DateTime.parse(params[:todt])
+    end
+    if params[:username]
+      user = User.find_by_name(params[:username])
+      # filter private ones
+      conditions[0] += " AND " if (params[:fromdt] || params[:todt])
+      conditions[0] += "private = ?"
+      conditions << 0
+    elsif current_user
+      user = current_user
+    elsif (!current_user && !params[:username])
+      redirect_to :controller => :application, :action => :index
     end
     if params[:tag]
       limit = "ALL"
@@ -37,10 +43,6 @@ class PostsController < ApplicationController
       if user
         posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
       else
-        # filter private ones
-        conditions[0] += " AND " if (params[:fromdt] || params[:todt])
-        conditions[0] += "private = ?"
-        conditions << 0
         posts = Bookmark.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
       end
     end
