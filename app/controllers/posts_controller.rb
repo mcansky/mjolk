@@ -160,7 +160,8 @@ class PostsController < ApplicationController
         bookmark.destroy if bookmark.user == current_user
         link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
       end
-      
+      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
+      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
     end
     respond_to do |format|
       format.html { redirect_to :action => "index" }
@@ -259,6 +260,8 @@ class PostsController < ApplicationController
       bookmark.tag_list = params[:bookmark][:tags]
       bookmark.private = params[:bookmark][:private]
       if bookmark.save
+        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
+        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
         flash[:message] = "Updated"
       else
       end
