@@ -3,8 +3,15 @@
 
   %h1 Last 20 bookmarks
 
-  - cache(:action => 'index', :action_suffix => 'last_20_posts') do
-    %ul
-    - @posts.each do |post|
-      %li.bookmark
-        = render "/posts/short_post", :post => post
+  - if current_user
+    - cache(:action => 'index', :action_suffix => 'last_20_posts') do
+      %ul
+      - @posts.each do |post|
+        %li.bookmark
+          = render "/posts/short_post", :post => post
+  - else
+    - cache(:action => 'index', :action_suffix => 'public_last_20_posts') do
+      %ul
+      - @posts.each do |post|
+        %li.bookmark
+          = render "/posts/short_post", :post => post

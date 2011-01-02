@@ -21,10 +21,19 @@
       - if( current_user.name == params[:username])
         = link_to( '+', :action => 'new')
 
-  - cache(:action => 'index', :action_suffix => 'all_user_posts') do
-    %ul
-      - @posts.each do |post|
-        %li.bookmark
-          = render "short_post", :post => post
-    .pagination
-      = will_paginate(@posts)
+  - if current_user
+    - cache(:action => 'index', :action_suffix => 'all_user_posts') do
+      %ul
+        - @posts.each do |post|
+          %li.bookmark
+            = render "short_post", :post => post
+      .pagination
+        = will_paginate(@posts)
+  - else
+    - cache(:action => 'index', :action_suffix => 'public_all_posts') do
+      %ul
+        - @posts.each do |post|
+          %li.bookmark
+            = render "short_post", :post => post
+      .pagination
+        = will_paginate(@posts)
