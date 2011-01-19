@@ -1,14 +1,14 @@
-== Welcome to Altelicious
+h2. Welcome to Mjölk
 
-Altelicious is a online bookmarking engine written to be an equivalent to Delicious.
+Mjölk is a online bookmarking engine written to be an equivalent to Delicious.
 
 As many of us are again aware of the problem to have a third party company running such a service and the risk to loose our bookmarks we decided to write an alternative.
 
 The main goal is to provide a maximum compatibility on the api side.
 
-You can find more info and code at : http://github.com/mcansky/altelicious.
+You can find more info and code at : http://github.com/mcansky/mjolk.
 
-== Getting things running
+h2. Getting things running
 
 First you need to get a proper web server, one that can handle ruby on rails app (thin, nginx+passenger, apache+passenger,unicorn, ...), then get ruby 1.9.2, and bundler.
 
