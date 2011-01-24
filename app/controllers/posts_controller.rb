@@ -117,9 +117,9 @@ class PostsController < ApplicationController
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         current_user.bookmarks_update_at = Time.now
         if new_bookmark.save
-          expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
+          #expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
           expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-          expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
+          #expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
           expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
           current_user.save
           logger.info("bookmark for #{url} added")
