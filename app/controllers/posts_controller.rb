@@ -57,6 +57,8 @@ class PostsController < ApplicationController
         the_posts << post
       end
     end
+    @user = user
+    @tags = user.bookmarks.tag_counts_on(:tags)
     @posts_count = the_posts.size
     respond_to do |format|
       format.html do
@@ -83,6 +85,10 @@ class PostsController < ApplicationController
 
   def new
     @bookmark = Bookmark.new
+  end
+
+  def tag_cloud
+    @tags = Post.tag_counts_on(:tags)
   end
 
   # also respond to posts/add

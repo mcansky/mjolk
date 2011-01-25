@@ -7,14 +7,14 @@ Poulpzor::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  match 'posts/all' => 'posts#index'
-  match 'posts/add' => 'posts#create', :via => :post
-  match 'posts/delete' => 'posts#destroy', :via => :post
-  match 'posts/edit' => 'posts#edit'
-  match 'posts/update' => 'posts#update'
-  match 'posts/import' => 'posts#import'
-  match 'posts/import_url' => 'posts#import_url'
-  match 'posts/import_file' => 'posts#import_file'
+  match 'posts/all', :to => 'posts#index'
+  match 'posts/add', :to => 'posts#create', :via => :post
+  match 'posts/delete', :to => 'posts#destroy', :via => :post
+  match 'posts/edit', :to => 'posts#edit'
+  match 'posts/update', :to => 'posts#update'
+  match 'posts/import', :to => 'posts#import'
+  match 'posts/import_url', :to => 'posts#import_url'
+  match 'posts/import_file', :to => 'posts#import_file'
   resources :bookmarks, :controller => "posts"
 
   # Sample of named route:
