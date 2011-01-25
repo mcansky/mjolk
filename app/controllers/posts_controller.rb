@@ -124,6 +124,7 @@ class PostsController < ApplicationController
         current_user.bookmarks_update_at = Time.now
         if new_bookmark.save
           expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
+          expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name})"
           expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
           expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
           expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
@@ -174,6 +175,7 @@ class PostsController < ApplicationController
       expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
       expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
       expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
+      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name})"
     end
     respond_to do |format|
       format.html { redirect_to :action => "index" }
