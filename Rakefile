@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Poulpzor::Application.load_tasks
+Mjolk::Application.load_tasks
