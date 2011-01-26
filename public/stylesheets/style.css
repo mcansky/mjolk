@@ -73,3 +73,7 @@ span.author a:hover {
 .tag_css2 { font-size: 1.2em; }
 .tag_css3 { font-size: 1.4em; }
 .tag_css4 { font-size: 1.6em; }
+
+.tags {
+	text-align: center;
+}
