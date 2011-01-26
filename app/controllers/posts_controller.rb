@@ -24,9 +24,11 @@ class PostsController < ApplicationController
       conditions[0] += " AND " if (params[:fromdt] || params[:todt])
       conditions[0] += "private = ?"
       conditions << 0
+    elsif params[:all_users]
+      user = nil
     elsif current_user
       user = current_user
-    elsif (!current_user && !params[:username])
+    elsif (!current_user && !params[:username] && !params[:all_users])
       redirect_to :controller => :application, :action => :index
     end
     if params[:tag]
@@ -58,7 +60,7 @@ class PostsController < ApplicationController
       end
     end
     @user = user
-    @tags = user.bookmarks.tag_counts_on(:tags)
+    @tags = user.bookmarks.tag_counts_on(:tags) unless params[:tag]
     @posts_count = the_posts.size
     respond_to do |format|
       format.html do

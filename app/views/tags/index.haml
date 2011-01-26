@@ -3,5 +3,5 @@
   .tags
     - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
       - tag_cloud(@tags, %w(tag_css1 tag_css2 tag_css3 tag_css4)) do |tag, css_class|
-        = link_to tag.name, { :controller => "posts", :action => "index", :tag => tag.name }, :class => css_class
+        = link_to tag.name, { :controller => "posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class
 .clear
