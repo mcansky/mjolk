@@ -34,14 +34,15 @@
         </p>
     </div>
     <div class="clear"></div>
+    <div class="grid_6 prefix_1" id="menu">
+      <%= link_to "All tags", posts_path %>
     <% if current_user %>
-      <div class="grid_6 prefix_1" id="menu">
-        <%= link_to "Bookmarks", posts_path %>
+        <%= link_to "My Bookmarks", posts_path %>
         <%= link_to "Add a Bookmark", new_post_path %>
         <%= link_to "Import from delicious", :controller => "/posts", :action => "import" %>
-      </div>
-      <div class="clear"></div>
     <% end %>
+    </div>
+    <div class="clear"></div>
     <div class="grid_16" id="content">
       <%= yield %>
     </div>
