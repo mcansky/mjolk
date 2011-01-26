@@ -1,13 +1,13 @@
 .grid_15
   %h1
     - if current_user
-      - if params[:username]
+      - if params[:all_users] && params[:tag]
+        = "Bookmarks in " + params[:tag]
+      - elsif params[:username]
         - if (current_user.name == params[:username])
           Your Bookmarks
         - else
           = params[:username] + "'s Bookmarks "
-        - if params[:all_users] && params[:tag]
-          "Bookmarks in " + params[:tag]
       - else
         Your Bookmarks
     - elsif params[:username]
