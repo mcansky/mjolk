@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.1
+
+* fixed caching for user bookmarks
+* added tags cloud
+* changed menu
+
 ## v0.2
 
 beta release
