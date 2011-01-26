@@ -35,7 +35,7 @@
     </div>
     <div class="clear"></div>
     <div class="grid_10 prefix_1" id="menu">
-      <%= link_to "All tags", tags_path %>
+      <%= link_to "All tags", :controller => "/tags" %>
     <% if current_user %>
         <%= link_to "My Bookmarks", posts_path %>
         <%= link_to "Add a Bookmark", new_post_path %>
