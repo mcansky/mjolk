@@ -16,7 +16,7 @@ Mjolk::Application.routes.draw do
   match 'posts/import_url', :to => 'posts#import_url'
   match 'posts/import_file', :to => 'posts#import_file'
   resources :bookmarks, :controller => "posts"
-  resources :tags
+  match 'tags/', :to => 'tags#index', :via => :get
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
