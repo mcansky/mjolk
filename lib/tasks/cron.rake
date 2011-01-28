@@ -1,5 +1,5 @@
 task :cron => :environment do
-  if Time.now.hour == 1
+  if Stat.last.created_at.day < Time.now.day
     daily_stats = Stat.new
     daily_stats.generate
     daily_stats.save
