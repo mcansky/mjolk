@@ -24,6 +24,7 @@ class PostsController < ApplicationController
       if user == nil
         flash[:message] = "User not found"
         redirect_to root_url
+        return
       end
       # filter private ones
       conditions[0] += " AND " if (params[:fromdt] || params[:todt])
