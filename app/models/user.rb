@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   def is_beta
     if Settings.beta && User.all.count >= 42
       self.active = false
+    elsif Settings.beta
+      self.roles = "beta"
     end
   end
 
