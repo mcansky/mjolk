@@ -19,4 +19,13 @@ namespace :misc do
       end
     end
   end
+
+  desc "remove lost bookmarks"
+  task :lost_bookmarks => :environment do
+    Bookmark.all.each do |d|
+      if d.user == nil
+        d.destroy
+      end
+    end
+  end
 end
