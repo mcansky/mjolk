@@ -3,7 +3,7 @@ require 'xmlsimple'
 class PostsController < ApplicationController
   # auth needed !x
   before_filter :authenticate_user!, :except => "index"
-  authorize_resource
+  authorize_resource :class => "Bookmark"
 
   def index
     # building conditions
