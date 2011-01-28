@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   # tag ownership
   acts_as_tagger
+  before_save :set_role
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me
@@ -23,6 +24,11 @@ class User < ActiveRecord::Base
   #validates_format_of :password, :with => /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
   #validates_exclusion_of :name, :in => ['admin', 'login', 'logout'], :message => "name %{value} is reserved."
 
+  def set_role
+    if roles == nil
+      self.roles = "guest"
+    end
+  end
 
   def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
     data = access_token['extra']['user_hash']

@@ -9,4 +9,14 @@ namespace :misc do
       end
     end
   end
+
+  desc "set default role if none"
+  task :set_default_role => :environment do
+    User.all.each do |user|
+      if user.roles == nil
+        user.roles = "guest"
+        user.save
+      end
+    end
+  end
 end
