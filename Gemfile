@@ -36,6 +36,7 @@ gem "flutie"
 # auth stuff
 gem "devise", :git => "git://github.com/plataformatec/devise.git", :tag => "v1.2.rc"
 gem "oa-oauth", :require => "omniauth/oauth"
+gem "cancan"
 
 # config stuff
 gem "rails_config"

@@ -74,6 +74,22 @@ class User < ActiveRecord::Base
     roles.split.each { |r| e_roles << r.to_sym } unless not roles
     return e_roles
   end
+  
+  def admin?
+    return true if roles_symbols.include?(:admin)
+    return false
+  end
+
+  def beta?
+    return true if roles_symbols.include?(:beta)
+    return false
+  end
+
+  def guest?
+    return true if roles_symbols.include?(:guest)
+    return true if roles_symbols.count < 1
+    return false
+  end
 
   #private
   # where the work happens

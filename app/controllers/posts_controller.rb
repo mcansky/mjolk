@@ -1,8 +1,9 @@
 require 'xmlsimple'
 
 class PostsController < ApplicationController
-  # auth needed !
+  # auth needed !x
   before_filter :authenticate_user!, :except => "index"
+  authorize_resource
 
   def index
     # building conditions
