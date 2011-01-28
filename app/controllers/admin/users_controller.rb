@@ -48,7 +48,7 @@ class Admin::UsersController < ApplicationController
       @user = User.new(:password_confirmation => params[:user][:password_confirmation],
         :password => params[:user][:password],
         :email => params[:user][:email],
-        :role => params[:user][:role]
+        :roles => params[:user][:roles]
         )
     else
       redirect_to :action => "new"
@@ -75,7 +75,7 @@ class Admin::UsersController < ApplicationController
       @user.password_confirmation = params[:user][:password_confirmation]
       @user.password = params[:user][:password]
     end
-    @user.role = params[:user][:role]
+    @user.roles = params[:user][:roles]
 
     respond_to do |format|
       if @user.save
