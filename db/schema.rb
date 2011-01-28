@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101227225027) do
+ActiveRecord::Schema.define(:version => 20110128080426) do
 
   create_table "bookmarks", :force => true do |t|
     t.string   "title"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(:version => 20101227225027) do
 
   create_table "links", :force => true do |t|
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stats", :force => true do |t|
+    t.integer  "users"
+    t.integer  "bookmarks"
+    t.integer  "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

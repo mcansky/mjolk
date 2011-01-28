@@ -1,0 +1,9 @@
+    <div id="placeholder" style="width:600px;height:300px;"></div>
+
+    <p>Simple example. You don't need to specify much to get an
+       attractive look. Put in a placeholder, make sure you set its
+       dimensions (otherwise the plot library will barf) and call the
+       plot function with the data. The axes are automatically
+       scaled.</p>
+
+<%= javascript_include_tag "stats" %>

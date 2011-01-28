@@ -77,3 +77,8 @@ span.author a:hover {
 .tags {
 	text-align: center;
 }
+
+#graph {
+	width: 300px;
+	height: 200px;
+}
