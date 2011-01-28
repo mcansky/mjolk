@@ -21,6 +21,10 @@ class PostsController < ApplicationController
     end
     if params[:username]
       user = User.find_by_name(params[:username])
+      if user == nil
+        flash[:message] = "User not found"
+        redirect_to root_url
+      end
       # filter private ones
       conditions[0] += " AND " if (params[:fromdt] || params[:todt])
       conditions[0] += "private = ?"
