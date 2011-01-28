@@ -1,5 +1,5 @@
 $(document).ready(function() {
-		$.getJSON('stats.json', function(stats) {
+		$.getJSON('/stats/stats.json', function(stats) {
 			var options = {xaxis: {
 			    mode: "time",
 			    timeformat: "%d/%m/%y"
