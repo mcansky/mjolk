@@ -1,6 +1,39 @@
 <h1>Editing user</h1>
 
-<%= render 'form' %>
+<%= form_for @user, :url => { :controller => :users, :action => :update } do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email, :id => "email" %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :roles %><br />
+    <%= f.select :roles, [["admin", "admin"], ["beta", 'beta'], ["guest", 'guest']], :default => "guest" %>
+  </p>
+  <div class="actions">
+    <%= f.submit "Update user", :name => "Create new user"%>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', :action => :show, :id => @user.id %> |
 <%= link_to 'Back', :action => :index %>
