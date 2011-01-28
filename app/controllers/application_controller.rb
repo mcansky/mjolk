@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   authorize_resource
-  
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
-    redirect_to root_url
-  end
+
+#  rescue_from CanCan::AccessDenied do |exception|
+#    flash[:alert] = exception.message
+#    redirect_to root_url
+#  end
 
   def index
     # building conditions
