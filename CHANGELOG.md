@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.3
+
+* added roles management
+* upgraded all controllers for roles compatibility
+* added beta accounts
+* added mailers for account creation and administrative purposes
+* replace rails_admin with a simple admin interface for users management
+* added stats graphs using jquery flot lib
+
 ## v0.2.1
 
 * fixed caching for user bookmarks
