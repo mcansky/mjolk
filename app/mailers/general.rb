@@ -10,16 +10,16 @@ class General < ActionMailer::Base
       User.find(:all, :conditions => ["roles = ?", role]).each { |u| to_addresses << u.email }
     end
     @text = text
-    mail(:to => to_addresses, :subject => "Mjölk: important information")
+    mail(:to => to_addresses, :subject => "Mjolk: important information")
   end
 
   def welcome_beta(user_id)
     user = User.find(user_id)
-    mail(:to => to_addresses, :subject => "Welcome @ Mjölk beta user !")
+    mail(:to => to_addresses, :subject => "Welcome @ Mjolk beta user !")
   end
 
   def welcome_too_many(user_id)
     user = User.find(user_id)
-    mail(:to => to_addresses, :subject => "Welcome @ Mjölk ! The app is in beta mode, your account is locked.")
+    mail(:to => to_addresses, :subject => "Welcome @ Mjolk ! The app is in beta mode, your account is locked.")
   end
 end

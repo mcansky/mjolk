@@ -20,6 +20,9 @@ Mjolk::Application.routes.draw do
   match 'stats/' => 'stats#index', :via => :get
   match 'stats/stats.json' => 'stats#stats', :via => :get, :format => :json
 
+  
+  match 'admin/users/mass_mail' => 'admin/users#mass_mail', :via => :get
+  match 'admin/users/mass_email_send' => 'admin/users#mass_email_send', :via => :post
   scope 'admin', :name_prefix => "admin" do
     resources :users, :controller => "admin/users"
   end

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   # tag ownership
   acts_as_tagger
   before_save :set_role, :is_beta
+  after_create :send_welcome_email
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me
@@ -33,6 +34,14 @@ class User < ActiveRecord::Base
   def is_beta
     if Settings.beta && User.all.count >= 42
       self.active = false
+    end
+  end
+
+  def send_welcome_email
+    if beta?
+      General.welcome_beta(id).deliver
+    elsif locked?
+      General.welcome_too_many(id).deliver
     end
   end
 

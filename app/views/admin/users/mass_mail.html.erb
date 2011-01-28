@@ -1,0 +1,16 @@
+<% form_tag '/admin/users/mass_email_send' do |f| %>
+  <p>
+    <b>Text</b><br />
+    <%= text_area_tag :text, nil, :cols => 60, :rows => 15 %>
+  </p>
+
+  <p>
+    <b>Role</b><br />
+    <%= select_tag :role, options_for_select([["all", "all"], ["admin", "admin"], ["beta", 'beta'], ["guest", 'guest']]), :default => "admin" %>
+  </p>
+    <div class="actions">
+      <%= submit_tag "Mass mail !", :name => "Mass mail"%>
+    </div>
+  <% end %>
+
+  <%= link_to 'Index', :action => :index %>

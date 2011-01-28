@@ -100,10 +100,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def mass_email
+  def mass_mail
   end
   
   def mass_email_send
     General.mass_email(params[:text], params[:role]).deliver
+    redirect_to :action => :index
   end
 end
