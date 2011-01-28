@@ -27,12 +27,12 @@ Mjolk::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # memcached
-  config.cache_store = :dalli_store
+  #config.cache_store = :dalli_store
   # Global enable/disable all memcached usage
-  config.perform_caching = true
+  #config.perform_caching = true
   # Disable/enable fragment and page caching in ActionController
-  config.action_controller.perform_caching = true
+  #config.action_controller.perform_caching = true
   # The underlying cache store to use.
-  config.cache_store = :dalli_store, 'localhost:11211'
+  #config.cache_store = :dalli_store, 'localhost:11211'
 end
 
