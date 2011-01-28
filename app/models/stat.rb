@@ -1,5 +1,5 @@
 class Stat < ActiveRecord::Base
-  def set
+  def generate
     self.users = User.all.count
     self.bookmarks = Bookmark.all.count
     self.tags = ActsAsTaggableOn::Tag.all.count
