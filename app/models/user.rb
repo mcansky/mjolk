@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def roles_to_s
     roles_s = ""
-    roles.each { |d| roles_s << d + " "}
+    roles.split.each { |d| roles_s << d + " "}
     roles_s.gsub(/ $/, '')
     return roles_s
   end

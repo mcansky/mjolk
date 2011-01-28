@@ -3,49 +3,49 @@ class Admin::UsersController < ApplicationController
   before_filter :authenticate_user!
   authorize_resource
 
-  # GET /accounts
-  # GET /accounts.xml
+  # GET /users
+  # GET /users.xml
   def index
-    @accounts = User.all
+    @users = User.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
+      format.xml  { render :xml => @users }
     end
   end
 
-  # GET /accounts/1
-  # GET /accounts/1.xml
+  # GET /users/1
+  # GET /users/1.xml
   def show
-    @account = User.find(params[:id])
+    @user = User.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @account }
+      format.xml  { render :xml => @user }
     end
   end
 
-  # GET /accounts/new
-  # GET /accounts/new.xml
+  # GET /users/new
+  # GET /users/new.xml
   def new
-    @account = User.new
+    @user = User.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @account }
+      format.xml  { render :xml => @user }
     end
   end
 
-  # GET /accounts/1/edit
+  # GET /users/1/edit
   def edit
-    @account = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
-  # POST /accounts
-  # POST /accounts.xml
+  # POST /users
+  # POST /users.xml
   def create
     if (params[:user]["password"] && params[:user]["password_confirmation"]) && (params[:user]["password"].size > 0 && params[:user][:password_confirmation].size > 0) && (params[:user]["password"] == params[:user]["password_confirmation"])
-      @account = User.new(:password_confirmation => params[:user][:password_confirmation],
+      @user = User.new(:password_confirmation => params[:user][:password_confirmation],
         :password => params[:user][:password],
         :email => params[:user][:email],
         :role => params[:user][:role]
@@ -56,46 +56,46 @@ class Admin::UsersController < ApplicationController
     end
 
     respond_to do |format|
-      if @account.save
-        format.html { redirect_to(:controller => :accounts, :action => :show, :id => @account.id, :notice => 'Account was successfully created.') }
-        format.xml  { render :xml => @account, :status => :created, :location => @account }
+      if @user.save
+        format.html { redirect_to(:controller => :users, :action => :show, :id => @user.id, :notice => 'Account was successfully created.') }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /accounts/1
-  # PUT /accounts/1.xml
+  # PUT /users/1
+  # PUT /users/1.xml
   def update
-    @account = User.find(params[:id])
-    @account.email = params[:user][:email]
+    @user = User.find(params[:id])
+    @user.email = params[:user][:email]
     if (params[:user][:password] && params[:user][:password_confirmation]) && (params[:user][:password].size > 0 && params[:user][:password_confirmation].size > 0) && (params[:user][:password] == params[:user][:password_confirmation])
-      @account.password_confirmation = params[:user][:password_confirmation]
-      @account.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+      @user.password = params[:user][:password]
     end
-    @account.role = params[:user][:role]
+    @user.role = params[:user][:role]
 
     respond_to do |format|
-      if @account.save
-        format.html { redirect_to( :controller => :accounts, :action => :show, :id => @account.id, :notice => 'Account was successfully updated.') }
+      if @user.save
+        format.html { redirect_to( :controller => :users, :action => :show, :id => @user.id, :notice => 'Account was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /accounts/1
-  # DELETE /accounts/1.xml
+  # DELETE /users/1
+  # DELETE /users/1.xml
   def destroy
-    @account = User.find(params[:id])
-    @account.destroy
+    @user = User.find(params[:id])
+    @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(accounts_url) }
+      format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
   end

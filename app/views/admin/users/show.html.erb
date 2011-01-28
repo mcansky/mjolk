@@ -1,8 +1,11 @@
+<div class="grid_15 prefix_1">
 <h2><%= @user.email %></h2>
 
 <p id="notice"><%= notice %></p>
 
 <p>Role : <%= @user.roles_to_s %></p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit', :action => :edit, :id => @user.id %> |
+<%= link_to 'Back', :action => :index %>
+</div>
+<div class="clear"></div>
