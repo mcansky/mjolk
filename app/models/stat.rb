@@ -7,9 +7,9 @@ class Stat < ActiveRecord::Base
 
   def data
     data = Hash.new
-    data[:users] = [created_at.usec * 1000, users]
-    data[:bookmarks] = [created_at.usec * 1000, bookmarks]
-    data[:tags] = [created_at.usec * 1000, tags]
+    data[:users] = [created_at.to_i * 1000, users]
+    data[:bookmarks] = [created_at.to_i * 1000, bookmarks]
+    data[:tags] = [created_at.to_i * 1000, tags]
     return data
   end
 end
