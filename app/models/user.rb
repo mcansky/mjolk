@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   # tag ownership
   acts_as_tagger
-  before_save :set_role
+  before_save :set_role, :is_beta
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me
@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
   def set_role
     if roles == nil
       self.roles = "guest"
+    end
+  end
+
+  def is_beta
+    if Settings.beta && User.all.count >= 42
+      self.active = false
     end
   end
 
@@ -101,6 +107,11 @@ class User < ActiveRecord::Base
   def guest?
     return true if role_symbols.include?(:guest)
     return true if role_symbols.count < 1
+    return false
+  end
+
+  def locked?
+    return true if active
     return false
   end
 

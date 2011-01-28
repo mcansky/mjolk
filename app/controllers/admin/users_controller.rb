@@ -99,4 +99,11 @@ class Admin::UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def mass_email
+  end
+  
+  def mass_email_send
+    General.mass_email(params[:text], params[:role]).deliver
+  end
 end

@@ -1,1 +1,3 @@
 version: 0.2.1
+from_address: bottle@mjolk.net
+beta: true

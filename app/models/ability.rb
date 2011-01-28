@@ -40,5 +40,10 @@ class Ability
       can :read, Stat
     end
 
+    if user.locked?
+      can :read, Bookmark
+      can :read, Stat
+    end
+
   end
 end
