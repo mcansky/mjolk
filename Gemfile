@@ -70,5 +70,3 @@ group :test do
   gem 'factory_girl_rails', "1.1.beta1"
   gem "rspec-rails", "2.0.0.beta.12"
 end
-
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'

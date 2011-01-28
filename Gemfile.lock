@@ -8,14 +8,6 @@ GIT
       orm_adapter (~> 0.0.2)
       warden (~> 1.0.2)
 
-GIT
-  remote: git://github.com/sferik/rails_admin.git
-  revision: f7a277a
-  specs:
-    rails_admin (0.0.1)
-      builder (~> 2.1.0)
-      rails (~> 3.0.3)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -166,7 +158,6 @@ DEPENDENCIES
   oa-oauth
   pg
   rails (= 3.0.3)
-  rails_admin!
   rails_config
   rspec-rails (= 2.0.0.beta.12)
   shoulda

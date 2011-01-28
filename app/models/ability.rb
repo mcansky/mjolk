@@ -30,14 +30,14 @@ class Ability
     end
     
     if user.guest?
-      can [:read], Bookmark
-      can [:read], Stat
+      can :read, Bookmark
+      can :read, Stat
     end
     
     if user.beta?
-      can [:manage], Bookmark, :user_id => user.id
-      can [:read], Bookmark
-      can [:read], Stat
+      can :manage, Bookmark, :user_id => user.id
+      can :read, Bookmark
+      can :read, Stat
     end
 
   end

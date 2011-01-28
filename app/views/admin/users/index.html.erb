@@ -1,0 +1,23 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Role</th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.email %></td>
+      <td><%= user.roles_to_s %></td>
+    <td><%= link_to 'Show', :controller => :users, :action => :show, :id => user.id %></td>
+    <td><%= link_to 'Edit', :controller => :users, :action => :edit, :id => user.id %></td>
+    <td><%= link_to 'Destroy', :controller => :users, :action => :destroy, :id => user.id, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Account', new_user_path %>
