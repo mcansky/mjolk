@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: User</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./app/models/user_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/models/user.rb">app/models/user.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">ActiveRecord::Base</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-find_for_twitter_oauth">::find_for_twitter_oauth</a></li>
+					
+					<li><a href="#method-c-new_with_session">::new_with_session</a></li>
+					
+					<li><a href="#method-i-admin%3F">#admin?</a></li>
+					
+					<li><a href="#method-i-beta%3F">#beta?</a></li>
+					
+					<li><a href="#method-i-gen_api_key">#gen_api_key</a></li>
+					
+					<li><a href="#method-i-guest%3F">#guest?</a></li>
+					
+					<li><a href="#method-i-import_from_delicious">#import_from_delicious</a></li>
+					
+					<li><a href="#method-i-import_from_delicious_xml">#import_from_delicious_xml</a></li>
+					
+					<li><a href="#method-i-is_beta">#is_beta</a></li>
+					
+					<li><a href="#method-i-locked%3F">#locked?</a></li>
+					
+					<li><a href="#method-i-role_symbols">#role_symbols</a></li>
+					
+					<li><a href="#method-i-roles_to_s">#roles_to_s</a></li>
+					
+					<li><a href="#method-i-send_welcome_email">#send_welcome_email</a></li>
+					
+					<li><a href="#method-i-set_initial_name">#set_initial_name</a></li>
+					
+					<li><a href="#method-i-set_role">#set_role</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Admin.html">Admin</a></li>
+				
+					<li><a href="./Admin/UsersController.html">Admin::UsersController</a></li>
+				
+					<li><a href="./Admin/UsersHelper.html">Admin::UsersHelper</a></li>
+				
+					<li><a href="./V1.html">V1</a></li>
+				
+					<li><a href="./V1/PostsController.html">V1::PostsController</a></li>
+				
+					<li><a href="./V1/PostsHelper.html">V1::PostsHelper</a></li>
+				
+					<li><a href="./Users.html">Users</a></li>
+				
+					<li><a href="./Users/OmniauthCallbacksController.html">Users::OmniauthCallbacksController</a></li>
+				
+					<li><a href="./Ability.html">Ability</a></li>
+				
+					<li><a href="./ApiAuthorizedFilter.html">ApiAuthorizedFilter</a></li>
+				
+					<li><a href="./ApplicationController.html">ApplicationController</a></li>
+				
+					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
+				
+					<li><a href="./Bookmark.html">Bookmark</a></li>
+				
+					<li><a href="./General.html">General</a></li>
+				
+					<li><a href="./Link.html">Link</a></li>
+				
+					<li><a href="./PostsController.html">PostsController</a></li>
+				
+					<li><a href="./PostsHelper.html">PostsHelper</a></li>
+				
+					<li><a href="./Stat.html">Stat</a></li>
+				
+					<li><a href="./StatsController.html">StatsController</a></li>
+				
+					<li><a href="./StatsHelper.html">StatsHelper</a></li>
+				
+					<li><a href="./TagsController.html">TagsController</a></li>
+				
+					<li><a href="./TagsHelper.html">TagsHelper</a></li>
+				
+					<li><a href="./User.html">User</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">User</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="find-for-twitter-oauth-method" class="method-detail ">
+				<a name="method-c-find_for_twitter_oauth"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">find_for_twitter_oauth</span><span
+						class="method-args">(access_token, signed_in_resource=nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="find-for-twitter-oauth-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 50</span>
+50:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_for_twitter_oauth</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">signed_in_resource</span>=<span class="ruby-keyword kw">nil</span>)
+51:     <span class="ruby-identifier">data</span> = <span class="ruby-identifier">access_token</span>[<span class="ruby-value str">'extra'</span>][<span class="ruby-value str">'user_hash'</span>]
+52:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">data</span>[<span class="ruby-value str">&quot;name&quot;</span>])
+53:       <span class="ruby-identifier">user</span>
+54:     <span class="ruby-keyword kw">else</span> <span class="ruby-comment cmt"># not found nil (will redirect to sign up form)</span>
+55:       <span class="ruby-identifier">user</span> = <span class="ruby-keyword kw">nil</span>
+56:     <span class="ruby-keyword kw">end</span>
+57:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">user</span>
+58:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="new-with-session-method" class="method-detail ">
+				<a name="method-c-new_with_session"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new_with_session</span><span
+						class="method-args">(params, session)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-with-session-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 59</span>
+59:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_with_session</span>(<span class="ruby-identifier">params</span>, <span class="ruby-identifier">session</span>)
+60:     <span class="ruby-keyword kw">super</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+61:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">data</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value str">&quot;devise.twitter_data&quot;</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">session</span>[<span class="ruby-value str">&quot;devise.twitter_data&quot;</span>][<span class="ruby-value str">&quot;extra&quot;</span>][<span class="ruby-value str">&quot;user_hash&quot;</span>]
+62:         <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value str">&quot;email&quot;</span>]
+63:       <span class="ruby-keyword kw">end</span>
+64:     <span class="ruby-keyword kw">end</span>
+65:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="admin--method" class="method-detail ">
+				<a name="method-i-admin%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">admin?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="admin--source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/user.rb, line 108</span>
+108:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">admin?</span>
+109:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">role_symbols</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">:admin</span>)
+110:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+111:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="beta--method" class="method-detail ">
+				<a name="method-i-beta%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">beta?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="beta--source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/user.rb, line 113</span>
+113:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">beta?</span>
+114:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">role_symbols</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">:beta</span>)
+115:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+116:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="gen-api-key-method" class="method-detail ">
+				<a name="method-i-gen_api_key"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">gen_api_key</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="gen-api-key-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 91</span>
+91:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gen_api_key</span>
+92:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">api_key</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">name</span>)
+93:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="guest--method" class="method-detail ">
+				<a name="method-i-guest%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">guest?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="guest--source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/user.rb, line 118</span>
+118:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guest?</span>
+119:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">role_symbols</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">:guest</span>)
+120:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">role_symbols</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+121:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+122:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="import-from-delicious-method" class="method-detail ">
+				<a name="method-i-import_from_delicious"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">import_from_delicious</span><span
+						class="method-args">(username, password)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+import from delicious user username and password pair this pair is not
+stored locally
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="import-from-delicious-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 74</span>
+74:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">import_from_delicious</span>(<span class="ruby-identifier">username</span>, <span class="ruby-identifier">password</span>)
+75:     <span class="ruby-keyword kw">if</span> ((<span class="ruby-identifier">username</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">password</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>))
+76:       <span class="ruby-comment cmt"># delicious api expected</span>
+77:       <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;api.del.icio.us&quot;</span>, <span class="ruby-value">443</span>)
+78:       <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword kw">true</span>
+79:       <span class="ruby-identifier">resp</span> = <span class="ruby-keyword kw">nil</span>
+80:       <span class="ruby-identifier">http</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
+81:         <span class="ruby-identifier">req</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/v1/posts/all&quot;</span>, {<span class="ruby-value str">&quot;User-Agent&quot;</span> =<span class="ruby-operator">&gt;</span>
+82:             <span class="ruby-node">&quot;altelicious #{Settings.version}&quot;</span>})
+83:         <span class="ruby-identifier">req</span>.<span class="ruby-identifier">basic_auth</span>(<span class="ruby-identifier">username</span>, <span class="ruby-identifier">password</span>)
+84:         <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">req</span>)
+85:         <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>
+86:       <span class="ruby-keyword kw">end</span>
+87:       <span class="ruby-identifier">import_from_delicious_xml</span>(<span class="ruby-identifier">resp</span>)
+88:     <span class="ruby-keyword kw">end</span>
+89:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="import-from-delicious-xml-method" class="method-detail ">
+				<a name="method-i-import_from_delicious_xml"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">import_from_delicious_xml</span><span
+						class="method-args">(xml_file)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+private
+</p>
+<pre>
+ where the work happens
+ use a xml file and extract content</pre>
+					
+
+					
+					<div class="method-source-code"
+						id="import-from-delicious-xml-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/user.rb, line 132</span>
+132:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">import_from_delicious_xml</span>(<span class="ruby-identifier">xml_file</span>)
+133:     <span class="ruby-comment cmt"># work this out</span>
+134:     <span class="ruby-identifier">xml_stuff</span> = <span class="ruby-keyword kw">nil</span>
+135:     <span class="ruby-keyword kw">begin</span>
+136:       <span class="ruby-identifier">xml_stuff</span> = <span class="ruby-constant">Hpricot</span>(<span class="ruby-identifier">xml_file</span>)
+137:     <span class="ruby-keyword kw">rescue</span>
+138:       <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-value str">&quot;Hpricot doesn't like this. this is not xml&quot;</span>)
+139:     <span class="ruby-keyword kw">end</span>
+140:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">xml_stuff</span>
+141:       <span class="ruby-keyword kw">if</span> (((<span class="ruby-identifier">xml_stuff</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;posts&quot;</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>) <span class="ruby-operator">&amp;&amp;</span> ((<span class="ruby-identifier">xml_stuff</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;posts&quot;</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)) <span class="ruby-comment cmt"># hooray delicious format ?</span>
+142:         (<span class="ruby-identifier">xml_stuff</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;posts&quot;</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;post&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span>
+143:           
+144:           <span class="ruby-comment cmt"># let's check if the url is already in the db</span>
+145:           <span class="ruby-comment cmt"># but first we need to check if there is http:// in there</span>
+146:           <span class="ruby-identifier">url</span> = <span class="ruby-identifier">post</span>[<span class="ruby-value str">&quot;href&quot;</span>]
+147:           <span class="ruby-keyword kw">if</span> ((<span class="ruby-identifier">post</span>[<span class="ruby-value str">&quot;href&quot;</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^http:\/\//</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">post</span>[<span class="ruby-value str">&quot;href&quot;</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^https:\/\//</span>))
+148:           <span class="ruby-keyword kw">else</span>
+149:             <span class="ruby-identifier">url</span> = <span class="ruby-value str">&quot;http://&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">post</span>[<span class="ruby-value str">&quot;href&quot;</span>]
+150:           <span class="ruby-keyword kw">end</span>
+151:           <span class="ruby-identifier">link</span> = <span class="ruby-constant">Link</span>.<span class="ruby-identifier">find_by_url</span>(<span class="ruby-identifier">url</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">nil</span>
+152:           <span class="ruby-comment cmt"># not found must create</span>
+153:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">link</span>
+154:             <span class="ruby-identifier">link</span> = <span class="ruby-constant">Link</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">url</span>)
+155:             <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;link #{url} added&quot;</span>)
+156:             <span class="ruby-identifier">link</span>.<span class="ruby-identifier">save</span>
+157:           <span class="ruby-keyword kw">end</span>
+158: 
+159:           <span class="ruby-comment cmt"># now taking care of the bookmark</span>
+160:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>)
+161:             <span class="ruby-comment cmt"># already in</span>
+162:           <span class="ruby-keyword kw">else</span>
+163:             <span class="ruby-identifier">new_bookmark</span> = <span class="ruby-constant">Bookmark</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">post</span>[<span class="ruby-value str">'description'</span>], <span class="ruby-value">:link_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:bookmarked_at</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">post</span>[<span class="ruby-value str">'time'</span>]))
+164:             <span class="ruby-identifier">new_bookmark</span>.<span class="ruby-identifier">tag_list</span> = <span class="ruby-identifier">post</span>[<span class="ruby-value str">'tag'</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot; &quot;</span>,<span class="ruby-value str">&quot;, &quot;</span>)
+165:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_bookmark</span>.<span class="ruby-identifier">save</span>
+166:               <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;bookmark for #{url} added&quot;</span>)
+167:             <span class="ruby-keyword kw">else</span>
+168:               <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;Error : could not save the new bookmark&quot;</span>)
+169:             <span class="ruby-keyword kw">end</span>
+170:           <span class="ruby-keyword kw">end</span> 
+171:         <span class="ruby-keyword kw">end</span>
+172:       <span class="ruby-keyword kw">end</span>
+173:     <span class="ruby-keyword kw">end</span>
+174:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="is-beta-method" class="method-detail ">
+				<a name="method-i-is_beta"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">is_beta</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="is-beta-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 34</span>
+34:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">is_beta</span>
+35:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Settings</span>.<span class="ruby-identifier">beta</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">42</span>
+36:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">active</span> = <span class="ruby-keyword kw">false</span>
+37:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">Settings</span>.<span class="ruby-identifier">beta</span>
+38:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">roles</span> = <span class="ruby-value str">&quot;beta&quot;</span>
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="locked--method" class="method-detail ">
+				<a name="method-i-locked%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">locked?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="locked--source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/user.rb, line 124</span>
+124:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">locked?</span>
+125:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">active</span>
+126:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+127:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="role-symbols-method" class="method-detail ">
+				<a name="method-i-role_symbols"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">role_symbols</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="role-symbols-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 95</span>
+95:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">role_symbols</span>
+96:     <span class="ruby-identifier">e_roles</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+97:     <span class="ruby-identifier">roles</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e_roles</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_sym</span> } <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">roles</span>
+98:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">e_roles</span>
+99:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="roles-to-s-method" class="method-detail ">
+				<a name="method-i-roles_to_s"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">roles_to_s</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="roles-to-s-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/user.rb, line 101</span>
+101:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">roles_to_s</span>
+102:     <span class="ruby-identifier">roles_s</span> = <span class="ruby-value str">&quot;&quot;</span>
+103:     <span class="ruby-identifier">roles</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span> <span class="ruby-identifier">roles_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">d</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; &quot;</span>}
+104:     <span class="ruby-identifier">roles_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/ $/</span>, <span class="ruby-value str">''</span>)
+105:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">roles_s</span>
+106:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="send-welcome-email-method" class="method-detail ">
+				<a name="method-i-send_welcome_email"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">send_welcome_email</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="send-welcome-email-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 42</span>
+42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_welcome_email</span>
+43:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">beta?</span>
+44:       <span class="ruby-constant">General</span>.<span class="ruby-identifier">welcome_beta</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">deliver</span>
+45:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">locked?</span>
+46:       <span class="ruby-constant">General</span>.<span class="ruby-identifier">welcome_too_many</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">deliver</span>
+47:     <span class="ruby-keyword kw">end</span>
+48:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="set-initial-name-method" class="method-detail ">
+				<a name="method-i-set_initial_name"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">set_initial_name</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+setting some initial name as devise seems to misunderstand if we put that
+in the registration form TODO
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="set-initial-name-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 68</span>
+68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_initial_name</span>
+69:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">name</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">name</span>
+70:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="set-role-method" class="method-detail ">
+				<a name="method-i-set_role"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">set_role</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+validates_length_of :password, :minimum => 8
+</p>
+<pre>
+ check strength of password : again 8 chars min, at least one capitaled letter, at least one normal letter, at least one non alpha characters
+</pre>
+<p>
+validates_format_of :password, :with => /^.*(?=.{<a
+href="http://A-Z">8,})(?=.*[a-z])(?=.*</a>)(?=.*[d\W]).*$/
+validates_exclusion_of :name, :in => [&#8216;admin&#8217;,
+&#8216;login&#8217;, &#8216;logout&#8217;], :message => &#8220;name
+%{value} is reserved.&#8220;
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="set-role-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/user.rb, line 28</span>
+28:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_role</span>
+29:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">roles</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>
+30:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">roles</span> = <span class="ruby-value str">&quot;guest&quot;</span>
+31:     <span class="ruby-keyword kw">end</span>
+32:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
