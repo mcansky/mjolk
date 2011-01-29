@@ -16,7 +16,11 @@ Mjolk::Application.routes.draw do
   match 'posts/import_url' => 'posts#import_url'
   match 'posts/import_file' => 'posts#import_file'
   resources :bookmarks, :controller => "posts"
+
+  # tags
   match 'tags/' => 'tags#index', :via => :get
+
+  # stats
   match 'stats/' => 'stats#index', :via => :get
   match 'stats/stats.json' => 'stats#stats', :via => :get, :format => :json
 
@@ -26,19 +30,15 @@ Mjolk::Application.routes.draw do
   match 'v1/posts/add' => 'v1/posts#create', :via => :post
   match 'v1/posts/delete' => 'v1/posts#destroy', :via => :post
   match 'v1/posts/update' => 'v1/posts#update'
-  
+
+  # admin
   match 'admin/users/mass_mail' => 'admin/users#mass_mail', :via => :get
   match 'admin/users/mass_email_send' => 'admin/users#mass_email_send', :via => :post
   scope 'admin', :name_prefix => "admin" do
     resources :users, :controller => "admin/users"
   end
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  # 
   resources :posts
 
   root :to => "application#index"
