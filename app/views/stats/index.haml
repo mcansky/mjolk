@@ -3,6 +3,12 @@
   - cache(:action => 'index', :action_suffix => 'stats', :expires_in => 12.hour) do
     %h1 Stats
     .grid_8.prefix_1.alpha
-      #placeholder{:style => "width:700px;height:300px;"}
+      %h2 Bookmarks
+      #stats_bookmarks{:style => "width:700px;height:300px;"}
+      %h2 Tags
+      #stats_tags{:style => "width:700px;height:300px;"}
+      %h2 Users
+      #stats_users{:style => "width:700px;height:300px;"}
       .clear
       =javascript_include_tag "stats"
+
