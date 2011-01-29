@@ -157,6 +157,48 @@ class V1::PostsController < ApplicationController
     end
   end
 
+  # return a list of recent posts
+  # args :
+  #   tag = {TAG} tag to filter [OPT]
+  #   count = 1..100 number of posts to return (default 15, max 100)
+  def recent
+    error = true
+    posts = Array.new
+    # limit
+    limit = params[:count] || 15
+    limit = 100 if limit > 100
+    # getting the posts
+    if params[:tag]
+      tags = params[:tag].split(/[ +]/)
+      posts = current_user.bookmarks.last(limit).tagged_with(tags, :match_all => true)
+    else
+      posts = current_user.bookmarks.last(limit)
+    end
+    # return results
+    respond_to do |format|
+      format.xml do
+        if current_user
+          xml_posts = Array.new
+          posts.each do |post|
+            tags = Array.new
+            post.tags.each { |t| tags << t.name } if post.tags.count > 0
+            if params[:meta]
+              xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' '), "meta" => post.meta}
+            else
+              xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
+            end
+          end
+          meta = Digest::MD5.hexdigest(current_user.name + current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"))
+          posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :hash => meta, :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
+          xml_output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XmlSimple.xml_out(posts).gsub("opt","posts")
+          render :xml => xml_output
+        else
+          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
+        end
+      end
+    end
+  end
+
   def index
     # testing some params
     user = nil
