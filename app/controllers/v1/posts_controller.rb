@@ -72,13 +72,15 @@ class V1::PostsController < ApplicationController
   def delete
     error = true
     if params[:url]
-      a_post = nil
-      a_post = Bookmark.find_by_url(params[:url])
-      if a_post
-        error = false if a_post.destroy
+      link = Bookmark.find_by_url(params[:url]) || nil
+      if (link && link.users.include(current_user))
+        bookmark = current_user.bookmarks.find(:all, :conditions => ["link_id = ?", link.id])
+        bookmark.destroy
+        link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
+        error = false
       end
-    else
     end
+
     respond_to do |format|
       format.xml do
         if error
@@ -199,6 +201,19 @@ class V1::PostsController < ApplicationController
     end
   end
 
+  # return a list of dates with a count of posts for each
+  # TODO
+  def dates
+  end
+
+  # return all posts, also responds to /all
+  # params
+  # tag : filter by tag (list ok) [OPT]
+  # start : number from where to start in the results [OPT]
+  # results : number limit for results [OPT]
+  # fromdt : date from which posts should be taken [OPT]
+  # todt : date to which posts should be taken [OPT]
+  # meta : include meta for posts [OPT]
   def index
     # testing some params
     user = nil
@@ -238,10 +253,11 @@ class V1::PostsController < ApplicationController
       if ActiveRecord::Base.connection.class.to_s.split('::')[-1].gsub("Adapter",'') == "SQLite3"
         limit = -1
       end
+      tags = params[:tag].split(/[ +]/)
       if user
-        posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        posts = user.bookmarks.tagged_with(params[:tag], :match_all => true).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
       else
-        posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        posts = Bookmark.tagged_with(params[:tag], :match_all => true).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
       end
     else
       if user
@@ -281,147 +297,11 @@ class V1::PostsController < ApplicationController
     end
   end
 
-
-
-  def destroy
-    error = false
-    if params[:url] || params[:id]
-      if params[:url]
-        link = Bookmark.find_by_url(url) || nil
-        if (link && link.users.include(current_user))
-          bookmark = current_user.bookmarks.find(:all, :conditions => ["link_id = ?", link.id])
-          bookmark.destroy
-          link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
-        end
-      elsif params[:id]
-        bookmark = Bookmark.find(params[:id]) || nil
-        link = bookmark.link
-        bookmark.destroy if bookmark.user == current_user
-        link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
-      end
-      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'stats')
-      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-      expire_fragment(:controller => 'tags', :action => 'index', :action_suffix => 'all_tags')
-      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
-      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name}")
-    end
-    respond_to do |format|
-      format.html { redirect_to :action => "index" }
-      format.xml do
-        if error
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
-        else
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"done\" />"
-        end
-      end
-    end
-  end
-
-  # to fix
-  def import_file
-    if params[:file]
-      # using hpricot to read
-      xml_stuff = nil
-      begin
-        xml_stuff = Hpricot(params[:file])
-      rescue
-        logger.info("Hpricot doesn't like this. this is not xml")
-      end
-      if xml_stuff
-        if (((xml_stuff/"posts") != nil) && ((xml_stuff/"posts").size > 0)) # hooray delicious format ?
-          (xml_stuff/"posts").each do |post|
-            
-            # let's check if the url is already in the db
-            # but first we need to check if there is http:// in there
-            url = post["href"]
-            if ((post["href"] =~ /^http:\/\//) || (post["href"] =~ /^https:\/\//))
-            else
-              url = "http://" + post["href"]
-            end
-            link = Link.find_by_url(url) || nil
-            # not found must create
-            if !link
-              link = Link.new(:url => url)
-            end
-
-
-            # now taking care of the bookmark
-            if link.users.include?(current_user)
-              # already in
-            else
-              new_bookmark = Bookmark.new(:title => post['description'], :link => link)
-              new_bookmark.tag_list = post['tag'].gsub(" ",", ")
-              current_user.bookmarks << new_bookmark
-              new_bookmark.save
-              
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-              expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-              expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name}")
-            end 
-          end
-        end
-      end
-      redirect_to :action => 'index'
-    else
-      redirect_to :action => 'import'
-    end
-  end
-
-  def edit
-    @bookmark = Bookmark.find(params[:id])
-  end
-
-  def import
-    
-  end
-
-  def import_url
-    if (params[:password] && params[:username])
-      current_user.import_from_delicious(params[:username], params[:password])
-    end
-    flash[:message] = "Importing ..."
-    redirect_to :action => "index"
-  end
-
-  def update
-    bookmark = Bookmark.find(params[:bookmark][:id])
-    if bookmark.user == current_user
-      new_url = params[:url]["url"]
-      if not ((new_url =~ /^http:\/\//) || (new_url =~ /^https:\/\//))
-        new_url = "http://" + new_url
-      end
-      if new_url != bookmark.url
-        if bookmark.link.bookmarks.size == 1
-          # only one entry, meaning it's gonna be empty
-          bookmark.link.destroy
-        end
-        new_link = Link.find_by_url(new_url)
-        if new_link
-          bookmark.link = new_link
-        else
-          bookmark.link = Link.new(:url => new_url)
-        end
-      end
-      bookmark.title = params[:bookmark][:title]
-      bookmark.tag_list = params[:bookmark][:tags]
-      bookmark.private = params[:bookmark][:private]
-      if bookmark.save
-        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
-        flash[:message] = "Updated"
-      else
-      end
-      redirect_to :action => "index"
-    else
-      flash[:message] = "You have no rights here."
-      redirect_to :action => "index"
-    end
+  # return a list of tags already used for the url given
+  # params: 
+  #  url
+  # TODO
+  def suggest
   end
 
   private
