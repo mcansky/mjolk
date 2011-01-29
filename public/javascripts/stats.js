@@ -5,9 +5,17 @@ $(document).ready(function() {
 			    timeformat: "%d/%m/%y"
 			  }};
 			
-			$.plot($("#placeholder"), [{label: "users", data: stats[0],lines: { show: true }},
-				{label: "bookmarks", data: stats[1],lines: { show: true, }},
-				{label: "tags", data: stats[2], lines: { show: true }}],
+			$.plot($("#stats_users"), [{label: "users", data: stats[0], color: "#6E92FF",lines: { show: true }, points: { show: true }
+			}],
+				options);
+
+			$.plot($("#stats_bookmarks"), [
+				{label: "bookmarks", data: stats[1], color: "#E86A4D",lines: { show: true, }, points: { show: true }
+				}],
+				options);
+				
+			$.plot($("#stats_tags"), [{label: "tags", data: stats[2], color: "#81E79D", lines: { show: true }, points: { show: true }
+			}],
 				options);
 		});
 });

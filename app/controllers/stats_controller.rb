@@ -13,6 +13,21 @@ class StatsController < ApplicationController
       tags << stat.data[:tags]
       bookmarks << stat.data[:bookmarks]
     end
+    # ordering the points, very important !
+    users.sort! { |a,b| a[0] <=> b[0] }
+    tags.sort! { |a,b| a[0] <=> b[0] }
+    bookmarks.sort! { |a,b| a[0] <=> b[0] }
+    if Rails.env == "development"
+      i = 0
+      2.times do
+        i += 1
+        date = Time.now + i.day
+        number = 300 + rand(2000)
+        users << [date.to_i * 1000, number]
+        bookmarks << [date.to_i * 1000, number]
+        tags << [date.to_i * 1000, number]
+      end
+    end
     stats = [users, tags, bookmarks]
     respond_to do |format|
       format.json { render :json => stats}
