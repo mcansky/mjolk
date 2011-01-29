@@ -13,6 +13,9 @@ class StatsController < ApplicationController
       tags << stat.data[:tags]
       bookmarks << stat.data[:bookmarks]
     end
+    users.sort! { |a,b| a[0] <=> b[0] }
+    tags.sort! { |a,b| a[0] <=> b[0] }
+    bookmarks.sort! { |a,b| a[0] <=> b[0] }
     if Rails.env == "development"
       i = 0
       2.times do
