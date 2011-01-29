@@ -142,5 +142,6 @@ Devise.setup do |config|
 
   # oauth
   config.omniauth :twitter, Settings.oauth.twitter.consumer_key, Settings.oauth.twitter.consumer_secret
-  
+  # http auth
+  config.http_authenticatable = true
 end
