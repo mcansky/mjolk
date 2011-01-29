@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.1
+* moved api code from posts controller to v1/posts controller
+* fixed basic http auth
+* cleaned and fixed api posts methods : all, get, add, delete. some are still needed
+* fixed bookmarks destroy on user destroy
+
 ## v0.3
 
 * added roles management
