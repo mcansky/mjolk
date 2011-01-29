@@ -6,10 +6,18 @@ class PostsController < ApplicationController
   authorize_resource :class => "Bookmark"
 
   def index
+    # testing some params
+    user = nil
+    if params[:username]
+      user = User.find_by_name(params[:username])
+      if user == nil
+        redirect_to :controller => :application, :action => :index, :notice => "User not found"
+        return
+      end
+    end
     # building conditions
     conditions = Array.new
     conditions[0] = ""
-    user = nil
     if params[:fromdt]
       conditions[0] = "bookmarked_at >= ?"
       conditions << DateTime.parse(params[:fromdt])
@@ -20,10 +28,6 @@ class PostsController < ApplicationController
       conditions << DateTime.parse(params[:todt])
     end
     if params[:username]
-      user = User.find_by_name(params[:username])
-      if user == nil
-        flash[:message] = "User not found"
-      end
       # filter private ones
       conditions[0] += " AND " if (params[:fromdt] || params[:todt])
       conditions[0] += "private = ?"
