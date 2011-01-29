@@ -2,6 +2,8 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
+doc/*
 
 /bundler/
 /tmp/
+/.yardoc/
