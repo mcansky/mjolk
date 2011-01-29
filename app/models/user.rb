@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me, :roles
   has_many :bookmarks, :dependent => :destroy
   has_many :links, :through => :bookmarks
   before_validation :set_initial_name
