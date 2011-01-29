@@ -1,18 +1,28 @@
 require 'xmlsimple'
 
-class V1::PostsController < ApplicationController
+class V1::PostsController < ApplicationController  
   # auth needed !x
   before_filter :authenticate_user!
   authorize_resource :class => "Bookmark"
 
-  # return updated time
-  # TODO
+  ##
+  # return updated time *TODO*
+  #
   def update
   end
 
-  # also respond to posts/add
-  # implemented : url (req), description (req), tags, dt, shared
-  # not implemented : replace, extended
+  ##
+  # add a new bookmark
+  #
+  # http://www.mjolk.net/v1/posts/add _or_ http://yourhost/v1/posts/add
+  #
+  # args :
+  # * url (req)
+  # * description (req)
+  # * tags
+  # * dt
+  # * shared
+  # * not implemented : replace, extended
   def create
     incomplete = true
     error = false
@@ -67,8 +77,13 @@ class V1::PostsController < ApplicationController
     end
   end
 
+  ##
   # delete a post using url as key
-  # params : url
+  #
+  # http://www.mjolk.net/v1/posts/delete _or_ http://yourhost/v1/posts/delete
+  #
+  # params
+  # * url
   def delete
     error = true
     if params[:url]
@@ -92,13 +107,17 @@ class V1::PostsController < ApplicationController
     end
   end
 
+  ##
   # return one or more post for a single day. if no date is passed the last day is returned
+  #
+  # http://www.mjolk.net/v1/posts/get _or_ http://yourhost/v1/posts/get
+  #
   # params :
-  #   - tag : {TAG} + {TAG} + {TAG} ...     [OPT]
-  #   - dt (date) : {CCYY-MM-DDThh:mm:ssZ}  [OPT]
-  #   - url : fetch bookmark with that url  [OPT]
-  #   - hashes: fetch bookmarks using their url hashes as key (md5) [OPT] #TODO
-  #   - meta (boolean): include change detection meta for each item [OPT]
+  # * tag : {TAG} + {TAG} + {TAG} ...     _optionnal_
+  # * dt (date) : {CCYY-MM-DDThh:mm:ssZ}  _optionnal_
+  # * url : fetch bookmark with that url  _optionnal_
+  # * hashes: fetch bookmarks using their url hashes as key (md5) _optionnal_ *TODO*
+  # * meta (boolean): include change detection meta for each item _optionnal_
   def get
     error = true
     posts = Array.new
@@ -159,10 +178,14 @@ class V1::PostsController < ApplicationController
     end
   end
 
+  ## 
   # return a list of recent posts
+  #
+  # http://www.mjolk.net/v1/posts/recent _or_ http://yourhost/v1/posts/recent
+  #
   # args :
-  #   tag = {TAG} tag to filter [OPT]
-  #   count = 1..100 number of posts to return (default 15, max 100)
+  # * tag = {TAG} tag to filter _optionnal_
+  # * count = 1..100 number of posts to return (default 15, max 100)
   def recent
     error = true
     posts = Array.new
@@ -201,19 +224,26 @@ class V1::PostsController < ApplicationController
     end
   end
 
-  # return a list of dates with a count of posts for each
-  # TODO
+  ##
+  # return a list of dates with a count of posts for each *TODO*
+  #
+  # http://www.mjolk.net/v1/posts/dates _or_ http://yourhost/v1/posts/dates
+  #
   def dates
   end
 
-  # return all posts, also responds to /all
-  # params
-  # tag : filter by tag (list ok) [OPT]
-  # start : number from where to start in the results [OPT]
-  # results : number limit for results [OPT]
-  # fromdt : date from which posts should be taken [OPT]
-  # todt : date to which posts should be taken [OPT]
-  # meta : include meta for posts [OPT]
+  ##
+  # return all posts
+  #
+  # http://www.mjolk.net/v1/posts/all _or_ http://yourhost/v1/posts/all
+  #
+  # params :
+  # * tag : filter by tag (list ok) _optionnal_
+  # * start : number from where to start in the results _optionnal_
+  # * results : number limit for results _optionnal_
+  # * fromdt : date from which posts should be taken _optionnal_
+  # * todt : date to which posts should be taken _optionnal_
+  # * meta : include meta for posts _optionnal_
   def index
     # testing some params
     user = nil
@@ -297,10 +327,14 @@ class V1::PostsController < ApplicationController
     end
   end
 
-  # return a list of tags already used for the url given
+  ## 
+  # return a list of tags already used for the url given *TODO*
+  #
+  # http://www.mjolk.net/v1/posts/suggest _or_ http://yourhost/v1/posts/suggest
+  #
   # params: 
-  #  url
-  # TODO
+  # * url
+  #
   def suggest
   end
 
