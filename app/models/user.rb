@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me
-  has_many :bookmarks
+  has_many :bookmarks, :dependent => :destroy
   has_many :links, :through => :bookmarks
   before_validation :set_initial_name
   
