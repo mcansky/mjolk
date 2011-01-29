@@ -1,4 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  protect_from_forgery
   def twitter
     # You need to implement the method below in your model
     logger.info(env["omniauth.auth"].inspect)

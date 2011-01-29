@@ -1,6 +1,7 @@
 require 'xmlsimple'
 
 class PostsController < ApplicationController
+  protect_from_forgery
   # auth needed !x
   before_filter :authenticate_user!, :except => "index"
   authorize_resource :class => "Bookmark"

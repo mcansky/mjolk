@@ -20,6 +20,12 @@ Mjolk::Application.routes.draw do
   match 'stats/' => 'stats#index', :via => :get
   match 'stats/stats.json' => 'stats#stats', :via => :get, :format => :json
 
+  # api
+  match 'v1/posts/all' => 'v1/posts#index'
+  match 'v1/posts/get' => 'v1/posts#get'
+  match 'v1/posts/add' => 'v1/posts#create', :via => :post
+  match 'v1/posts/delete' => 'v1/posts#destroy', :via => :post
+  match 'v1/posts/update' => 'v1/posts#update'
   
   match 'admin/users/mass_mail' => 'admin/users#mass_mail', :via => :get
   match 'admin/users/mass_email_send' => 'admin/users#mass_email_send', :via => :post
