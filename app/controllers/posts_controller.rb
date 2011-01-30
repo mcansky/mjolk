@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # auth needed !x
   before_filter :authenticate_user!, :except => "index"
   authorize_resource :class => "Bookmark"
+  cache_sweeper :bookmark_sweeper
 
   def index
     # testing some params
@@ -134,12 +135,6 @@ class PostsController < ApplicationController
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
         current_user.bookmarks_update_at = Time.now
         if new_bookmark.save
-          expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_#{curren_user.id}_posts')
-          expire_fragment(:controller => 'tags', :action => 'index', :action_suffix => 'all_tags')
-          expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name}")
-          expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-          expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-          expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
           current_user.save
           logger.info("bookmark for #{url} added")
         else
@@ -183,13 +178,6 @@ class PostsController < ApplicationController
         bookmark.destroy if bookmark.user == current_user
         link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
       end
-      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'stats')
-      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-      expire_fragment(:controller => 'tags', :action => 'index', :action_suffix => 'all_tags')
-      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-      expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
-      expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name}")
     end
     respond_to do |format|
       format.html { redirect_to :action => "index" }

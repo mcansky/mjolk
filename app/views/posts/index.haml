@@ -24,23 +24,23 @@
         = link_to( '+', :action => 'new')
 
   
-  - if (params[:tag] || params[:username] || params[:fromdt] || params[:todt])
+  - if (params[:tag] || params[:username] || params[:fromdt] || params[:todt] || params[:page])
     - if current_user
       - cache(:action => 'index', :action_suffix => params.to_s, :expires_in => 10.minute) do
         %ul
           - @posts.each do |post|
             %li.bookmark
               = render "short_post", :post => post
-        .pagination
-          = will_paginate(@posts)
+      .pagination
+        = will_paginate(@posts)
     - else
       - cache(:action => 'index', :action_suffix => params.to_s, :expires_in => 10.minute) do
         %ul
           - @posts.each do |post|
             %li.bookmark
               = render "short_post", :post => post
-        .pagination
-          = will_paginate(@posts)
+      .pagination
+        = will_paginate(@posts)
   - else
     - if current_user
       - cache(:action => 'index', :action_suffix => "all_user_#{current_user.id}_posts", :expires_in => 10.minute) do
@@ -48,16 +48,16 @@
           - @posts.each do |post|
             %li.bookmark
               = render "short_post", :post => post
-        .pagination
-          = will_paginate(@posts)
+      .pagination
+        = will_paginate(@posts)
     - else
       - cache(:action => 'index', :action_suffix => "public_all_post", :expires_in => 10.minute) do
         %ul
           - @posts.each do |post|
             %li.bookmark
               = render "short_post", :post => post
-        .pagination
-          = will_paginate(@posts)
+      .pagination
+        = will_paginate(@posts)
 .clear
 - unless params[:tag]
   .grid_15
