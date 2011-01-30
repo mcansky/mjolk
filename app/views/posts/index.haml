@@ -26,7 +26,7 @@
   
   - if (params[:tag] || params[:username] || params[:fromdt] || params[:todt] || params[:page])
     - if current_user
-      - cache(:action => 'index', :action_suffix => params.to_s, :expires_in => 10.minute) do
+      - cache(:action => 'index', :action_suffix => params.to_s + "_#{current_user.id}", :expires_in => 10.minute) do
         %ul
           - @posts.each do |post|
             %li.bookmark
