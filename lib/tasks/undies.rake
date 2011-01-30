@@ -3,7 +3,9 @@
 namespace :undies do
   desc "generate changelog with nice clean output"
   task :changelog, :since_c, :until_c do |t,args|
-    cmd=`git log --pretty='format:%ci::%an <%ae>::%s' #{args[:since_c]}..#{args[:until_c]}`
+    since_c = args[:since_c] || `git tag | head -1`.chomp
+    until_c = args[:until_c]
+    cmd=`git log --pretty='format:%ci::%an <%ae>::%s' #{since_c}..#{until_c}`
 
     entries = Hash.new
     changelog_content = String.new
