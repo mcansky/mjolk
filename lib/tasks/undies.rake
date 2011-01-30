@@ -79,7 +79,8 @@ namespace :undies do
       changelog_content += "\n" unless changelog_content.size == 0
       github_authors = YAML::load(File.open(Rails.root.to_s + "/config/devs.yml"))
       entries = Hash.new
-      changelog_content += "# #{tag}\n"
+      changelog_content += "# #{tag}\n" if tag
+      changelog_content += "# current\n" unless tag
 
       # unfolding the data, splitting up by author
       commits_hash[tag].split("\n").each do |entry|
