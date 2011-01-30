@@ -1,9 +1,10 @@
-# 
+# current
 * [mcansky](http://github.com/mcansky) from lala land
     * adding own rake tasks file (f0481c349469c6d53555ad766e3b978a5fef4d37)
     * improving changelog generation task (b01780bc873cd10d52128ab3dbe28de34a694d8a)
     * improving changelog tast : hash (d5a997e46f2fd1892c68c960fe906f928a9d24a9)
     * adding github requests for changelog gen (041badb78584c49f4c5d8eb354f87e009b17b201)
+    * adding changelog file generation from commits (7765b566b0f67b3b52b50ed673dcf313d957052b)
 
 # 0.3.2
 * [mcansky](http://github.com/mcansky) from lala land
