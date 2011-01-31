@@ -16,6 +16,8 @@ Mjolk::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+  # log level
+  config.log_level = :debug
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -29,10 +31,11 @@ Mjolk::Application.configure do
   # memcached
   #config.cache_store = :dalli_store
   # Global enable/disable all memcached usage
-  #config.perform_caching = true
+  config.perform_caching = false
   # Disable/enable fragment and page caching in ActionController
-  #config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = false
   # The underlying cache store to use.
+  #config.cache_store = :file_store, "#{Rails.root.to_s}/tmp/cache_loc/"
   #config.cache_store = :dalli_store, 'localhost:11211'
 end
 

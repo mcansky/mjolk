@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     if params[:tag]
       @posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
     else  
-      @posts = Bookmark.find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
+      @posts = Bookmark.find(:all, :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
     end
     @posts.reverse!
     respond_to do |format|

@@ -227,12 +227,6 @@ class PostsController < ApplicationController
               new_bookmark.tag_list = post['tag'].gsub(" ",", ")
               current_user.bookmarks << new_bookmark
               new_bookmark.save
-              
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-              expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-              expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name}")
             end 
           end
         end
@@ -282,10 +276,6 @@ class PostsController < ApplicationController
       bookmark.tag_list = params[:bookmark][:tags]
       bookmark.private = params[:bookmark][:private]
       if bookmark.save
-        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
         flash[:message] = "Updated"
       else
       end

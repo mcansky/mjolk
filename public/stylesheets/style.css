@@ -24,6 +24,31 @@ body {
 	margin-top: 5px;
 }
 
+#banner {
+	background: #9BC4DB;
+}
+
+#menu {
+	background: #FFF;
+}
+
+#content {
+	background: #9BC4DB;
+}
+
+#sidebar {
+	background: #417488;
+	margin-left: -10px;
+}
+
+#content h1, #content h2, #content h3 {
+	color: #417488;
+}
+
+#menu a {
+	color: #417488;
+}
+
 li.bookmark {
 	line-height: 18px;
 	margin-bottom: 10px;
