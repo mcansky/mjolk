@@ -20,6 +20,17 @@ namespace :misc do
     end
   end
 
+  desc "get all short urls"
+  task :get_shorts => :environment do
+    Link.all.each do |l|
+      l.shorten if l.short_url == nil
+      if l.short_url
+        Rails.logger.info("#{l.url} shorten to #{l.short_url}")
+        l.save
+      end
+    end
+  end
+
   desc "remove lost bookmarks"
   task :lost_bookmarks => :environment do
     Bookmark.all.each do |d|
