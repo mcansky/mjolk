@@ -12,6 +12,8 @@
   - if (current_user && (post.user == current_user))
     = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
     = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
+  - elsif (current_user && post.user != current_user)
+    = link_to 'c', :controller => "posts", :action => "create", :id => post.id, :method => :post
   = link_to 'u', post.link.short_url if post.link.short_url
 - if post.private?
   %span.private P

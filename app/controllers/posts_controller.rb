@@ -106,6 +106,7 @@ class PostsController < ApplicationController
   # also respond to posts/add
   # implemented : url (req), description (req), tags, dt, shared
   # not implemented : replace, extended
+  # can also be used to clone/copy a bookmark if id is passed
   def create
     incomplete = true
     error = false
@@ -123,7 +124,8 @@ class PostsController < ApplicationController
       link = Link.find_by_url(url) || Link.new(:url => url)
       link.save
       if link.users.include?(current_user)
-        flash[:message] = "Already in"
+        redirect_to :action => "index", :notice => "Already in !"
+        return
       else
         datetime = nil
         datetime = params[:dt] if params[:dt]
@@ -142,6 +144,26 @@ class PostsController < ApplicationController
           logger.warn("Error : could not save the new bookmark")
         end
       end
+    elsif params[:id]
+      # clone
+      to_clone = Bookmark.find(params[:id])
+      if to_clone == nil
+        redirect_to root_url, :alert => "not found !"
+        return
+      end
+      # check if the link is already associated with 
+      if to_clone.link.users.include?(current_user)
+        redirect_to :action => "index", :notice => "Already in !"
+        return
+      else
+      new_b = to_clone.clone
+      new_b.link = to_clone.link
+      new_b.tags = to_clone.tags
+      current_user.bookmarks << new_b
+      if new_b.save
+        current_user.save
+        logger.info("bookmark for #{new_b.link.url} cloned")
+      end
     end
     respond_to do |format|
       format.html do
@@ -149,7 +171,7 @@ class PostsController < ApplicationController
           flash[:error] = "incomplet"
           render :file => File.join(Rails.root, 'public', '400.html'), :status => 400
         else
-          redirect_to :action => "index"
+          redirect_to :action => "index", :notice => "Added properly !"
         end
       end
       format.xml do
