@@ -12,7 +12,7 @@
   - if (current_user && (post.user == current_user))
     = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
     = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
-  = link_to 'u', post.short_url if post.short_url
+  = link_to 'u', post.link.short_url if post.link.short_url
 - if post.private?
   %span.private P
 - if post.tags.size > 0
