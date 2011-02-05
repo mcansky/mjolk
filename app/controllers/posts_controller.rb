@@ -1,4 +1,8 @@
 require 'xmlsimple'
+require 'net/http'
+require "net/https"
+require 'uri'
+require 'json'
 
 class PostsController < ApplicationController
   protect_from_forgery
@@ -121,7 +125,12 @@ class PostsController < ApplicationController
       if not ((url =~ /^http:\/\//) || (url =~ /^https:\/\//))
         url = "http://" + url
       end
-      link = Link.find_by_url(url) || Link.new(:url => url)
+      link = nil
+      if (url =~ /goo\.gl/)
+        link = get_link_from_short(url)
+      else
+        link = Link.find_by_url(url) || Link.new(:url => url)
+      end
       link.save
       if link.users.include?(current_user)
         redirect_to :action => "index", :notice => "Already in !"
@@ -155,7 +164,7 @@ class PostsController < ApplicationController
       if to_clone.link.users.include?(current_user)
         redirect_to :action => "index", :notice => "Already in !"
         return
-      else
+      end
       new_b = to_clone.clone
       new_b.link = to_clone.link
       new_b.tags = to_clone.tags
@@ -314,5 +323,26 @@ class PostsController < ApplicationController
       return true
     end
     return false
+  end
+
+  def get_link_from_short(url)
+    link = nil
+    link = Link.find_by_short_url(url)
+    if link == nil
+      # get long url from short (google)
+      google_payload = "/urlshortener/v1/url?shortUrl=#{url}&key=#{Settings.goo_gl.api}"
+      host = "www.googleapis.com"
+      port = "443"
+      req = Net::HTTP::Get.new(google_payload)
+      req.body = data
+      httpd = Net::HTTP.new(host, port)
+      httpd.use_ssl = true
+      response = httpd.request(req)
+      json_res = JSON.parse(response.body)
+      long_url = json_res["longUrl"]
+      # ok let's find the link from the long_url or create a new Link if not found
+      link = Link.find_by_url(long_url) || Link.new(:url => long_url, :short_url => url)
+    end
+    return link
   end
 end
