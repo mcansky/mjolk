@@ -141,7 +141,9 @@ Devise.setup do |config|
   # end
 
   # oauth
-  config.omniauth :twitter, Settings.oauth.twitter.consumer_key, Settings.oauth.twitter.consumer_secret unless Rails.env == "test"
+  if Rails.env.to_s == "production"
+    config.omniauth :twitter, Settings.oauth.twitter.consumer_key, Settings.oauth.twitter.consumer_secret unless Rails.env == "test"
+  end
   # http auth
   config.http_authenticatable = true
 end
