@@ -33,7 +33,7 @@
       </div>
       <div class="grid_5" id="user_menu">
         <% if !current_user %>
-          <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
+          <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) if Rails.env.to_s == "production" %>
           <%= link_to "Sign up", new_user_registration_path %> / <%= link_to('Sign in', new_user_session_path) %>  
         <% end %>
         <% if current_user %>
