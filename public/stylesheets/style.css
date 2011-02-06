@@ -51,6 +51,7 @@ body {
 
 #sidebar {
 	background: #CBD6D0;
+	padding: 5px;
 }
 
 #content h1, #content h2, #content h3 {
@@ -99,7 +100,7 @@ div.bookmark div.link {
 	margin-bottom: 5px;
 }
 
-div.bookmark div.link span.date {
+div.bookmark div.link span.date, div#sidebar span.date {
 	color: #FFF;
 	font-style: italic;
 	font-size: 8pt;
@@ -156,6 +157,11 @@ span.tags a:hover {
 	text-decoration: underline;
 }
 
+span.manage a {
+	color: #ED4811;
+	text-decoration: none;
+}
+
 span.author a {
 	font-size: 12px;
 	color: #ED4811;
@@ -163,6 +169,17 @@ span.author a {
 }
 span.author a:hover {
 	text-decoration: underline;
+}
+
+span.follow {
+	
+}
+
+span.follow a {
+	text-decoration :none;
+	color: #ED4811;
+	font-size: 9pt;
+	vertical-align: super;
 }
 
 .tag_css1 { font-size: 1.0em; }
@@ -177,4 +194,42 @@ span.author a:hover {
 #graph {
 	width: 300px;
 	height: 200px;
+}
+
+#sidebar h3.sidebar {
+	font-weight: normal;
+	margin-bottom: 3px;
+}
+
+#sidebar h4.sidebar {
+	font-size: 11pt;
+	font-weight: normal;
+	padding:0 ;
+	margin: 0;
+	margin-top: 10px;
+}
+
+#sidebar div.last_posts {
+	list-style: none;
+	margin: 0;
+}
+#sidebar div.last_post li {
+	margin: 0;
+	margin-top: -5px;
+	padding: 0;
+}
+#sidebar div.last_posts a {
+	font-size: 10pt;
+}
+#sidebar div.last_post_more a {
+	font-size: 10pt;
+	text-decoration: none;
+	color: #ED4811;
+}
+#sidebar div.last_posts span.post_tags a {
+	font-weight: bold;
+	font-size: 8pt;
+	font-style: italic;
+	color: #ED4811;
+	text-decoration: none;
 }

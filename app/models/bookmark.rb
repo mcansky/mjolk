@@ -19,6 +19,10 @@ class Bookmark < ActiveRecord::Base
     return link.url
   end
 
+  def short_url
+    return link.short_url
+  end
+
   def date_to_s
     return bookmarked_at.strftime("%d.%m.%Y")
   end

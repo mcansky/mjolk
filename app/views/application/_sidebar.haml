@@ -1,0 +1,52 @@
+- if current_user
+  - if params[:username] && (params[:username] != current_user.name)
+    %h3.sidebar
+      = @user.name
+      - if current_user.followed.include?(@user)
+        %span.follow
+          = link_to "unfollow", :controller => :users, :action => :follow, :id => @user.id, :method => :delete
+      - else
+        %span.follow
+          = link_to("follow", :controller => :users, :action => :follow, :id => @user.id, :method => :post)
+    
+    %h4.sidebar
+      = "Following (#{@user.followed.count})"
+    = render "application/follows", :user => @user, :kind => "followed"
+    
+    %h4.sidebar
+      = "Followed by (#{@user.followers.count})"
+    = render "application/follows", :user => @user, :kind => "followers"
+      
+    %h4.sidebar
+      Groups
+    %hr
+
+  %h3.sidebar
+    You
+  %h4.sidebar
+    Your bookmarks
+    = " (#{current_user.bookmarks.size.to_s})"
+  
+  %div.last_posts
+    - current_user.last_posts(3).each do |post|
+      %div.last_post
+        = link_to post.title, post.link.short_url
+        %span.date
+          = post.date_to_s
+        %span.post_tags
+          - if post.tags.size > 0
+            - post.tags.each do |tag|
+              = link_to tag, :controller => "posts", :action => "index", :tag => tag.name, :username => post.user.name
+    %div.last_post_more
+      = link_to "more", posts_path
+
+    %h4.sidebar
+      = "Following (#{current_user.followed.count})"
+    = render "application/follows", :user => current_user, :kind => "followed"
+
+    %h4.sidebar
+      = "Followed by (#{current_user.followers.count})"
+    = render "application/follows", :user => current_user, :kind => "followers"
+
+  %h4.sidebar
+    Groups

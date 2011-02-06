@@ -1,0 +1,9 @@
+- people = nil
+- if kind == "followed"
+  - people = user.followed
+- elsif kind == "followers"
+  - people = user.followers
+
+- if people
+  - people.each do |person|
+    = link_to image_tag("http://www.gravatar.com/avatar/#{person.hash}?s=20"), {:controller => :posts, :action => :index, :username => person.name}, {:title => person.name, :alt => person.name}

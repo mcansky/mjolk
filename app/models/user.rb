@@ -16,6 +16,18 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :api_key, :name, :remember_me, :roles
   has_many :bookmarks, :dependent => :destroy
   has_many :links, :through => :bookmarks
+  
+  has_and_belongs_to_many :followers,
+                          :class_name => 'User',
+                          :join_table => 'users_have_followers',
+                          :foreign_key => 'followed_id',
+                          :association_foreign_key => 'follower_id'
+  
+  has_and_belongs_to_many :followed,
+                          :class_name => 'User',
+                          :join_table => 'users_have_followers',
+                          :foreign_key => 'follower_id',
+                          :association_foreign_key => 'followed_id'
   before_validation :set_initial_name
   
   validates_exclusion_of :name, :in => ["admin", "login", "logout"], :message => "name %{value} is reserved."
@@ -24,7 +36,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => true
   #validates_length_of :password, :minimum => 8
   # check strength of password : again 8 chars min, at least one capitaled letter, at least one normal letter, at least one non alpha characters
-  validates_format_of :password, :with => /^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
+  #validates_format_of :password, :with => /^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
   #validates_exclusion_of :name, :in => ['admin', 'login', 'logout']
 
   def set_role
@@ -130,6 +142,11 @@ class User < ActiveRecord::Base
   def locked?
     return true if active
     return false
+  end
+
+  def last_posts(count)
+    harr = bookmarks.last(count)
+    return harr
   end
 
   #private
