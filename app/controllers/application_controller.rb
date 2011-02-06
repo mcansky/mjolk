@@ -24,18 +24,13 @@ class ApplicationController < ActionController::Base
     conditions[0] += "private = ?"
     conditions << 0
     size = Bookmark.all.count
-    if params[:tag]
-      @posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (size - 20), :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
-    else  
-      @posts = Bookmark.find(:all, :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
-    end
+    @posts = Bookmark.find(:all, :limit => 20, :conditions => conditions, :order => "bookmarked_at DESC")
     @tags = Bookmark.tag_counts_on(:tags)
-    @posts.reverse!
     respond_to do |format|
       format.html
       format.xml do
         xml_posts = Array.new
-        @posts.each do |post|
+        @posts[0..19].each do |post|
           tags = Array.new
           post.tags.each { |t| tags << t.name }
           xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
