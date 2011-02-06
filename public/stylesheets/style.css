@@ -8,7 +8,7 @@
 }
 
 body {
-	background: #EBEEE2;
+	background: #F5FFFC;
 }
 
 #content {
@@ -34,11 +34,11 @@ body {
 
 #content {
 	background: #9BC4DB;
+	margin-right: -20px;
 }
 
 #sidebar {
 	background: #417488;
-	margin-left: -10px;
 }
 
 #content h1, #content h2, #content h3 {
