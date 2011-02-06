@@ -7,8 +7,8 @@
     = post.date_to_s
   %span.manage
     - if (current_user && (post.user == current_user))
-      = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
-      = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
+      = link_to 'e', {:controller => "posts", :action => "edit", :id => post.id}, {:class => "edit", :title => "edit"}
+      = link_to 'd!', post, {:confirm => "Deleting, You sure ?", :method => :delete, :title => "destroy"}
     - elsif (current_user && post.user != current_user)
       = link_to 'c', :controller => "posts", :action => "create", :id => post.id, :method => :post
   - if post.private?

@@ -157,6 +157,11 @@ span.tags a:hover {
 	text-decoration: underline;
 }
 
+span.manage a {
+	color: #ED4811;
+	text-decoration: none;
+}
+
 span.author a {
 	font-size: 12px;
 	color: #ED4811;
@@ -182,6 +187,7 @@ span.author a:hover {
 
 #sidebar h3.sidebar {
 	font-weight: normal;
+	margin-bottom: 3px;
 }
 
 #sidebar div.last_posts {
@@ -190,6 +196,7 @@ span.author a:hover {
 }
 #sidebar div.last_post li {
 	margin: 0;
+	margin-top: -5px;
 	padding: 0;
 }
 #sidebar div.last_posts a {
