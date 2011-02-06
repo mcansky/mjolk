@@ -190,6 +190,14 @@ span.author a:hover {
 	margin-bottom: 3px;
 }
 
+#sidebar h4.sidebar {
+	font-size: 11pt;
+	font-weight: normal;
+	padding:0 ;
+	margin: 0;
+	margin-top: 10px;
+}
+
 #sidebar div.last_posts {
 	list-style: none;
 	margin: 0;
