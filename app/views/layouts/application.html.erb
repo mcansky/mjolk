@@ -26,6 +26,7 @@
     <div class="clear"></div>
     <div class="grid_16" id="menu">
       <div class="grid_9 prefix_1 alpha">
+        <%= link_to "Home", root_url %>
         <%= link_to "All tags", :controller => "/tags" %>
         <% if current_user %>
           <%= link_to "My Bookmarks", posts_path %>
