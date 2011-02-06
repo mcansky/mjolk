@@ -1,23 +1,24 @@
-- if current_user && current_user != post.user
-  %span.author= link_to "@" + post.user.name, :controller => "posts", :action => "index", :username => post.user.name
-- elsif current_user && current_user == post.user
-  %span.author= link_to "you", :controller => "posts", :action => "index", :username => post.user.name
-- elsif !current_user
-  %span.author= link_to "@" + post.user.name, :controller => "posts", :action => "index", :username => post.user.name
-= link_to post.title, post.link.url
+%div.author_grav
+  = link_to image_tag("http://www.gravatar.com/avatar/#{post.user.hash}?s=40"), {:controller => :posts, :action => :index, :username => post.user.name}, {:title => post.user.name, :alt => post.user.name}
 
-- if post.bookmarked_at
-  %span.added_on= post.bookmarked_at.strftime("%d/%m/%Y @ %H:%M")
-%span.manage
-  - if (current_user && (post.user == current_user))
-    = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
-    = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
-  - elsif (current_user && post.user != current_user)
-    = link_to 'c', :controller => "posts", :action => "create", :id => post.id, :method => :post
-  = link_to 'u', post.link.short_url if post.link.short_url
-- if post.private?
-  %span.private P
-- if post.tags.size > 0
-  %span.tags
+%div.link
+  = link_to post.title, post.link.short_url, {:class => "title"}
+  %span.date
+    = post.date_to_s
+  %span.manage
+    - if (current_user && (post.user == current_user))
+      = link_to 'e', :controller => "posts", :action => "edit", :id => post.id
+      = link_to 'd!', post, :confirm => "Deleting, You sure ?", :method => :delete
+    - elsif (current_user && post.user != current_user)
+      = link_to 'c', :controller => "posts", :action => "create", :id => post.id, :method => :post
+  - if post.private?
+    %span.private P
+
+%div.desc
+  =# post.comment
+
+%div.post_tags
+  - if post.tags.size > 0
     - post.tags.each do |tag|
+      = image_tag("/images/icons/tag-small.png")
       = link_to tag, :controller => "posts", :action => "index", :tag => tag.name, :username => post.user.name

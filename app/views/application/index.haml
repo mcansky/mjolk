@@ -7,13 +7,13 @@
 
   - if current_user
     - cache(:action => 'index', :action_suffix => 'last_20_posts', :expires_in => 10.minute) do
-      %ul
+      %div.posts
       - @posts.each do |post|
-        %li.bookmark
+        %div.bookmark
           = render "/posts/short_post", :post => post
   - else
     - cache(:action => 'index', :action_suffix => 'public_last_20_posts', :expires_in => 10.minute) do
-      %ul
+      %div.posts
       - @posts.each do |post|
-        %li.bookmark
+        %div.bookmark
           = render "/posts/short_post", :post => post

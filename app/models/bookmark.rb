@@ -19,6 +19,10 @@ class Bookmark < ActiveRecord::Base
     return link.url
   end
 
+  def date_to_s
+    return bookmarked_at.strftime("%d.%m.%Y")
+  end
+
   def private?
     return true if self.private == 1
     return false

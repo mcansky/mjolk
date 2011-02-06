@@ -1,5 +1,6 @@
 require 'net/https'
 require 'digest/sha1'
+require 'digest/md5'
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -91,6 +92,10 @@ class User < ActiveRecord::Base
   
   def gen_api_key
     self.api_key = Digest::SHA1.hexdigest(Time.now.to_s + self.email + self.name)
+  end
+
+  def hash
+    return Digest::MD5.hexdigest(email.downcase)
   end
 
   def role_symbols
