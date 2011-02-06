@@ -22,6 +22,18 @@
     * planning groups and followers for 0.4 (3c5288568bd35b52a057da80ac7651b939560305)
     * bit of changes for the css (63e12646dd36e2d4d1c1b7cb532b563cd7d33b3b)
     * adding comment text_area in posts forms (d954da3b47107d68164df48da203581f417afe69)
+    * changelog (cfc775a364627341d9105743b81b156b5d6a436a)
+    * sidebar start (56b9733b12bfa05f012d17214f477dec7889618a)
+    * improving manage links style (a47bc2d9ca1b7ff54f25ed7fd09774585ffe3c60)
+    * adding another idea (5f114c67f864150d0592a066ea5dc491a832bcef)
+    * migrating style on posts index view (b0ca603a1365f23316317472c0f13bc8da2975c1)
+    * adding user test (280fe889167de14d584a9823ee501529609e6f91)
+    * group title (98ccd94660b47c1efffdccd84d16542a2c1805c4)
+    * adding followers/followed (e907a5c1b16878ddb51e1940b8f7bec455b63798)
+    * adding interface to see followers and followed (7f945447dd4ef78428aba272e112b5c87649e261)
+    * adding link to follow and unfollow people (b38fc6b89d60a7c382350c96d0ca2ad1901cbbe2)
+    * styling up the sidebar (f3774f4635edc01b2d31312cc314cf48917e6007)
+    * fixing html in stats and tags view (60fe0e39f8a97b3f128447c4f7d7644d5c66d1af)
 
 # 0.3.2
 * [mcansky](http://github.com/mcansky) from lala land

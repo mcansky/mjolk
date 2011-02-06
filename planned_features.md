@@ -2,9 +2,7 @@
 
 ## Hot list
 
-* user groups : status _planned_ *0.4*. no tests, no model, no controller, no views
-* following : status _planned_ *0.4*. no tests, no model, no controller, no views
-    * implies : follow/unfollow buttons, followed/followers lists, follow feeds on a page
+* user groups : status _planned_ *0.5*. no tests, no model, no controller, no views
 
 ## Needed
 
