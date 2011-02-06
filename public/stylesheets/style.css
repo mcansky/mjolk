@@ -1,3 +1,11 @@
+* {
+	font-family: 'Molengo', 'Adobe Caslon Pro', 'Hoefler Text', Garamond, serif;;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
+}
+
 .clear {
 	clear: both;
 }
@@ -34,6 +42,7 @@ body {
 
 #content {
 	background: #F5FFFC;
+	padding: 5px;
 }
 
 #content-box {
@@ -53,12 +62,20 @@ body {
 }
 
 div.bookmark {
-	background: #123840;
+	background: #FFF;
 	line-height: 18px;
 	margin-bottom: 10px;
 	list-style: none;
 	border-bottom: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	
 	padding: 3px;
+	margin: 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-bottom: 10px;
 }
 
 div.bookmark a.title {
@@ -75,14 +92,32 @@ div.bookmark div.author_grav {
 	margin-left: 5px;
 }
 
+div.bookmark div.link {
+	background: #123840;
+	margin: -3px;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+
 div.bookmark div.link span.date {
 	color: #FFF;
 	font-style: italic;
 	font-size: 8pt;
 }
 
+div.bookmark div.desc {
+	color: #DDD;
+	font
+}
+
 div.bookmark div.post_tags {
 	margin-left: 20px;
+}
+div.bookmark div.post_tags img {
+	position: relative;
+	top: 4px;
+	margin-right: -5px;
+	margin-left: 3px;
 }
 
 div.bookmark div.post_tags a {
