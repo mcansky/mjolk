@@ -50,3 +50,12 @@
 
   %h4.sidebar
     Groups
+- if current_user
+  %hr
+%div
+  - if @tags
+    %h3.sidebar Tags
+    .tags
+      - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
+        - tag_cloud_limited(@tags, %w(tag_css1 tag_css2 tag_css3 tag_css4), 20) do |tag, css_class|
+          = link_to tag.name, { :controller => "posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class

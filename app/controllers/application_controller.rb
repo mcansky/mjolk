@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
     else  
       @posts = Bookmark.find(:all, :limit => 20, :conditions => conditions, :order => "bookmarked_at ASC")
     end
+    @tags = Bookmark.tag_counts_on(:tags)
     @posts.reverse!
     respond_to do |format|
       format.html
