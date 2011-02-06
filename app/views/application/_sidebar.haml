@@ -7,7 +7,7 @@
           = link_to "unfollow", :controller => :users, :action => :follow, :id => @user.id, :method => :delete
       - else
         %span.follow
-          = link_to "follow", :controller => :users, :action => :follow, :id => @user.id, :method => :post
+          = link_to("follow", :controller => :users, :action => :follow, :id => @user.id, :method => :post)
     
     %h4.sidebar
       = "Following (#{@user.followed.count})"
