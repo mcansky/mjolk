@@ -63,6 +63,6 @@
   %div
     %h1 Tags
     - cache(:action => 'index', :action_suffix => "tags_#{@user.name}", :expires_in => 30.minute) do
-      - tag_cloud(@tags, %w(tag_css1 tag_css2 tag_css3 tag_css4)) do |tag, css_class|
+      - tag_cloud_limited(@tags, %w(tag_css1 tag_css2 tag_css3 tag_css4), -1) do |tag, css_class|
         = link_to tag.name, { :controller => "posts", :action => "index", :tag => tag.name, :username => @user.name }, :class => css_class
 .clear

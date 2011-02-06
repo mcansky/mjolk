@@ -13,7 +13,11 @@ module ApplicationHelper
       end
       public_tags << tag if shared
     end
-    tags = public_tags.sort_by(&:count).last(limit).sort_by(&:name)
+    if limit > 0
+      tags = public_tags.sort_by(&:count).last(limit).sort_by(&:name)
+    else
+      tags = public_tags.sort_by(&:count).sort_by(&:name)
+    end
 
     tags.each do |tag|
       index = ((tag.count / max_count) * (classes.size - 1)).round
