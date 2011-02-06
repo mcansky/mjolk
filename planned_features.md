@@ -16,5 +16,6 @@
 * tags synonyms
 * website previews
 * paid access
+* "to read" : special tag to put link in "read box" awaiting approval/confirmation
 
 ## Requested
