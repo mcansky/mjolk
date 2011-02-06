@@ -7,16 +7,9 @@ module ApplicationHelper
     max_count = tags.sort_by(&:count).last.count.to_f
     public_tags = Array.new
     tags.each do |tag|
-      shared = true
-      if tag[:count] == 1
-        share = false
-      elsif tag[:count] > 1
-        Bookmark.tagged_with(tag.name).all.each do |bookmark|
-          if bookmark.private?
-            shared = false
-            return
-          end
-        end
+      shared = false
+      Bookmark.tagged_with(tag.name).all.each do |bookmark|
+        shared = true if !bookmark.private?
       end
       public_tags << tag if shared
     end
