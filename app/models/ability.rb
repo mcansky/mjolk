@@ -40,6 +40,12 @@ class Ability
       can :read, Stat
     end
 
+    if user.normal?
+      can :manage, Bookmark, :user_id => user.id
+      can :read, Bookmark
+      can :read, Stat
+    end
+
     if user.locked?
       can :read, Bookmark
       can :read, Stat

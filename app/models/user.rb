@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   before_validation :set_initial_name
   
   validates_exclusion_of :name, :in => ["admin", "login", "logout"], :message => "name %{value} is reserved."
-  validates_presence_of :name, :email, :password, :message => "can't be blank"
+  validates_presence_of :name, :email, :message => "can't be blank"
   validates_uniqueness_of :name, :case_sensitive => true
   validates_uniqueness_of :email, :case_sensitive => true
   #validates_length_of :password, :minimum => 8
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
   def set_role
     if roles == nil
-      self.roles = "guest"
+      self.roles = "normal"
     end
   end
 
@@ -130,6 +130,11 @@ class User < ActiveRecord::Base
 
   def beta?
     return true if role_symbols.include?(:beta)
+    return false
+  end
+
+  def normal?
+    return true if role_symbols.include?(:normal)
     return false
   end
 
