@@ -74,7 +74,9 @@ class PostsController < ApplicationController
       end
     end
     @user = user
-    @tags = user.bookmarks.tag_counts_on(:tags) unless params[:tag]
+    if user
+      @tags = user.bookmarks.tag_counts_on(:tags) unless params[:tag]
+    end
     @posts_count = the_posts.size
     respond_to do |format|
       format.html do
