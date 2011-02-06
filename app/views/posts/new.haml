@@ -8,8 +8,13 @@
         = fl.text_field :url
 
     %p
-      = f.label :description
+      = f.label :title
       = f.text_field :title
+
+    %p
+      = f.label :comment
+      %br
+      = f.text_area :comment, :cols => 40, :rows => 3
 
     %p
       = f.label "Tags (comma separated)"

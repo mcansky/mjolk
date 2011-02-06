@@ -138,9 +138,10 @@ class PostsController < ApplicationController
       else
         datetime = nil
         datetime = params[:dt] if params[:dt]
+        comment = params[:extended] || params[:bookmark][:comment] || nil
         description = params['description'] || params[:bookmark]['title']
 
-        new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
+        new_bookmark = Bookmark.new(:title => description, :comment => comment, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
         new_bookmark.private = 1 if ((params[:shared] && (params[:shared] == "no")))
         new_bookmark.private = params[:bookmark]["private"] if params[:bookmark]["private"]
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
@@ -304,6 +305,7 @@ class PostsController < ApplicationController
         end
       end
       bookmark.title = params[:bookmark][:title]
+      bookmark.comment = params[:bookmark][:comment]
       bookmark.tag_list = params[:bookmark][:tags]
       bookmark.private = params[:bookmark][:private]
       if bookmark.save
