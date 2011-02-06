@@ -51,6 +51,7 @@ body {
 
 #sidebar {
 	background: #CBD6D0;
+	padding: 5px;
 }
 
 #content h1, #content h2, #content h3 {
@@ -99,7 +100,7 @@ div.bookmark div.link {
 	margin-bottom: 5px;
 }
 
-div.bookmark div.link span.date {
+div.bookmark div.link span.date, div#sidebar span.date {
 	color: #FFF;
 	font-style: italic;
 	font-size: 8pt;
@@ -177,4 +178,32 @@ span.author a:hover {
 #graph {
 	width: 300px;
 	height: 200px;
+}
+
+#sidebar h3.sidebar {
+	font-weight: normal;
+}
+
+#sidebar div.last_posts {
+	list-style: none;
+	margin: 0;
+}
+#sidebar div.last_post li {
+	margin: 0;
+	padding: 0;
+}
+#sidebar div.last_posts a {
+	font-size: 10pt;
+}
+#sidebar div.last_post_more a {
+	font-size: 10pt;
+	text-decoration: none;
+	color: #ED4811;
+}
+#sidebar div.last_posts span.post_tags a {
+	font-weight: bold;
+	font-size: 8pt;
+	font-style: italic;
+	color: #ED4811;
+	text-decoration: none;
 }

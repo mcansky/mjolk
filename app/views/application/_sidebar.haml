@@ -1,0 +1,23 @@
+%h3.sidebar
+  Your bookmarks
+  = " (#{current_user.bookmarks.size.to_s})"
+  %div.last_posts
+    - current_user.last_posts(3).each do |post|
+      %div.last_post
+        = link_to post.title, post.link.short_url
+        %span.date
+          = post.date_to_s
+        %span.post_tags
+          - if post.tags.size > 0
+            - post.tags.each do |tag|
+              = link_to tag, :controller => "posts", :action => "index", :tag => tag.name, :username => post.user.name
+    %div.last_post_more
+      = link_to "more", posts_path
+
+%h3.sidebar
+  Following
+  = "XX"
+
+%h3.sidebar
+  Followers
+  = "XX"

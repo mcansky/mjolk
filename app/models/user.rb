@@ -132,6 +132,11 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def last_posts(count)
+    harr = bookmarks.last(count)
+    return harr
+  end
+
   #private
   # where the work happens
   # use a xml file and extract content
