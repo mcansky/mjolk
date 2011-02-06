@@ -1,4 +1,8 @@
 require 'xmlsimple'
+require 'net/http'
+require "net/https"
+require 'uri'
+require 'json'
 
 class PostsController < ApplicationController
   protect_from_forgery
@@ -106,6 +110,7 @@ class PostsController < ApplicationController
   # also respond to posts/add
   # implemented : url (req), description (req), tags, dt, shared
   # not implemented : replace, extended
+  # can also be used to clone/copy a bookmark if id is passed
   def create
     incomplete = true
     error = false
@@ -120,16 +125,23 @@ class PostsController < ApplicationController
       if not ((url =~ /^http:\/\//) || (url =~ /^https:\/\//))
         url = "http://" + url
       end
-      link = Link.find_by_url(url) || Link.new(:url => url)
+      link = nil
+      if (url =~ /goo\.gl/)
+        link = get_link_from_short(url)
+      else
+        link = Link.find_by_url(url) || Link.new(:url => url)
+      end
       link.save
       if link.users.include?(current_user)
-        flash[:message] = "Already in"
+        redirect_to :action => "index", :notice => "Already in !"
+        return
       else
         datetime = nil
         datetime = params[:dt] if params[:dt]
+        comment = params[:extended] || params[:bookmark][:comment] || nil
         description = params['description'] || params[:bookmark]['title']
 
-        new_bookmark = Bookmark.new(:title => description, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
+        new_bookmark = Bookmark.new(:title => description, :comment => comment, :link_id => link.id, :user_id => current_user.id, :bookmarked_at => (datetime || Time.now))
         new_bookmark.private = 1 if ((params[:shared] && (params[:shared] == "no")))
         new_bookmark.private = params[:bookmark]["private"] if params[:bookmark]["private"]
         new_bookmark.tag_list = params['tags'] || params[:bookmark]['tags']
@@ -142,6 +154,26 @@ class PostsController < ApplicationController
           logger.warn("Error : could not save the new bookmark")
         end
       end
+    elsif params[:id]
+      # clone
+      to_clone = Bookmark.find(params[:id])
+      if to_clone == nil
+        redirect_to root_url, :alert => "not found !"
+        return
+      end
+      # check if the link is already associated with 
+      if to_clone.link.users.include?(current_user)
+        redirect_to :action => "index", :notice => "Already in !"
+        return
+      end
+      new_b = to_clone.clone
+      new_b.link = to_clone.link
+      new_b.tags = to_clone.tags
+      current_user.bookmarks << new_b
+      if new_b.save
+        current_user.save
+        logger.info("bookmark for #{new_b.link.url} cloned")
+      end
     end
     respond_to do |format|
       format.html do
@@ -149,7 +181,7 @@ class PostsController < ApplicationController
           flash[:error] = "incomplet"
           render :file => File.join(Rails.root, 'public', '400.html'), :status => 400
         else
-          redirect_to :action => "index"
+          redirect_to :action => "index", :notice => "Added properly !"
         end
       end
       format.xml do
@@ -227,12 +259,6 @@ class PostsController < ApplicationController
               new_bookmark.tag_list = post['tag'].gsub(" ",", ")
               current_user.bookmarks << new_bookmark
               new_bookmark.save
-              
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-              expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-              expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
-              expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => "tags_#{current_user.name}")
             end 
           end
         end
@@ -279,13 +305,10 @@ class PostsController < ApplicationController
         end
       end
       bookmark.title = params[:bookmark][:title]
+      bookmark.comment = params[:bookmark][:comment]
       bookmark.tag_list = params[:bookmark][:tags]
       bookmark.private = params[:bookmark][:private]
       if bookmark.save
-        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'all_user_posts')
-        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'last_20_posts')
-        expire_fragment(:controller => 'posts', :action => 'index', :action_suffix => 'public_all_posts')
-        expire_fragment(:controller => 'application', :action => 'index', :action_suffix => 'public_last_20_posts')
         flash[:message] = "Updated"
       else
       end
@@ -302,5 +325,26 @@ class PostsController < ApplicationController
       return true
     end
     return false
+  end
+
+  def get_link_from_short(url)
+    link = nil
+    link = Link.find_by_short_url(url)
+    if link == nil
+      # get long url from short (google)
+      google_payload = "/urlshortener/v1/url?shortUrl=#{url}&key=#{Settings.goo_gl.api}"
+      host = "www.googleapis.com"
+      port = "443"
+      req = Net::HTTP::Get.new(google_payload)
+      req.body = data
+      httpd = Net::HTTP.new(host, port)
+      httpd.use_ssl = true
+      response = httpd.request(req)
+      json_res = JSON.parse(response.body)
+      long_url = json_res["longUrl"]
+      # ok let's find the link from the long_url or create a new Link if not found
+      link = Link.find_by_url(long_url) || Link.new(:url => long_url, :short_url => url)
+    end
+    return link
   end
 end

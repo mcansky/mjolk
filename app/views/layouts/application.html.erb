@@ -8,6 +8,8 @@
 
 <title>Mjölk :: Bookmarks</title>
 
+<link href='http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" media="all" href="/stylesheets/reset.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/stylesheets/text.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/stylesheets/960.css" />
@@ -18,34 +20,38 @@
 </head>
 <body>
   <div class="container_16" id="main">
-    <div class="grid_2 prefix_1">
+    <div class="grid_16" id="banner">
       <h1><%= link_to "Mjölk", root_path %></h1>
     </div>
     <div class="clear"></div>
-    <div class="grid_3 prefix_13" id="user_info">
-      <p>
+    <div class="grid_16" id="menu">
+      <div class="grid_9 prefix_1 alpha">
+        <%= link_to "All tags", :controller => "/tags" %>
+        <% if current_user %>
+          <%= link_to "My Bookmarks", posts_path %>
+          <%= link_to "Add a Bookmark", new_post_path %>
+          <%= link_to "Import from delicious", :controller => "/posts", :action => "import" %>
+        <% end %>
+      </div>
+      <div class="grid_5" id="user_menu">
         <% if !current_user %>
-          <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %><br />
+          <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) if Rails.env.to_s == "production" %>
           <%= link_to "Sign up", new_user_registration_path %> / <%= link_to('Sign in', new_user_session_path) %>  
         <% end %>
         <% if current_user %>
           Hello <%= link_to current_user.name, "/users/edit" %> ! <%= link_to "Logout", destroy_user_session_path %>
           <% end %>
-        </p>
+      </div>
     </div>
     <div class="clear"></div>
-    <div class="grid_10 prefix_1" id="menu">
-      <%= link_to "All tags", :controller => "/tags" %>
-    <% if current_user %>
-        <%= link_to "My Bookmarks", posts_path %>
-        <%= link_to "Add a Bookmark", new_post_path %>
-        <%= link_to "Import from delicious", :controller => "/posts", :action => "import" %>
-    <% end %>
-    </div>
-    <div class="clear"></div>
-    <div class="grid_16" id="content">
-      <%= yield %>
-    </div>
+      <div class="grid_11" id="content-box">
+        <div id="content">
+        <%= yield %>
+        </div>
+      </div>
+      <div class="grid_5" id="sidebar">
+        <h2>Sidebar</h2>
+      </div>
     <div class="clear"></div>
     <div class="grid_16" id="footer">
       <%= link_to "Mjölk", "https://github.com/mcansky/mjolk" %> v<%= Settings.version %>,

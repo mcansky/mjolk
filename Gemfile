@@ -13,9 +13,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # some good jquery
 gem "jquery-rails"
 
-# memcached
-gem "dalli"
-
 # authorizations
 gem "declarative_authorization"
 
@@ -55,6 +52,7 @@ gem 'hpricot'
 
 group :production do
 	gem "pg"
+	gem "dalli"
 end
 
 # Bundle gems for the local environment. Make sure to

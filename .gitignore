@@ -3,7 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 doc/*
-
+config/settings/*.yml
 /bundler/
 /tmp/
 /.yardoc/

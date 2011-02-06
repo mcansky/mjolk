@@ -1,5 +1,6 @@
 require 'net/https'
 require 'digest/sha1'
+require 'digest/md5'
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -17,13 +18,14 @@ class User < ActiveRecord::Base
   has_many :links, :through => :bookmarks
   before_validation :set_initial_name
   
-  validates_presence_of :name, :email
+  validates_exclusion_of :name, :in => ["admin", "login", "logout"], :message => "name %{value} is reserved."
+  validates_presence_of :name, :email, :password, :message => "can't be blank"
   validates_uniqueness_of :name, :case_sensitive => true
   validates_uniqueness_of :email, :case_sensitive => true
   #validates_length_of :password, :minimum => 8
   # check strength of password : again 8 chars min, at least one capitaled letter, at least one normal letter, at least one non alpha characters
-  #validates_format_of :password, :with => /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
-  #validates_exclusion_of :name, :in => ['admin', 'login', 'logout'], :message => "name %{value} is reserved."
+  validates_format_of :password, :with => /^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
+  #validates_exclusion_of :name, :in => ['admin', 'login', 'logout']
 
   def set_role
     if roles == nil
@@ -90,6 +92,10 @@ class User < ActiveRecord::Base
   
   def gen_api_key
     self.api_key = Digest::SHA1.hexdigest(Time.now.to_s + self.email + self.name)
+  end
+
+  def hash
+    return Digest::MD5.hexdigest(email.downcase)
   end
 
   def role_symbols

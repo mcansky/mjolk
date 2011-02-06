@@ -43,7 +43,7 @@ Devise.setup do |config|
   # from others authentication tools as :clearance_sha1, :authlogic_sha512 (then
   # you should set stretches above to 20 for default behavior) and :restful_authentication_sha1
   # (then you should set stretches to 10, and copy REST_AUTH_SITE_KEY to pepper)
-  config.encryptor = :bcrypt
+  #config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
   config.pepper = "0765300a3b56dd7e2a5d1aebc06fd417fb0e81f07909822ae84729ba9f0e707ebfa12403e675866bdc0dfbb45e0a6714cb08405dee8fa9e55a3cf9ca4d579ec1"
@@ -141,7 +141,9 @@ Devise.setup do |config|
   # end
 
   # oauth
-  config.omniauth :twitter, Settings.oauth.twitter.consumer_key, Settings.oauth.twitter.consumer_secret
+  if Rails.env.to_s == "production"
+    config.omniauth :twitter, Settings.oauth.twitter.consumer_key, Settings.oauth.twitter.consumer_secret unless Rails.env == "test"
+  end
   # http auth
   config.http_authenticatable = true
 end

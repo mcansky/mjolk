@@ -1,4 +1,4 @@
-.grid_15
+%div
   %h1
     - if current_user
       - if params[:all_users] && params[:tag]
@@ -60,7 +60,7 @@
         = will_paginate(@posts)
 .clear
 - unless params[:tag]
-  .grid_15
+  %div
     %h1 Tags
     - cache(:action => 'index', :action_suffix => "tags_#{@user.name}", :expires_in => 30.minute) do
       - tag_cloud(@tags, %w(tag_css1 tag_css2 tag_css3 tag_css4)) do |tag, css_class|

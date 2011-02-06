@@ -34,7 +34,7 @@ Mjolk::Application.routes.draw do
   # admin
   match 'admin/users/mass_mail' => 'admin/users#mass_mail', :via => :get
   match 'admin/users/mass_email_send' => 'admin/users#mass_email_send', :via => :post
-  scope 'admin', :name_prefix => "admin" do
+  scope 'admin', :as => "admin" do
     resources :users, :controller => "admin/users"
   end
 
