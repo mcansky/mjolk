@@ -5,6 +5,23 @@
     * improving changelog tast : hash (d5a997e46f2fd1892c68c960fe906f928a9d24a9)
     * adding github requests for changelog gen (041badb78584c49f4c5d8eb354f87e009b17b201)
     * adding changelog file generation from commits (7765b566b0f67b3b52b50ed673dcf313d957052b)
+    * improving changelog autogen : section header (70dc0a1df40dfd3d2baea2568aac0236b28f1d07)
+    * improving cache : time out for app index view (4cabdbf8ded829651dff3a263ae15dcf1d9cb2b2)
+    * starting the new design fixing tests (94e5a8a518709fcc69c15b41a2bb3087f5dec36f)
+    * adding short_link (goo.gl) (5fcea381e1017e3e43caad67a079a7c1d31a386a)
+    * removing dev settings file adding to ignore file (889de201d6ae16a42cc766eb7b0e80cfcebd7db1)
+    * fixing short_url call (36b8c2f6a794d6925f3e817bc9e698e20262e67c)
+    * adding stuff to test env for twitter mode auth (375a3a15eed55a9824d3a6adb50e46386b1bf8ef)
+    * adding test for twitter auth (22cc22f8c3bd4686fd8cbc68f4573b50ae3ce310)
+    * adding task to shorten not shorten links (2b92ec33e07d7f605aa889b78dee6f395d729a69)
+    * adding "clone"/"copy" behavior (d8326b3d3b70f5151432520bf9e447063f9ec046)
+    * check for short url (3524f08ffa157d6a8793c6068292f736848df969)
+    * improving design and style (de8ca845a142de542a919ec1503028d6f52b305c)
+    * colors (0499ca69d5435c1e07efcdb4d546183a0fd5a1d4)
+    * improving style (b84e98d55679457696f43a83b4a6a54b59386eeb)
+    * planning groups and followers for 0.4 (3c5288568bd35b52a057da80ac7651b939560305)
+    * bit of changes for the css (63e12646dd36e2d4d1c1b7cb532b563cd7d33b3b)
+    * adding comment text_area in posts forms (d954da3b47107d68164df48da203581f417afe69)
 
 # 0.3.2
 * [mcansky](http://github.com/mcansky) from lala land
