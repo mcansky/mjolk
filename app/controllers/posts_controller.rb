@@ -24,18 +24,8 @@ class PostsController < ApplicationController
     # building conditions
     conditions = Array.new
     conditions[0] = ""
-    if params[:fromdt]
-      conditions[0] = "bookmarked_at >= ?"
-      conditions << DateTime.parse(params[:fromdt])
-    end
-    if params[:todt]
-      conditions[0] += " AND " if params[:fromdt]
-      conditions[0] += "bookmarked_at <= ?"
-      conditions << DateTime.parse(params[:todt])
-    end
     if params[:username]
       # filter private ones
-      conditions[0] += " AND " if (params[:fromdt] || params[:todt])
       conditions[0] += "private = ?"
       conditions << 0
     elsif params[:all_users]
@@ -78,27 +68,7 @@ class PostsController < ApplicationController
       @tags = user.bookmarks.tag_counts_on(:tags) unless params[:tag]
     end
     @posts_count = the_posts.size
-    respond_to do |format|
-      format.html do
-        @posts = the_posts.paginate(:page => params[:page])
-      end
-      format.xml do
-        if current_user
-          xml_posts = Array.new
-          the_posts.each do |post|
-            tags = Array.new
-            post.tags.each { |t| tags << t.name } if post.tags.count > 0
-            xml_posts << {"href" => post.link.url, "description" => post.title, "tag" => tags.join(' ')}
-          end
-          meta = Digest::MD5.hexdigest(current_user.name + current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"))
-          posts = {:user => current_user.name, :update => current_user.updated_at.utc.strftime("%Y-%m-%dT%H:%M:%SZ"), :hash => meta, :tag => "", :total => current_user.bookmarks.size, :post => xml_posts}
-          xml_output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XmlSimple.xml_out(posts).gsub("opt","posts")
-          render :xml => xml_output
-        else
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
-        end
-      end
-    end
+    @posts = the_posts.paginate(:page => params[:page])
   end
 
   def new
@@ -177,22 +147,11 @@ class PostsController < ApplicationController
         logger.info("bookmark for #{new_b.link.url} cloned")
       end
     end
-    respond_to do |format|
-      format.html do
-        if incomplete || error
-          flash[:error] = "incomplet"
-          render :file => File.join(Rails.root, 'public', '400.html'), :status => 400
-        else
-          redirect_to :action => "index", :notice => "Added properly !"
-        end
-      end
-      format.xml do
-        if incomplete || error
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
-        else
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"done\" />"
-        end
-      end
+    if incomplete || error
+      flash[:error] = "incomplet"
+      render :file => File.join(Rails.root, 'public', '400.html'), :status => 400
+    else
+      redirect_to :action => "index", :notice => "Added properly !"
     end
   end
 
@@ -213,16 +172,7 @@ class PostsController < ApplicationController
         link.destroy if link.bookmarks.size == 0 # destroy the link if no bookmarks are left
       end
     end
-    respond_to do |format|
-      format.html { redirect_to :action => "index" }
-      format.xml do
-        if error
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"something went wrong\" />"
-        else
-          render :xml => "<?xml version='1.0' standalone='yes'?>\n<result code=\"done\" />"
-        end
-      end
-    end
+    redirect_to :action => "index"
   end
 
   # to fix
