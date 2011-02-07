@@ -22,12 +22,7 @@
     
     %div.side_bar_tags
       %h4.sidebar Tags
-      .tags
-        - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
-          - tag_cloud_limited(@user.bookmarks.tag_counts_on(:tags), %w(tag_css1 tag_css2 tag_css3 tag_css4), 20) do |tag, css_class|
-            %span.tag
-              = image_tag("/images/icons/tag-small.png")
-              = link_to tag.name, { :controller => "/posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class
+      = render "tags/tag_cloud", :tags => @user.bookmarks.tag_counts_on(:tags)
 
   %div.sidebar
     You
@@ -49,16 +44,6 @@
 %div.side_bar_tags
   %h4.sidebar Tags
   - if current_user
-    .tags
-      - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
-        - tag_cloud_limited(current_user.bookmarks.tag_counts_on(:tags), %w(tag_css1 tag_css2 tag_css3 tag_css4), 20) do |tag, css_class|
-          %span.tag
-            = image_tag("/images/icons/tag-small.png")
-            = link_to tag.name, { :controller => "/posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class
+    = render "tags/tag_cloud", :tags => current_user.bookmarks.tag_counts_on(:tags)
   - else
-    .tags
-      - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
-        - tag_cloud_limited(Bookmark.tag_counts_on(:tags), %w(tag_css1 tag_css2 tag_css3 tag_css4), 30) do |tag, css_class|
-          %span.tag
-            = image_tag("/images/icons/tag-small.png")
-            = link_to tag.name, { :controller => "/posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class
+    = render "tags/tag_cloud", :tags => Bookmark.tag_counts_on(:tags)
