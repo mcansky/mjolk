@@ -24,6 +24,20 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def join
+    group = Group.find(params[:id])
+    group.users << current_user unless group.users.include?(current_user)
+    group.save
+    redirect_to :action => :show, :id => group.id
+  end
+
+  def quit
+    group = Group.find(params[:id])
+    group.users.delete(current_user) if group.users.include?(current_user)
+    group.save
+    redirect_to :action => :show, :id => group.id
+  end
+
   def create
     @group = Group.new
     @group.name = params[:group][:name]

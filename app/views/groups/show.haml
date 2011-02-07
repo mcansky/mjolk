@@ -2,6 +2,14 @@
   %h2
     = @group.name
     group
+    %span.follow
+      - if @group.owner == current_user
+        = link_to 'e', {:controller => "groups", :action => "edit", :id => @group.id}, {:class => "edit", :title => "edit"}
+        = link_to 'd!', @group, {:confirm => "Deleting, You sure ?", :method => :delete, :title => "destroy"}
+      - elsif @group.users.include?(current_user)
+        = link_to "q", {:controller => :groups, :action => :quit, :id => @group.id}, {:confirm => "Quitting the group, You sure ?", :method => :delete, :title => "quit"}
+      - else
+        = link_to "j", {:controller => :groups, :action => :join, :id => @group.id}, {:method => :post, :title => "join"}
 
   %p
     Owned by :

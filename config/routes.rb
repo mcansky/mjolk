@@ -22,7 +22,8 @@ Mjolk::Application.routes.draw do
 
   # groups
   resources :groups
-  match 'groups/join', :to => 'groups#join', :via => [:delete, :post]
+  match 'groups/join/:id', :to => 'groups#join', :via => :post
+  match 'groups/quit/:id', :to => 'groups#quit', :via => :delete
 
   # stats
   match 'stats/', :to => 'stats#index', :via => :get
@@ -30,7 +31,7 @@ Mjolk::Application.routes.draw do
 
   # follow
   #match 'users/follow/:id', :to => 'users#follow', :via => [:delete, :post]
-  match "users/follow/:id" => 'users#follow', :via => [:get, :post]
+  match "users/follow/:id" => 'users#follow', :via => [:get, :delete, :post]
 
   # api
   match 'v1/posts/all', :to => 'v1/posts#index'

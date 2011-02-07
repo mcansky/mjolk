@@ -127,6 +127,7 @@ class PostsController < ApplicationController
         end
       end
     elsif params[:id]
+      incomplete = false
       # clone
       to_clone = Bookmark.find(params[:id])
       if to_clone == nil

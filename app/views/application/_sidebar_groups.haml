@@ -1,2 +1,2 @@
-- groups.each do |group|
+- groups.uniq.each do |group|
   = link_to group.name, {:controller => :groups, :action => :show, :id => group.id}, {:class => "title"}
