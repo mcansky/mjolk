@@ -26,6 +26,8 @@ class GroupsController < ApplicationController
     @group = Group.new
     @group.name = params[:group][:name]
     @group.desc = params[:group][:desc]
+    @group.owner = current_user
+    @group.users << current_user
     if @group.save
       redirect_to :action => :show, :id => @group.id
       return

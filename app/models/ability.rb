@@ -32,6 +32,7 @@ class Ability
     if user.guest?
       can :read, Bookmark
       can :read, Stat
+      can :read, Group
     end
     
     if user.beta?

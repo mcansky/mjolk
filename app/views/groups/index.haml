@@ -7,3 +7,6 @@
         = params[:username] + "'s groups "
     - else
       Groups
+
+  - @groups.each do |group|
+    - render "groups/group_short", :group => group

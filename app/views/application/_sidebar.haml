@@ -19,6 +19,7 @@
       
     %h4.sidebar
       Groups
+    = render "applications/sidebar_groups", :groups => current_user.groups
     
     %div.side_bar_tags
       %h4.sidebar
@@ -41,6 +42,8 @@
 
   %h4.sidebar
     Groups
+    = link_to "+", {:controller => "/groups", :action => :new}, {:class => "sidebar_new_group"}
+  = render "application/sidebar_groups", :groups => current_user.groups
 
 %div.side_bar_tags
   %h4.sidebar

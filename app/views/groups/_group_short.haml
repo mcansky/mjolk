@@ -1,0 +1,11 @@
+%div.link
+  = link_to group.name, {:controller => :groups, :action => :show, :id => group.id}, {:class => "title"}
+  %span.manage
+    - if (current_user && (group.owner == current_user))
+      = link_to 'e', {:controller => "groups", :action => "edit", :id => group.id}, {:class => "edit", :title => "edit"}
+      = link_to 'd!', group, {:confirm => "Deleting, You sure ?", :method => :delete, :title => "destroy"}
+    - elsif (current_user && group.user != current_user)
+      = link_to 'c', :controller => "posts", :action => "create", :id => post.id, :method => :post
+
+%div.desc
+  = group.desc

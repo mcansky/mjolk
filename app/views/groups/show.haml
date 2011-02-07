@@ -1,0 +1,13 @@
+%div
+  %h2
+    = @group.name
+    group
+
+  %p
+    Owned by :
+    = link_to image_tag("http://www.gravatar.com/avatar/#{@group.owner.hash}?s=20", :alt => @group.owner.name), {:controller => "/posts", :action => :index, :username => @group.owner.name}, {:title => @group.owner.name, :alt => @group.owner.name}
+  %p= @group.desc
+
+  %h3 Members
+  
+  = render "groups/members", :group => @group
