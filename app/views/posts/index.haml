@@ -22,35 +22,23 @@
   - if (params[:tag] || params[:username] || params[:fromdt] || params[:todt] || params[:page])
     - if current_user
       - cache(:action => 'index', :action_suffix => params.to_s + "_#{current_user.id}", :expires_in => 10.minute) do
-        %div.posts
-        - @posts.each do |post|
-          %div.bookmark
-            = render "short_post", :post => post
+        = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
     - else
       - cache(:action => 'index', :action_suffix => params.to_s, :expires_in => 10.minute) do
-        %div.posts
-        - @posts.each do |post|
-          %div.bookmark
-            = render "short_post", :post => post
+        = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
   - else
     - if current_user
       - cache(:action => 'index', :action_suffix => "all_user_#{current_user.id}_posts", :expires_in => 10.minute) do
-        %div.posts
-        - @posts.each do |post|
-          %div.bookmark
-            = render "short_post", :post => post
+        = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
     - else
       - cache(:action => 'index', :action_suffix => "public_all_post", :expires_in => 10.minute) do
-        %div.posts
-        - @posts.each do |post|
-          %div.bookmark
-            = render "short_post", :post => post
+        = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
 .clear
