@@ -301,6 +301,10 @@ span.follow a {
 	color: #ED4811;
 	text-decoration: none;
 }
+#sidebar h4.sidebar a {
+	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
+}
+
 #footer a {
 	color: #FFF;
 	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;

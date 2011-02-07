@@ -21,8 +21,9 @@
       Groups
     
     %div.side_bar_tags
-      %h4.sidebar Tags
-      = render "tags/tag_cloud", :tags => @user.bookmarks.tag_counts_on(:tags)
+      %h4.sidebar
+        = link_to "Tags", :controller => "/tags", :action => :index, :username => @user.name
+      = render "tags/tag_cloud", :tags => @user.bookmarks.tag_counts_on(:tags), :limit => 20
 
   %div.sidebar
     You
@@ -30,20 +31,24 @@
     = link_to "Your bookmarks", :controller => "/posts", :action => :index
     = " (#{current_user.bookmarks.size.to_s})"
     
-    %h4.sidebar
-      = "Following (#{current_user.followed.count})"
-    = render "application/follows", :user => current_user, :kind => "followed"
+  %h4.sidebar
+    = "Following (#{current_user.followed.count})"
+  = render "application/follows", :user => current_user, :kind => "followed"
 
-    %h4.sidebar
-      = "Followed by (#{current_user.followers.count})"
-    = render "application/follows", :user => current_user, :kind => "followers"
+  %h4.sidebar
+    = "Followed by (#{current_user.followers.count})"
+  = render "application/follows", :user => current_user, :kind => "followers"
 
   %h4.sidebar
     Groups
 
 %div.side_bar_tags
-  %h4.sidebar Tags
+  %h4.sidebar
+    - if current_user
+      = link_to "Tags", :controller => "/tags", :action => :index, :username => current_user.name
+    - else
+      Tags
   - if current_user
-    = render "tags/tag_cloud", :tags => current_user.bookmarks.tag_counts_on(:tags)
+    = render "tags/tag_cloud", :tags => current_user.bookmarks.tag_counts_on(:tags), :limit => 20
   - else
-    = render "tags/tag_cloud", :tags => Bookmark.tag_counts_on(:tags)
+    = render "tags/tag_cloud", :tags => Bookmark.tag_counts_on(:tags), :limit => 20
