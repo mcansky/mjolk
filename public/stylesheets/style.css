@@ -107,8 +107,8 @@ div.bookmark div.link span.date, div#sidebar span.date {
 }
 
 div.bookmark div.desc {
-	color: #DDD;
-	font
+	color: #333;
+	margin: 5px;
 }
 
 div.bookmark div.post_tags {
