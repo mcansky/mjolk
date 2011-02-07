@@ -26,7 +26,12 @@ body {
 
 #footer {
 	text-align: center;
-	color: #AAA;
+	color: #FFF;
+	background: #417488;
+	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
+}
+#footer div.footer-box {
+	padding: 10px;
 }
 
 #main {
@@ -34,11 +39,12 @@ body {
 }
 
 #banner {
-	background: #FFF;
+	background: #417488;
 }
 
 #menu {
-	background: #FFF;
+	background: #417488;
+	margin-bottom: 0;
 }
 
 #content-box {
@@ -68,7 +74,16 @@ body {
 }
 
 #menu a {
+	color: #FFF;
+	text-decoration: none;
+	margin-right: 5px;
+	margin-bottom: 0;
+	padding: 3px;
+	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
+}
+#menu a:hover {
 	color: #417488;
+	background: #FFF;
 }
 
 div.bookmark {
@@ -100,6 +115,10 @@ div.bookmark div.author_grav {
 	margin-right: -3px;
 	width: 40px;
 	margin-left: 5px;
+}
+
+div.bookmark div.author_grav a {
+	color: #417488;
 }
 
 div.bookmark div.link {
@@ -219,10 +238,11 @@ span.follow a {
 }
 
 #banner h1 a {
-	color: #333;
+	color: #FFF;
 	text-decoration: none;
 	font-family: times;
-	letter-spacing: 0.2em;
+	font-size: 24pt;
+	letter-spacing: 0.4em;
 }
 .banner {
 	padding: 5px;
@@ -279,4 +299,8 @@ span.follow a {
 	font-style: italic;
 	color: #ED4811;
 	text-decoration: none;
+}
+#footer a {
+	color: #FFF;
+	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
 }

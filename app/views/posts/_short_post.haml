@@ -1,5 +1,5 @@
 %div.author_grav
-  = link_to image_tag("http://www.gravatar.com/avatar/#{post.user.hash}?s=40"), {:controller => :posts, :action => :index, :username => post.user.name}, {:title => post.user.name, :alt => post.user.name}
+  = link_to image_tag("http://www.gravatar.com/avatar/#{post.user.hash}?s=40",:alt => post.user.name), {:controller => :posts, :action => :index, :username => post.user.name}, {:title => post.user.name, :alt => post.user.name}
 
 %div.link
   = link_to post.title, post.link.short_url, {:class => "title"}
