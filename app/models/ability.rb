@@ -36,12 +36,15 @@ class Ability
     
     if user.beta?
       can :manage, Bookmark, :user_id => user.id
+      can :read, :create, Group
+      can :edit, :destroy, Group, :owner_id => user.id
       can :read, Bookmark
       can :read, Stat
     end
 
     if user.normal?
       can :manage, Bookmark, :user_id => user.id
+      can :read, Group
       can :read, Bookmark
       can :read, Stat
     end

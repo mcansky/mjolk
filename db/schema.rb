@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110206212957) do
+ActiveRecord::Schema.define(:version => 20110207115135) do
 
   create_table "bookmarks", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(:version => 20110206212957) do
     t.datetime "bookmarked_at"
     t.string   "meta"
     t.integer  "private",       :default => 0
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
   end
 
   create_table "histories", :force => true do |t|

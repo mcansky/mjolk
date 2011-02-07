@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :bookmarks, :dependent => :destroy
   has_many :links, :through => :bookmarks
   
+  has_and_belongs_to_many :groups
+  has_many :owned_groups, :class_name => "Group", :foreign_key => "owner_id"
+  
   has_and_belongs_to_many :followers,
                           :class_name => 'User',
                           :join_table => 'users_have_followers',
