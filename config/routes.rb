@@ -15,6 +15,7 @@ Mjolk::Application.routes.draw do
   match 'posts/import', :to => 'posts#import'
   match 'posts/import_url', :to => 'posts#import_url', :via => :post
   match 'posts/import_file', :to => 'posts#import_file'
+  match 'posts/copy', :to => 'posts#clone'
   resources :bookmarks, :controller => "posts"
 
   # tags

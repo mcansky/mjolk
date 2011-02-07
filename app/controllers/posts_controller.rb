@@ -140,13 +140,15 @@ class PostsController < ApplicationController
         return
       end
       new_b = to_clone.clone
-      new_b.link = to_clone.link
-      new_b.tags = to_clone.tags
-      current_user.bookmarks << new_b
+      new_b.user = current_user
+      new_b.tag_list = to_clone.tag_list
+      new_b.bookmarked_at = Time.now
       if new_b.save
         current_user.save
         logger.info("bookmark for #{new_b.link.url} cloned")
       end
+      redirect_to :action => "index", :username => to_clone.user.name
+      return
     end
     if incomplete || error
       flash[:error] = "incomplet"
