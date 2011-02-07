@@ -316,3 +316,8 @@ div.tags img {
 	color: #FFF;
 	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
 }
+
+#content h3,#content h2 {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}

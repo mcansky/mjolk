@@ -22,6 +22,7 @@ Mjolk::Application.routes.draw do
 
   # groups
   resources :groups
+  match 'groups/join', :to => 'groups#join', :via => [:delete, :post]
 
   # stats
   match 'stats/', :to => 'stats#index', :via => :get
