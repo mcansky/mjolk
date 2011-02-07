@@ -7,6 +7,8 @@
 * added goo.gl shortener calls when adding a bookmark
 * added followers/followed users
 * added user groups
+* added bookmarks cloning/copying from one user to another
+* added gravatar support (using account email)
 
 ## 0.3.2
 
