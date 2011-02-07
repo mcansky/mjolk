@@ -1,6 +1,6 @@
 - if current_user
   - if params[:username] && (params[:username] != current_user.name)
-    %h3.sidebar
+    %div.sidebar
       = @user.name
       - if current_user.followed.include?(@user)
         %span.follow
@@ -19,27 +19,22 @@
       
     %h4.sidebar
       Groups
-    %hr
+    
+    %div.side_bar_tags
+      %h4.sidebar Tags
+      .tags
+        - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
+          - tag_cloud_limited(@user.bookmarks.tag_counts_on(:tags), %w(tag_css1 tag_css2 tag_css3 tag_css4), 20) do |tag, css_class|
+            %span.tag
+              = image_tag("/images/icons/tag-small.png")
+              = link_to tag.name, { :controller => "posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class
 
-  %h3.sidebar
+  %div.sidebar
     You
   %h4.sidebar
-    Your bookmarks
+    = link_to "Your bookmarks", :controller => :posts, :action => :index
     = " (#{current_user.bookmarks.size.to_s})"
-  
-  %div.last_posts
-    - current_user.last_posts(3).each do |post|
-      %div.last_post
-        = link_to post.title, post.link.short_url
-        %span.date
-          = post.date_to_s
-        %span.post_tags
-          - if post.tags.size > 0
-            - post.tags.each do |tag|
-              = link_to tag, :controller => "posts", :action => "index", :tag => tag.name, :username => post.user.name
-    %div.last_post_more
-      = link_to "more", posts_path
-
+    
     %h4.sidebar
       = "Following (#{current_user.followed.count})"
     = render "application/follows", :user => current_user, :kind => "followed"
@@ -50,12 +45,12 @@
 
   %h4.sidebar
     Groups
-- if current_user
-  %hr
-%div
+
+%div.side_bar_tags
   - if @tags
-    %h3.sidebar Tags
+    %h4.sidebar Tags
     .tags
       - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
-        - tag_cloud_limited(@tags, %w(tag_css1 tag_css2 tag_css3 tag_css4), 20) do |tag, css_class|
+        - tag_cloud_limited(current_user.bookmarks.tag_counts_on(:tags), %w(tag_css1 tag_css2 tag_css3 tag_css4), 20) do |tag, css_class|
+          = image_tag("/images/icons/tag-small.png")
           = link_to tag.name, { :controller => "posts", :action => "index", :tag => tag.name, :all_users => true }, :class => css_class

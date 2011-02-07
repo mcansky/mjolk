@@ -47,17 +47,19 @@
       </div>
     </div>
     <div class="clear"></div>
+      <div class="box">
       <div class="grid_10" id="content-box">
         <div id="content">
         <%= yield %>
         </div>
       </div>
-      <div class="grid_6">
+      <div class="grid_6" id="sidebar_grid">
         <div id="sidebar">
           <%= render 'application/sidebar' %>
         </div>
       </div>
-    <div class="clear"></div>
+      <div class="clear"></div>
+      </div>
     <div class="grid_16" id="footer">
       <%= link_to "Mjölk", "https://github.com/mcansky/mjolk" %> v<%= Settings.version %>,
       <%= link_to "Bug reports", "https://github.com/mcansky/mjolk/issues" %>,

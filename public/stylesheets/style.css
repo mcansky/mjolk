@@ -1,5 +1,5 @@
 * {
-	font-family: 'Molengo', 'Adobe Caslon Pro', 'Hoefler Text', Garamond, serif;;
+	font-family: 'Molengo', 'Adobe Caslon Pro', 'Hoefler Text', Garamond, serif;
 }
 
 h1, h2, h3, h4, h5 {
@@ -21,6 +21,7 @@ body {
 
 #content {
 	background: #FFF;
+	padding: 5px;
 }
 
 #footer {
@@ -40,18 +41,26 @@ body {
 	background: #FFF;
 }
 
-#content {
-	background: #F5FFFC;
-	padding: 5px;
+#content-box {
+	padding-right: 0px;
+	margin-left: 0;
 }
 
-#content-box {
-	padding-right: -20px;
+.box {
+	background: #FFF;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 #sidebar {
-	background: #CBD6D0;
+	background: #FFF;
 	padding: 5px;
+	border: 1px solid #333;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+#sidebar_grid {
+	margin-right: 0px;
 }
 
 #content h1, #content h2, #content h3 {
@@ -113,6 +122,9 @@ div.bookmark div.desc {
 
 div.bookmark div.post_tags {
 	margin-left: 20px;
+}
+div.bookmark div.post_tags span.tag {
+	white-space: nowrap;
 }
 div.bookmark div.post_tags img {
 	position: relative;
@@ -182,10 +194,25 @@ span.follow a {
 	vertical-align: super;
 }
 
-.tag_css1 { font-size: 1.0em; }
-.tag_css2 { font-size: 1.2em; }
-.tag_css3 { font-size: 1.4em; }
-.tag_css4 { font-size: 1.6em; }
+.tag_css1 { font-size: 0.8em; }
+.tag_css2 { font-size: 0.9em; }
+.tag_css3 { font-size: 1.1em; }
+.tag_css4 { font-size: 1.4em; }
+
+#sidebar div.tags a {
+	text-decoration: none;
+}
+
+#sidebar div.tags span.tag {
+	white-space: nowrap;
+}
+
+#sidebar div.tags img {
+	position: relative;
+	top: 4px;
+	margin-right: -5px;
+	margin-left: 3px;
+}
 
 .tags {
 	text-align: center;
@@ -206,9 +233,19 @@ span.follow a {
 	height: 200px;
 }
 
-#sidebar h3.sidebar {
+#sidebar div.sidebar {
 	font-weight: normal;
-	margin-bottom: 3px;
+	background: #123840;
+	margin: -6px;
+	padding: 3px;
+	margin-bottom: 5px;
+	font-size: 12pt;
+	color: #FFF;
+	font-family: 'Myriad Pro', Corbel, 'Helvetica Neue', Helvetica, 'Lucida Grande', Verdana, sans-serif;
+}
+
+#sidebar div.side_bar_tags {
+	margin-bottom: 5px;
 }
 
 #sidebar h4.sidebar {

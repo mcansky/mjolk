@@ -20,5 +20,6 @@
 %div.post_tags
   - if post.tags.size > 0
     - post.tags.each do |tag|
-      = image_tag("/images/icons/tag-small.png")
-      = link_to tag, :controller => "posts", :action => "index", :tag => tag.name, :username => post.user.name
+      %span.tag
+        = image_tag("/images/icons/tag-small.png")
+        = link_to tag, :controller => "posts", :action => "index", :tag => tag.name, :username => post.user.name
