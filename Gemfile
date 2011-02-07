@@ -62,6 +62,8 @@ end
 #   gem 'webrat'
 # end
 
+gem 'hoptoad_notifier'
+
 # test stuff
 group :test do
   gem "shoulda"

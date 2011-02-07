@@ -61,6 +61,9 @@ GEM
       rack (>= 1.1.0, < 2)
     flutie (1.1.4)
     haml (3.0.24)
+    hoptoad_notifier (2.4.5)
+      activesupport
+      builder
     hpricot (0.8.3)
     i18n (0.5.0)
     jquery-rails (0.2.6)
@@ -153,6 +156,7 @@ DEPENDENCIES
   factory_girl_rails (= 1.1.beta1)
   flutie
   haml
+  hoptoad_notifier
   hpricot
   jquery-rails
   oa-oauth
