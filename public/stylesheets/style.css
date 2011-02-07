@@ -219,15 +219,22 @@ span.follow a {
 .tag_css3 { font-size: 1.1em; }
 .tag_css4 { font-size: 1.4em; }
 
-#sidebar div.tags a {
+#content div.tags {
+	width: 90%;
+}
+#sidebar div.tags {
+	width: 80%;
+}
+
+div.tags a {
 	text-decoration: none;
 }
 
-#sidebar div.tags span.tag {
+div.tags span.tag {
 	white-space: nowrap;
 }
 
-#sidebar div.tags img {
+div.tags img {
 	position: relative;
 	top: 4px;
 	margin-right: -5px;
