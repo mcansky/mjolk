@@ -8,5 +8,7 @@
     - else
       Groups
 
-  - @groups.each do |group|
-    - render "groups/group_short", :group => group
+  %div.groups
+    - @groups.each do |group|
+      %div.bookmark
+        = render "groups/group_short", :group => group
