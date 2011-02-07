@@ -150,7 +150,7 @@ class User < ActiveRecord::Base
   end
 
   def last_posts(count)
-    harr = bookmarks.last(count)
+    harr = bookmarks.first(count)
     return harr
   end
 
