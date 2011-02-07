@@ -17,11 +17,6 @@
     - else
       Some bookmarks
     = '(' + @posts_count.to_s + ')'
-    - if current_user && (!params[:username])
-      = link_to( '+', :action => 'new')
-    - elsif (current_user && params[:username])
-      - if( current_user.name == params[:username])
-        = link_to( '+', :action => 'new')
 
   
   - if (params[:tag] || params[:username] || params[:fromdt] || params[:todt] || params[:page])
