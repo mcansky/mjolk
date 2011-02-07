@@ -33,7 +33,7 @@ body {
 }
 
 #banner {
-	background: #9BC4DB;
+	background: #FFF;
 }
 
 #menu {
@@ -189,6 +189,16 @@ span.follow a {
 
 .tags {
 	text-align: center;
+}
+
+#banner h1 a {
+	color: #333;
+	text-decoration: none;
+	font-family: times;
+	letter-spacing: 0.2em;
+}
+.banner {
+	padding: 5px;
 }
 
 #graph {

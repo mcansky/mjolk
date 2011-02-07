@@ -3,7 +3,7 @@
   %p.beware
     = params[:notice]
 
-  %h1 Last 20 bookmarks
+  %h2 Last 20 bookmarks
 
   - if current_user
     - cache(:action => 'index', :action_suffix => 'last_20_posts', :expires_in => 10.minute) do
