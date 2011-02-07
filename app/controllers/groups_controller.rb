@@ -16,6 +16,8 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    bookmarks = Bookmark.find(:all, :conditions => ['private = 0 AND user_id in (?)', @group.users_id])
+    @bookmarks = bookmarks.paginate(:page => params[:page])
   end
 
   def new

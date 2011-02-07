@@ -9,5 +9,9 @@
   %p= @group.desc
 
   %h3 Members
-  
   = render "groups/members", :group => @group
+  
+  %h3 Bookmarks
+  = render "posts/posts_short", :posts => @bookmarks
+  .pagination
+    = will_paginate(@bookmarks)
