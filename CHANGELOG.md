@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4
+
+* fixed different cache problems
+* improved the design
+* added goo.gl shortener calls when adding a bookmark
+* added followers/followed users
+* added user groups
+
 ## 0.3.2
 
 * fixed "My bookmarks" cache bug (pages)
