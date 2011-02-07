@@ -29,7 +29,8 @@
     <div class="grid_16" id="menu">
       <div class="grid_11 prefix_1 alpha">
         <%= link_to "Home", root_url %>
-        <%= link_to "All tags", :controller => "/tags" %>
+        <%= link_to "Tags", :controller => "/tags" %>
+        <%= link_to "Groups", :controller => "/groups" %>
         <% if current_user %>
           <%= link_to "My Bookmarks", posts_path %>
           <%= link_to "Add a Bookmark", new_post_path %>

@@ -20,6 +20,9 @@ Mjolk::Application.routes.draw do
   # tags
   match 'tags/', :to => 'tags#index', :via => :get
 
+  # groups
+  resources :groups
+
   # stats
   match 'stats/', :to => 'stats#index', :via => :get
   match 'stats/stats.json', :to => 'stats#stats', :via => :get, :format => :json

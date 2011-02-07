@@ -1,0 +1,9 @@
+%div
+  %h2
+    - if params[:username]
+      - if current_user && (current_user.name == params[:username])
+        Your groups
+      - else
+        = params[:username] + "'s groups "
+    - else
+      Groups
