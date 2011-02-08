@@ -1,5 +1,5 @@
 .tags
-  - cache(:action => 'index', :action_suffix => "all_tags", :expires_in => 30.minute) do
+  - cache("tag_cloud_all", :expires_in => 30.minute) do
     - tag_cloud_limited(tags, %w(tag_css1 tag_css2 tag_css3 tag_css4), limit) do |tag, css_class|
       %span.tag
         = image_tag("/images/icons/tag-small.png")
