@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20110207115135) do
     t.string   "tagger_type"
     t.string   "context"
     t.datetime "created_at"
-    t.boolean  "private",       :default => false
   end
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
