@@ -1,6 +1,20 @@
 # because they come in handy
+#
+# you need a dev config file edit the DEVS path if needed
+# this has to be a yml file using syntax :
+#
+# <github_username>:
+#   emails:
+#     <first@email.co>
+#     <second@email.co>
+#
+# change <github_username> by the github username (so it can be linked properly with some stuff check markdown task)
+# put your emails instead of <first@email.co> .. etc
+# this will allow the tasks to find the proper users and link them properly
+#
 require "net/http"
 require "uri"
+DEVS = Rails.root.to_s + "/config/devs.yml"
 
 namespace :undies do
   desc "generate changelog with nice clean output"
@@ -9,7 +23,7 @@ namespace :undies do
     until_c = args[:until_c]
     cmd=`git log --pretty='format:%ci::%an <%ae>::%s::%H' #{since_c}..#{until_c}`
 
-    github_authors = YAML::load(File.open(Rails.root.to_s + "/config/devs.yml"))
+    github_authors = YAML::load(File.open(DEVS))
 
     entries = Hash.new
     changelog_content = String.new
@@ -77,7 +91,7 @@ namespace :undies do
       printf("Handling commits for current :") unless tag
       # setting up the consts
       changelog_content += "\n" unless changelog_content.size == 0
-      github_authors = YAML::load(File.open(Rails.root.to_s + "/config/devs.yml"))
+      github_authors = YAML::load(File.open(DEVS))
       entries = Hash.new
       changelog_content += "# #{tag}\n" if tag
       changelog_content += "# current\n" unless tag
@@ -139,7 +153,7 @@ namespace :undies do
     until_c = args[:until_c]
     cmd=`git log --pretty='format:%ci::%an <%ae>::%s::%H' #{since_c}..#{until_c}`
 
-    github_authors = YAML::load(File.open(Rails.root.to_s + "/config/devs.yml"))
+    github_authors = YAML::load(File.open(DEVS))
 
     entries = Hash.new
     changelog_content = String.new
