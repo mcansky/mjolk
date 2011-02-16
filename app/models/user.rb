@@ -34,9 +34,11 @@ class User < ActiveRecord::Base
   before_validation :set_initial_name
   
   validates_exclusion_of :name, :in => ["admin", "login", "logout"], :message => "name %{value} is reserved."
+  validates_exclusion_of :name, :in => [nil], :message => "can't be blank"
   validates_presence_of :name, :email, :message => "can't be blank"
   validates_uniqueness_of :name, :case_sensitive => true
   validates_uniqueness_of :email, :case_sensitive => true
+  validates_length_of :name, :minimum => 1, :message => "can't be blank"
   #validates_length_of :password, :minimum => 8
   # check strength of password : again 8 chars min, at least one capitaled letter, at least one normal letter, at least one non alpha characters
   #validates_format_of :password, :with => /^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d\W]).*$/
