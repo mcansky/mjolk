@@ -2,16 +2,19 @@ class BookmarkSweeper < ActionController::Caching::Sweeper
   observe Bookmark
   # If our sweeper detects that a Bookmark was created call this
   def after_create(bookmark)
+    expire_fragment(%r{.*post.*})
     expire_cache_for(bookmark)
   end
 
   # If our sweeper detects that a Bookmark was updated call this
   def after_update(bookmark)
+    expire_fragment(%r{.*post.*})
     expire_cache_for(bookmark)
   end
 
   # If our sweeper detects that a Bookmark was deleted call this
   def after_destroy(bookmark)
+    expire_fragment(%r{.*post.*})
     expire_cache_for(bookmark)
   end
 
