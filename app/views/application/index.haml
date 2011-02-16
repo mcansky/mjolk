@@ -6,13 +6,13 @@
   %h2 Last 20 bookmarks
 
   - if current_user
-    - cache(:fragment => "last_20_posts", :expires_in => 10.minute) do
+    - cache(:fragment => "last_20_posts", :expires_in => 3.minute) do
       %div.posts
       - @posts.each do |post|
         %div.bookmark
           = render "/posts/short_post", :post => post
   - else
-    - cache(:fragment => "last_20_posts_public", :expires_in => 10.minute) do
+    - cache(:fragment => "last_20_posts_public", :expires_in => 3.minute) do
       %div.posts
       - @posts.each do |post|
         %div.bookmark
