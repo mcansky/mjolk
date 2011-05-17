@@ -41,9 +41,17 @@ class PostsController < ApplicationController
         limit = -1
       end
       if user
-        posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        if limit == ("ALL" || -1)
+          posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :conditions => conditions, :order => "bookmarked_at DESC")
+        else
+          posts = user.bookmarks.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        end
       else
-        posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        if limit == ("ALL" || -1)
+          posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :conditions => conditions, :order => "bookmarked_at DESC")
+        else
+          posts = Bookmark.tagged_with(params[:tag]).find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        end
       end
     else
       if user
