@@ -51,8 +51,6 @@
   %h4.sidebar
     - if current_user
       = link_to "Tags", :controller => "/tags", :action => :index, :username => current_user.name
-    - else
-      Tags
   - if current_user
     = render "tags/tag_cloud", :tags => current_user.bookmarks.tag_counts_on(:tags), :limit => 20
   - else

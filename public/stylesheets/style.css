@@ -61,10 +61,6 @@ body {
 #sidebar {
 	background: #FFF;
 	padding: 5px;
-	border: 1px solid #333;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 }
 #sidebar_grid {
 	margin-right: 0px;
@@ -92,15 +88,8 @@ div.bookmark {
 	line-height: 18px;
 	margin-bottom: 10px;
 	list-style: none;
-	border-bottom: 1px solid #CCC;
-	border-right: 1px solid #CCC;
-	border-left: 1px solid #CCC;
-	
 	padding: 3px;
 	margin: 5px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
 	margin-bottom: 10px;
 }
 
