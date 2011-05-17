@@ -49,10 +49,10 @@ Mjolk::Application.configure do
 
   # memcache
   #config.cache_store = :file_store
-  config.cache_store = :dalli_store
+  #config.cache_store = :dalli_store
   # Global enable/disable all memcached usage
-  config.perform_caching = true
+  #config.perform_caching = true
   # Disable/enable fragment and page caching in ActionController
-  config.action_controller.perform_caching = true
+  #config.action_controller.perform_caching = true
 
 end
