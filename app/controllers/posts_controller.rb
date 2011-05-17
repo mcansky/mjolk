@@ -55,9 +55,17 @@ class PostsController < ApplicationController
       end
     else
       if user
-        posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        if !params[:result]
+          posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :conditions => conditions, :order => "bookmarked_at DESC")
+        else
+          posts = user.bookmarks.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        end
       else
-        posts = Bookmark.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        if !params[:result]
+          posts = Bookmark.find(:all, :offset => (params[:start] || 0), :conditions => conditions, :order => "bookmarked_at DESC")
+        else
+          posts = Bookmark.find(:all, :offset => (params[:start] || 0), :limit => (params[:results] || limit), :conditions => conditions, :order => "bookmarked_at DESC")
+        end
       end
     end
     # filter private ones
