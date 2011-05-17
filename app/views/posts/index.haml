@@ -21,24 +21,20 @@
   
   - if (params[:tag] || params[:username] || params[:fromdt] || params[:todt] || params[:page])
     - if current_user
-      - cache(:fragment => params.to_s + "_#{current_user.id}_posts", :expires_in => 10.minute) do
-        = render "posts/posts_short", :posts => @posts
+      = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
     - else
-      - cache(:fragment => params.to_s + "_#{current_user.id}_posts", :expires_in => 10.minute) do
-        = render "posts/posts_short", :posts => @posts
+      = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
   - else
     - if current_user
-      - cache(:fragment => "all_user_#{current_user.id}_posts", :expires_in => 3.minute) do
-        = render "posts/posts_short", :posts => @posts
+      = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
     - else
-      - cache(:fragment => "public_all_posts", :expires_in => 3.minute) do
-        = render "posts/posts_short", :posts => @posts
+      = render "posts/posts_short", :posts => @posts
       .pagination
         = will_paginate(@posts)
 .clear

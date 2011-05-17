@@ -1,12 +1,11 @@
 %div
-  - cache(:action => 'index', :action_suffix => 'stats', :expires_in => 12.hour) do
-    %h1 Stats
-    %h2 Bookmarks
-    #stats_bookmarks{:style => "width:570px;height:300px;"}
-    %h2 Tags
-    #stats_tags{:style => "width:570px;height:300px;"}
-    %h2 Users
-    #stats_users{:style => "width:570px;height:300px;"}
-    .clear
-    =javascript_include_tag "stats"
+  %h1 Stats
+  %h2 Bookmarks
+  #stats_bookmarks{:style => "width:570px;height:300px;"}
+  %h2 Tags
+  #stats_tags{:style => "width:570px;height:300px;"}
+  %h2 Users
+  #stats_users{:style => "width:570px;height:300px;"}
+  .clear
+  =javascript_include_tag "stats"
 

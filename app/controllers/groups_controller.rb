@@ -1,7 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :authenticate_user!, :except => ["index", "show"]
   authorize_resource :class => "Group"
-  cache_sweeper :group_sweeper
 
   def index
     groups = nil

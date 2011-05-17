@@ -9,9 +9,9 @@ class PostsController < ApplicationController
   # auth needed !x
   before_filter :authenticate_user!, :except => "index"
   authorize_resource :class => "Bookmark"
-  cache_sweeper :bookmark_sweeper
-
+  
   def index
+    response.headers['Cache-Control'] = 'public, max-age=240'
     # testing some params
     user = nil
     if params[:username]
