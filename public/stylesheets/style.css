@@ -86,11 +86,11 @@ body {
 div.bookmark {
 	background: #FFF;
 	line-height: 18px;
-	margin-bottom: 10px;
 	list-style: none;
 	padding: 3px;
 	margin: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #123840;
 }
 
 div.bookmark a.title {
@@ -112,14 +112,14 @@ div.bookmark div.author_grav a {
 }
 
 div.bookmark div.link {
-	background: #123840;
+	background: #FFF;
 	margin: -3px;
 	padding: 3px;
 	margin-bottom: 5px;
 }
 
 div.bookmark div.link span.date, div#sidebar span.date {
-	color: #FFF;
+	color: #123840;
 	font-style: italic;
 	font-size: 8pt;
 }
